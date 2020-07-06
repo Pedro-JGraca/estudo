@@ -1,6 +1,6 @@
-package aula11.classeRaiz.ClassesFilhas;
+package app.classeRaiz.ClassesFilhas;
 
-import aula11.classeRaiz.Pessoa;
+import app.classeRaiz.Pessoa;
 //herança de implementação
 public class Visitante extends Pessoa{
 	

@@ -1,6 +1,6 @@
-package aula11.classeRaiz.ClassesFilhas;
+package app.classeRaiz.ClassesFilhas;
 
-import aula11.classeRaiz.Pessoa;
+import app.classeRaiz.Pessoa;
 
 public class Aluno extends Pessoa {
 	private int matricula;

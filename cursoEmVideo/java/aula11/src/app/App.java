@@ -1,9 +1,10 @@
-package aula11;
+package app;
 
-import aula11.classeRaiz.ClassesFilhas.*;
-import aula11.ClassesFilhas.ClassesNetas.*;
+import app.classeRaiz.ClassesFilhas.Aluno;
+import app.classeRaiz.ClassesFilhas.Visitante;
+import app.classeRaiz.ClassesFilhas.ClassesNetas.Bolsista;
 
-public class Principal {
+public class App {
 
 	public static void main(String[] args) {
 		Visitante v1 = new Visitante();

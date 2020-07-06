@@ -1,4 +1,4 @@
-package aula11.classeRaiz;
+package app.classeRaiz;
 
 public abstract class Pessoa {
 	private String nome;

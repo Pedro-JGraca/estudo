@@ -1,6 +1,6 @@
-package aula11.ClassesFilhas.ClassesNetas;
+package app.classeRaiz.ClassesFilhas.ClassesNetas;
 
-import aula11.classeRaiz.ClassesFilhas.Aluno;
+import app.classeRaiz.ClassesFilhas.Aluno;
 
 public class Bolsista extends Aluno{
 	private float bolsa;
