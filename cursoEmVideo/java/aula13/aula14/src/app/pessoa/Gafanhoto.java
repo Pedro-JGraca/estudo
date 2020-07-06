@@ -11,12 +11,14 @@ public class Gafanhoto extends Pessoa {
         this.setTotAssistido(0);
     }
 
-
+    public void ViuMaisUm (){
+        this.setTotAssistido(this.getTotAssistido()+1);
+    }
+    
     @Override
     protected void ganharExp() {
         this.setExp(this.getExp()+1);
     }
-
     
 
     /**

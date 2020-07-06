@@ -70,7 +70,9 @@ public class Video implements AcoesVideo{
      * @param avaliacao the avaliacao to set
      */
     public void setAvaliacao(int avaliacao) {
-        this.avaliacao = avaliacao;
+        int nova;
+        nova = (this.avaliacao + avaliacao)/this.views;
+        this.avaliacao = nova;
     }
 
     /**
