@@ -1,16 +1,18 @@
-package aula05;
+package app;
 
-public class Aula05 {
-    public static void main( String[] args){
-        pessoa joao = new pessoa("joao",400f,200f);
-        pessoa maria = new pessoa("maria",500f,150f);
+import app.classes.*;
 
+public class App {
+
+    public static void main(String[] args) {
+        Pessoa joao = new Pessoa("joao", 400f, 200f);
+        Pessoa maria = new Pessoa("maria", 500f, 150f);
 
         System.out.println(maria.toString());
         System.out.println(joao.toString());
 
-        banco bjoao = new banco (joao);
-        banco bmaria = new banco (maria);
+        Banco bjoao = new Banco(joao);
+        Banco bmaria = new Banco(maria);
 
         System.out.println(bjoao.toString());
         System.out.println(bmaria.toString());

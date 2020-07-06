@@ -1,11 +1,11 @@
-package aula05;
+package app.classes;
 
-public class pessoa {
+public class Pessoa {
     public String nome;
     private float dinheiro;
     private float salario;
 
-    public pessoa(String nome,float dinheiro, float salario) {
+    public Pessoa(String nome, float dinheiro, float salario) {
         this.nome = nome;
         this.dinheiro = dinheiro;
         this.salario= salario;

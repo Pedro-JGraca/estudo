@@ -1,13 +1,13 @@
-package aula05;
+package app.classes;
 
-public class banco {
+public class Banco {
     public int numConta;
     protected String tipo;
-    private pessoa dono;
+    private Pessoa dono;
     private float saldo;
     private boolean status;
 
-    public banco( pessoa dono) {
+    public Banco(Pessoa dono) {
         this.setStatus(false);
         this.setNumConta(1);
         this.setSaldo(0f);
@@ -22,7 +22,7 @@ public class banco {
         return tipo;
     }
 
-    public pessoa getDono() {
+    public Pessoa getDono() {
         return dono;
     }
 
@@ -42,7 +42,7 @@ public class banco {
         this.tipo = tipo;
     }
 
-    public void setDono(pessoa dono) {
+    public void setDono(Pessoa dono) {
         this.dono = dono;
     }
 
