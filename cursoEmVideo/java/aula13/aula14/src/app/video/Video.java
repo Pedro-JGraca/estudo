@@ -4,7 +4,46 @@ public class Video implements AcoesVideo{
     private String titulo;
     private int avaliacao;
     private int views;
+    private int curtidas;
     private boolean reproduzindo;
+
+    public Video(String titulo) {
+        this.setTitulo(titulo);
+        this.setAvaliacao(1);
+        this.setViews(0);
+        this.setCurtidas(0);
+        this.setReproduzindo(false);;
+    }
+
+    @Override
+    public void play() {
+        if(isReproduzindo()){
+            System.out.println("Precisa estar pausado para dar play");
+        }
+        else {
+            System.out.println("Play!");
+            this.setReproduzindo(true);
+        }
+    }
+
+    @Override
+    public void pause() {
+        if(isReproduzindo()){
+            this.setReproduzindo(false);
+            System.out.println("Pause!");
+        }
+        else {
+            System.out.println("Precisa estar rodando para dar pause");
+        }
+
+    }
+
+    @Override
+    public void like() {
+        this.setAvaliacao(this.getAvaliacao()+1);
+    }
+
+    
 
     /**
      * @return String return the titulo
@@ -62,40 +101,29 @@ public class Video implements AcoesVideo{
         this.reproduzindo = reproduzindo;
     }
 
-    public Video(String titulo) {
-        this.titulo = titulo;
-        this.avaliacao = 0;
-        this.views = 0;
-        this.reproduzindo = false;
+
+
+    /**
+     * @return int return the curtidas
+     */
+    public int getCurtidas() {
+        return curtidas;
+    }
+
+    /**
+     * @param curtidas the curtidas to set
+     */
+    public void setCurtidas(int curtidas) {
+        this.curtidas = curtidas;
     }
 
     @Override
-    public void play() {
-        if(isReproduzindo()){
-            System.out.println("Precisa estar pausado para dar play");
-        }
-        else {
-            System.out.println("Play!");
-            this.setReproduzindo(true);
-        }
+    public String toString() {
+        return "Video [avaliacao=" + avaliacao + ", curtidas=" + curtidas + ", reproduzindo=" + reproduzindo
+                + ", titulo=" + titulo + ", views=" + views + "]";
     }
 
-    @Override
-    public void pause() {
-        if(isReproduzindo()){
-            this.setReproduzindo(false);
-            System.out.println("Pause!");
-        }
-        else {
-            System.out.println("Precisa estar rodando para dar pause");
-        }
+    
 
-    }
-
-    @Override
-    public void like() {
-        this.setAvaliacao(this.getAvaliacao()+1);
-
-    }
 
 }

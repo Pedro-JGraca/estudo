@@ -8,6 +8,14 @@ public abstract class Pessoa {
 
     protected abstract void ganharExp();
 
+
+    public Pessoa(String nome, int idade, char sexo) {
+        this.setNome(nome);
+        this.setIdade(idade);
+        this.setSexo(sexo);
+        this.setExp(0);
+    }
+
     public String getNome() {
         return nome;
     }
@@ -40,13 +48,12 @@ public abstract class Pessoa {
         this.exp = exp;
     }
 
-    public Pessoa(String nome, int idade, char sexo) {
-        this.setNome(nome);
-        this.setIdade(idade);
-        this.setSexo(sexo);
-        this.setExp(0);
+    @Override
+    public String toString() {
+        return "Pessoa [exp=" + exp + ", idade=" + idade + ", nome=" + nome + ", sexo=" + sexo + "]";
     }
 
+    
     
 
     

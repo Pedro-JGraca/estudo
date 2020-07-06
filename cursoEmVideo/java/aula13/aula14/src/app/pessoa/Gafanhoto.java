@@ -5,11 +5,16 @@ public class Gafanhoto extends Pessoa {
     private String login;
     private int totAssistido;
 
-    
+    public Gafanhoto(String nome, int idade, char sexo, String login) {
+        super(nome, idade, sexo);
+        this.setLogin(login);
+        this.setTotAssistido(0);
+    }
+
 
     @Override
     protected void ganharExp() {
-
+        this.setExp(this.getExp()+1);
     }
 
     
@@ -42,12 +47,13 @@ public class Gafanhoto extends Pessoa {
         this.totAssistido = totAssistido;
     }
 
-    public Gafanhoto(String nome, int idade, char sexo, String login) {
-        super(nome, idade, sexo);
-        this.setLogin(login);
-        this.setTotAssistido(0);
+    @Override
+    public String toString() {
+        return "Gafanhoto [login=" + super.toString() + login + ", totAssistido=" + totAssistido + "]";
     }
 
+    
+ 
     
 
 }
