@@ -1,4 +1,4 @@
-package aula09.pacote;
+package app.pacote;
 
 public interface Publicacao {
     public abstract void abrir();

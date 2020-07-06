@@ -1,4 +1,4 @@
-package aula09.pacote;
+package app.pacote;
 
 public class Pessoa{
     private String nome;

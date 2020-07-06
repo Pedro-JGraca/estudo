@@ -1,4 +1,4 @@
-package aula09.pacote;
+package app.pacote;
 
 public class Livro implements Publicacao {
     private String titulo, autor;

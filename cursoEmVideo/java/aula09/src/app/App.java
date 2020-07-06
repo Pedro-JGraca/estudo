@@ -1,8 +1,8 @@
-package aula09;
+package app;
 
-import aula09.pacote.*;
+import app.pacote.*;
 
-public class Principal 
+public class App 
 {
 	public static void main (String[] args)
 		{
