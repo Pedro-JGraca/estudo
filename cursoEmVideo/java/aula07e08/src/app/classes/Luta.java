@@ -1,4 +1,5 @@
-package aula07.luta;
+package app.classes;
+
 
 import java.util.Random;
 

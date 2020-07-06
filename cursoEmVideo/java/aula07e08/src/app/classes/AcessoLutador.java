@@ -1,4 +1,5 @@
-package aula07.luta;
+package app.classes;
+
 
 public interface AcessoLutador {
     public abstract void apresentar ();

@@ -1,4 +1,4 @@
-package aula07.luta;
+package app.classes;
 
 public class Lutador implements AcessoLutador{
     private String nome, nacionalidade,categoria ;
