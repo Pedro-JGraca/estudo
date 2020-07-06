@@ -1,6 +1,8 @@
-package controle;
+package app;
 
-public class Aula06 {
+import app.classe.*;
+
+public class App {
     public static void main (String[] args) {
         ControleRemoto c1 = new ControleRemoto();
         c1.ligar();

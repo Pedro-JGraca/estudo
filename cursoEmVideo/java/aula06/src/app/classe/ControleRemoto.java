@@ -1,4 +1,4 @@
-package controle;
+package app.classe;
 
 public class ControleRemoto implements Controlador{
     private int volume;

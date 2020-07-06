@@ -1,4 +1,4 @@
-package controle;
+package app.classe;
 
 public interface Controlador {
     public abstract void ligar();
