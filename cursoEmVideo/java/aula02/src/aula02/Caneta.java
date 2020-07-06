@@ -4,6 +4,8 @@ import static java.lang.System.out;
 
 public class Caneta {
     String modelo;
+public class Caneta {
+    String modelo;
     String cor;
     float ponta;
     int carga;
