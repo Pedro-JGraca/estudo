@@ -1,4 +1,4 @@
-package aula10.pacote;
+package app.pacote;
 
 public class Funcionario extends Pessoa{
     private String setor;

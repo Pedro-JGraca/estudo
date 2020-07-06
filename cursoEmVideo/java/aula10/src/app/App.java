@@ -1,8 +1,8 @@
-package aula10;
+package app;
 
-import aula10.pacote.*;
+import app.pacote.*;
 
-public class Principal {
+public class App {
     public static void main (String[] args) {
 			Pessoa p0= new Pessoa("Pedro",32,'M');
 			Aluno p1 = new Aluno("Maria",22,'F',1, "informática");
