@@ -6,6 +6,13 @@
             "request": "launch",
             "mainClass": "app.App",
             "projectName": "aula04"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "aula04"
         }
     ]
 }
