@@ -1,26 +1,17 @@
 package classes;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import java.awt.Color;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import javax.swing.JTable;
-import javax.swing.Box;
-import java.awt.Canvas;
-import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.JSlider;
-import javax.swing.JSeparator;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class TelaValores extends JFrame {
 

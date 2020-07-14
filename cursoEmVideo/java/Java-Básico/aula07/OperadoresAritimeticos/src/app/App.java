@@ -29,7 +29,7 @@ public class App {
 		System.out.printf("O arredondamendo round de %.1f é %d\n",v,ar);
 		
 		double ale = Math.random();
-		int sup=11; //nao inclui o superior
+		int sup=11; //nao inclui o superior (vai de 5,...1 até 10,...9 ~ 5 a 10)
 		int sub=5;
 		ale = sub + ale*((sup--)-sub);
 		System.out.printf("Valor aleatorio entre %d e %d é %d\n",sub,sup,(int)ale);
