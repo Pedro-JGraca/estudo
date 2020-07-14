@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JCheckBox;
 
 
 public class TelaIdadade extends JFrame {
@@ -57,10 +58,11 @@ public class TelaIdadade extends JFrame {
 		lblNewLabel.setBounds(12, 32, 136, 18);
 		contentPane.add(lblNewLabel);
 		Date data = new Date();
+		@SuppressWarnings("deprecation")
 		int year = data.getYear() + 1900;
 		
 		JSpinner txtAN = new JSpinner();
-		txtAN.setModel(new SpinnerNumberModel(1500, 1500, year, 1));
+		txtAN.setModel(new SpinnerNumberModel(2000, 1500, year, 1));
 		txtAN.setBounds(167, 32, 78, 20);
 		contentPane.add(txtAN);
 		
@@ -76,7 +78,7 @@ public class TelaIdadade extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblIdade = new JLabel("0");
-		lblIdade.setBounds(107, 148, 70, 25);
+		lblIdade.setBounds(107, 148, 171, 25);
 		lblIdade.setForeground(Color.RED);
 		lblIdade.setFont(new Font("Dialog", Font.BOLD, 18));
 		contentPane.add(lblIdade);
@@ -95,11 +97,24 @@ public class TelaIdadade extends JFrame {
 		JLabel lblAA = new JLabel(Integer.toString(year));
 		lblAA.setBounds(107, 5, 70, 15);
 		contentPane.add(lblAA);
+		
+		JCheckBox chckbxFezAniversario = new JCheckBox("Fez aniversario?");
+		chckbxFezAniversario.setBounds(22, 63, 155, 23);
+		contentPane.add(chckbxFezAniversario);
+		
 		btnCalc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int ano = (int) txtAN.getValue();
 				int id = 2020 - ano;
-				lblIdade.setText(Integer.toString(id));
+				if (!chckbxFezAniversario.isSelected()) {
+					id=id-1;
+				}
+				if (id < 0) {
+					lblIdade.setText("nao nasceu");
+				}
+				else {
+					lblIdade.setText(Integer.toString(id));
+				}
 				
 			}
 		});

@@ -12,6 +12,7 @@ public class App {
 		System.out.print("Digite a nota:");
 		float nota = teclado.nextFloat();
 		System.out.printf("A nota de %s e %.1f \n", nome,nota);
+		teclado.close();
 		
 	}
 
