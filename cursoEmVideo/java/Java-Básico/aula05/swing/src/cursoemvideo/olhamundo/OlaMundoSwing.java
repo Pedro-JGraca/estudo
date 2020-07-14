@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class OlaMundoSwing extends JFrame {
@@ -38,14 +40,19 @@ public class OlaMundoSwing extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
 	 */
-	public OlaMundoSwing() {
+	public OlaMundoSwing() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 612, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		new File("*").getCanonicalPath();
+		
+		
+		System.out.println(new File("").getCanonicalPath());
 		
 		JLabel lbMensagem = new JLabel("Aqui vai a mensagem");
 		lbMensagem.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,6 +62,7 @@ public class OlaMundoSwing extends JFrame {
 		
 		btnClick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if (lbMensagem.getText().equals("Aqui vai a mensagem")) {
 					lbMensagem.setText("Olá, Mundo!");
 				}
