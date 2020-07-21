@@ -134,8 +134,7 @@ public class TelaIdade extends JFrame {
 			        lblSituacao.setText("");
 			    }
 			    else {
-			    	int ano = Integer.parseInt(txtAno.getText());
-					int idade = cal.get(Calendar.YEAR) - ano;
+					int idade = cal.get(Calendar.YEAR) - Integer.parseInt(txtAno.getText());
 
 					if (!chckbxAniversario.isSelected()) {
 						idade -=1;
