@@ -70,6 +70,9 @@ public class TelaIdade extends JFrame {
 			return saida;
 		}	
 	}
+	
+	
+	
 
 	/**
 	 * Create the frame.
@@ -122,9 +125,9 @@ public class TelaIdade extends JFrame {
 		btnCalc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtAno.setText(removeZeros(txtAno.getText()));
-				int limite =4;
-				if (txtAno.getText().length()>limite) {
-					lblIdade.setText("Limite de " + limite + " caracteres"); //verifica se numero e grande
+
+				if (txtAno.getText().length()> Macros.limiteNCharlblIdade() ) {
+					lblIdade.setText("Limite de " + Macros.limiteNCharlblIdade() + " caracteres"); //verifica se numero e grande
 			        txtAno.setText("");
 			        lblSituacao.setText("");
 				}
@@ -139,14 +142,14 @@ public class TelaIdade extends JFrame {
 					if (!chckbxAniversario.isSelected()) {
 						idade -=1;
 					}
-					int superior = 150;
+
 					if (idade<0) {
 						lblIdade.setText("Ainda nao aconteceu"); //verifica se esta falando de uma data futura
 						txtAno.setText("");
 						lblSituacao.setText("");    
 					}
-					else if (idade>superior) {
-						lblIdade.setText("Pssou de " + superior + " anos!"); //verifica se esta falando de uma data futura
+					else if (idade>Macros.limiteIdadeMaxima()) {
+						lblIdade.setText("Passou de " + Macros.limiteIdadeMaxima() + " anos!"); //verifica se esta falando de uma data futura
 						txtAno.setText("");
 						lblSituacao.setText("");   
 					}
