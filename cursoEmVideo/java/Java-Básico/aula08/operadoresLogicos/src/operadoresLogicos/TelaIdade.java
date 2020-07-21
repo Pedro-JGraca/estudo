@@ -93,8 +93,8 @@ public class TelaIdade extends JFrame {
 		lblIdadeFixo.setBounds(22, 162, 57, 15);
 		contentPane.add(lblIdadeFixo);
 		
-		JLabel lblSituacaoFixo = new JLabel("Situação");
-		lblSituacaoFixo.setBounds(22, 219, 71, 15);
+		JLabel lblSituacaoFixo = new JLabel("Situação:");
+		lblSituacaoFixo.setBounds(22, 219, 88, 15);
 		contentPane.add(lblSituacaoFixo);
 		
 		txtAno = new JTextField();
@@ -114,7 +114,7 @@ public class TelaIdade extends JFrame {
 		
 		JLabel lblSituacao = new JLabel("");
 		lblSituacao.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblSituacao.setBounds(188, 219, 80, 15);
+		lblSituacao.setBounds(122, 219, 146, 15);
 		contentPane.add(lblSituacao);
 		
 		JCheckBox chckbxAniversario = new JCheckBox("Fez aniversário?");
@@ -155,7 +155,7 @@ public class TelaIdade extends JFrame {
 					}
 					else {
 						lblIdade.setText(Integer.toString(idade));
-						String sit = (idade>=18)?"de Maior":"De Menor";
+						String sit = ((idade>=16 && idade <18)|| (idade>70))?"Votar é opcional":((idade<16)?"Votar é proibido":"votar é obrigatório");
 						lblSituacao.setText(sit);
 					}		
 			    }
