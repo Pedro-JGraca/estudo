@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+p {
+    text-align: justify; 
+    text-indent: 50px;
+}
+body{
+    background-image: url("/home/pedro-graca/Documentos/git/estudo/cursoEmVideo/hmtl5/Aula05-07/curso-html5-pacote01/projeto-glass-html5/367502-PAXLKG-681.jpg");
+
+    background-color: rgb(255, 255, 255);
+                
+    color: rgba(0, 0, 0, 1);
+}
+figure.fotoLegenda {
+    position: relative;
+    border: 8px solid rgb(255, 255, 255);
+    box-shadow: 1px 1px 4px black;
+}
+
+figure.fotoLegenda img {
+    width: 100%;
+    height: 100%;
+}
+
+
+figure.fotoLegenda figcaption {
+    opacity: 0;
+    position: absolute;
+    top: 0%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: opacity 0.6s;
+    -webkit-transition: opacity 0.6s;
+    -moz-transition: opacity 0.6s;
+    -ms-transition: opacity 0.6s;
+    -o-transition: opacity 0.6s;
+}
+figure.fotoLegenda:hover figcaption {
+    opacity: 1;
+}
