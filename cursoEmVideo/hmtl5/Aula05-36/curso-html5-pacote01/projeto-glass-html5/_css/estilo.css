@@ -7,10 +7,27 @@ p {
 body{
     background-image: url("/home/pedro-graca/Documentos/git/estudo/cursoEmVideo/hmtl5/Aula05-07/curso-html5-pacote01/projeto-glass-html5/367502-PAXLKG-681.jpg");
 
-    background-color: rgb(255, 255, 255);
+    background-color:#dddddd;
                 
     color: rgba(0, 0, 0, 1);
 }
+
+div#interface {
+    width: 1000px;
+    background-color: white;
+    margin: -20px auto 0px auto;
+    box-shadow: 0px 0px 10px #000000;
+    padding: 10px;
+}
+
+/*header#cabecalho
+*/
+img#icone {
+    position: absolute;
+    left: 750px ;
+    top: 40px;
+}
+
 figure.fotoLegenda {
     position: relative;
     border: 8px solid rgb(255, 255, 255);
@@ -54,7 +71,7 @@ nav#menu ul {
     list-style: none;
     text-transform: uppercase;
     position: absolute;
-    top: 0px;
+    top: -20px;
     left: 250px;
 }
 
