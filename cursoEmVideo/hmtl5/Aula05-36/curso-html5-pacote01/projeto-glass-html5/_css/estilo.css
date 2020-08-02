@@ -9,11 +9,18 @@ p {
     text-indent: 50px;
 }
 body{
-    background-image: url("/home/pedro-graca/Documentos/git/estudo/cursoEmVideo/hmtl5/Aula05-07/curso-html5-pacote01/projeto-glass-html5/367502-PAXLKG-681.jpg");
-
     background-color:#dddddd;
                 
     color: rgba(0, 0, 0, 1);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: #606060;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
 
 div#interface {
@@ -23,6 +30,7 @@ div#interface {
     box-shadow: 0px 0px 10px #000000;
     padding: 10px;
 }
+
 
 img#icone {
     position: absolute;
@@ -136,6 +144,41 @@ section#corpo {
     padding-right: 15px;
 }
 
+article#noticia-princial h2{
+    font-size: 13pt;
+    color: #606060;
+    background-color: #dddddd;
+    padding: 5px 0px 5px 10px;
+    margin: 10px 0px 10px 0px;
+}
+
+header#cabecalho-artigo h1{
+    font-family: 'FonteLogo', sans-serif;
+    font-size: 20pt;
+    color: #606060;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.direita {
+    text-align: right;
+}
+
+header#cabecalho-artigo h2{
+    font-size: 13pt;
+    color: #cecece;
+    background-color: #fff;
+    margin: 0px;
+
+}
+
+header#cabecalho-artigo h3{
+    font-size: 12px;
+    color: #606060;
+    /*margin: 0px;
+*/
+}
+
 table#tabelaspec {
     border: 1px solid #606060;
     border-spacing: 0px;
@@ -180,9 +223,26 @@ aside#lateral {
     display: block;
     width: 400px;
     float: right;
+    background-color: #dddddd;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+aside#lateral h1{
+    font-family: 'FonteLogo', sans-serif;
+    font-size: 20pt;
+    color: #606060;
+    margin-top: 0px ;
+}
 
+aside#lateral h2{
+
+    background-color: #606060;
+    font-size: 13pt;
+    color: #fff;
+    padding: 5px;
+}
 
 footer#rodape {
     clear: both;
