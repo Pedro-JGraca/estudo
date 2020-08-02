@@ -63,4 +63,24 @@ nav#menu li {
     background-color: #dddddd;
     padding: 10px;
     margin: 2px;
+    
+}
+
+nav#menu ul :hover{
+    background-color: #606060;
+    transition: background-color 0.4s linear;
+    -webkit-transition: background-color 0.4s linear;
+    -moz-transition: background-color 0.4s linear;
+    -ms-transition: background-color 0.4s linear;
+    -o-transition: background-color 0.4s linear;
+}
+
+nav#menu a {
+    color: #000000;
+    text-decoration: none;
+}
+
+nav#menu a:hover {
+    color: #ffffff;
+    text-decoration: underline;
 }
