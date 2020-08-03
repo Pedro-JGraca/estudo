@@ -4,6 +4,7 @@
     font-family: 'FonteLogo';
     src: url(../_fonts/bubblegum-sans-regular.otf);
 }
+
 p {
     text-align: justify; 
     text-indent: 50px;
@@ -33,9 +34,9 @@ div#interface {
 
 
 img#icone {
-    position: absolute;
-    left: 780px ;
-    top: 70px;
+    position: relative;
+    left: 760px;
+    top: -45px;
 }
 
 header#cabecalho{
@@ -105,7 +106,8 @@ nav#menu ul {
     text-transform: uppercase;
     position: absolute;
     top: -20px;
-    left: 250px;
+    left: 37%;
+    
 }
 
 nav#menu li {
@@ -123,6 +125,7 @@ nav#menu ul :hover{
     -moz-transition: background-color 0.4s linear;
     -ms-transition: background-color 0.4s linear;
     -o-transition: background-color 0.4s linear;
+
 }
 
 nav#menu a {
@@ -175,8 +178,6 @@ header#cabecalho-artigo h2{
 header#cabecalho-artigo h3{
     font-size: 12px;
     color: #606060;
-    /*margin: 0px;
-*/
 }
 
 table#tabelaspec {
