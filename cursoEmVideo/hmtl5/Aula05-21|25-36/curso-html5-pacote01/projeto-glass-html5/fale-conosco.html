@@ -50,7 +50,7 @@
                             </hgroup>
                         </header>
                         
-                        <form action="">
+                        <form action="" method="POST" id="fcontato">
 
                             <fieldset id="usuario">
 
@@ -99,26 +99,76 @@
                                     <input type="number" name="tNumero" id="cNumero" min="0" max="1000000">
                                 </p> 
                                 <p>
-                                    Estado
+                                    <label for="cEst">Estado</label>
+                                    <select name="tEst" id="cEst">
+                                
+                                        <optgroup label="Sudeste">
+
+                                            <option value="RJ">Rio de Janeito</option>
+                                            <option value="SP">São Paulo</option>
+                                            <option value="MG">Minas Gerais</option>
+
+                                        </optgroup>
+
+                                        <optgroup label="Sul">
+                                            <option value="PR">Paraná</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        </optgroup>
+
+                                        <optgroup label="Nordeste">
+                                            <option value="BH">Bahia</option>
+                                            <option selected value="PE">Pernambuco</option>
+                                            <option value="CE">Ceará</option>
+                                        </optgroup>
+                                        
+                                        <optgroup label= "Norte">
+                                             <option value="AM">Amazônia</option>
+                                            <option value="PA">Pará</option>
+                                        </optgroup>
+                                       
+
+                                    </select>
+                                    
                                 </p> 
                                 <p>
-                                    Cidade
+                                    <label for="cCid">Cidade</label>
+                                    <input type="text" name="tCId" id="dCid" maxlength="40" size="20" placeholder="Sua Cidade">
                                 </p> 
                             </fieldset>
 
                             <fieldset id="mensagem">
                                 <legend>Mensagem do Usuário</legend>
-                                <p>Grau de Urgência:</p>
-                                <p>Mensagem:</p>
+                                <p>
+                                    <label for="cUrg">Grau de Urgência</label>
+                                    min<input type="range" name="tUrg" id="cUrg" min="0" max="10" step="2">max
+
+                                </p>
+                                <p>
+                                    <label for="cMsg">Mensagem</label>
+                                    <textarea name="tMsg" id="cMsg" cols="45" rows="5" placeholder="Deixe aqui sua mensgaem"></textarea>
+                                </p>
                             </fieldset>
                             
                             
                             <fieldset id="pedido">
                                 <legend>Quero um Google Glass</legend>
-                                <p>Gostaria de adquirir um Google Glass quando disponível</p>
-                                <p>Cor:</p>
-                                <p>Quantidade:</p>
-                                <p>Preço Total: R$</p>
+                                <p>
+                                    <label for="cPed">Gostaria de adquirir um Google Glass quando disponível</label>
+                                    
+                                </p>
+                                <p>
+                                    <label for="cCor">Cor</label>
+                                    
+                                </p>
+                                <p>
+                                    <label for="cQtd">Quantidade</label>
+                                    
+                                </p>
+                                <p>
+                                    <label for="cTot">Preço Total R$</label>
+                                    
+                                </p>
                             </fieldset>
                             
                                                
