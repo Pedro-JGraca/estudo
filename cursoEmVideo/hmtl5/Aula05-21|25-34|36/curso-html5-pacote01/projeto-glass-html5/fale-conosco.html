@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,8 +40,11 @@
                     </ul>
                 </nav>
             </header>
+
             <section id="corpo-full">
+
                     <article id="noticia-princial">
+
                         <header id= "cabecalho-artigo">
                             <hgroup>
                                 <h3>Fale Conosco > Contato</h3>
@@ -50,7 +54,7 @@
                             </hgroup>
                         </header>
                         
-                        <form action="" method="POST" id="fcontato">
+                        <form action="" method="POST" id="fcontato" oninput="calc_total();">
 
                             <fieldset id="usuario">
 
@@ -60,7 +64,7 @@
                                 </p>
                                 <p>
                                     <label for="cSenha">Senha</label>  
-                                    <input type="password" name="tSenha" id="cSenha" size="1" maxlength="8" placeholder="8 digitos"> 
+                                    <input type="password" name="tSenha" id="cSenha" size="9" maxlength="8" placeholder="8 digitos"> 
                                 </p>
                                 <p>
                                     <label for="cMail">E-mail</label>  
@@ -154,37 +158,34 @@
                             <fieldset id="pedido">
                                 <legend>Quero um Google Glass</legend>
                                 <p>
+                                    <input type="checkbox" name="tPed" id="CPed" checked>
                                     <label for="cPed">Gostaria de adquirir um Google Glass quando disponível</label>
                                     
                                 </p>
                                 <p>
                                     <label for="cCor">Cor</label>
-                                    
+                                    <input type="color" name="tCor" id="cCor" value="#FF0000">
                                 </p>
                                 <p>
                                     <label for="cQtd">Quantidade</label>
-                                    
+                                    <input type="number" name="tQtd" id="cQtd" min="0" max="5" value="0">
                                 </p>
                                 <p>
                                     <label for="cTot">Preço Total R$</label>
-                                    
+                                    <input type="text" name="tTot" id="cTot" placeholder="Total a Pagar" readonly>
                                 </p>
                             </fieldset>
                             
-                                               
-                            
-                            [BOTÃO ENVIAR]         
+                            <input type="submit" name="enviar" value="enviar">
 
                         </form>
 
                             
                         
                     </article>
-            </section>
-             
-            
 
-            
+            </section>
+    
             <footer id="rodape">
                 <p>Copyright 2013 - by Gustavo Guanabara<br/>
                 <a href="https://facebook.com/cursosemvideo" target="_blank">Facebook</a> 
@@ -194,12 +195,6 @@
     
         </div>
     </body>
+
 </html>
-
-
-
-
-
-
-
 
