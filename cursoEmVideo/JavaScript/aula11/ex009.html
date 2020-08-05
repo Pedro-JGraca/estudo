@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistemas de verificacao de pais</h1>
+    <label for="txtPais">Seu Pais :</label> <input type="text" name="txtPais" id="txtPais">
+    <input type="button" value="Verificar" onclick="calcular()">
+    <div><p id = 'res' ></p></div>
+    <script>
+        var pais = document.getElementById("txtPais").value;
+        var res = document.getElementById('res');
+        function calcular() {
+            res.innerHTML= `O seu país é <strong>${pais}</strong>`
+            if (pais!="Brasil") {
+                res.innerHTML+="<br/>Extrangeiro!"
+            }
+            else{
+                res.innerHTML+="<br/>continue"
+            }
+        }
+    </script>
+</body>
+</html>
