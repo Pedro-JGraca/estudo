@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modelo de Exercicio</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body> 
+    
+    <header>
+        <h1>Verificador de Idade</h1>
+    </header>
+    
+    <section>
+
+        <div>
+            <p>
+                <label for="txtAno">Ano de nascimento</label>
+                <input type="number" name="txtAno" id="txtAno" min="1900">
+                <br>
+                <label for="radAni">Fez Aniversário?</label>
+                <input type="radio" name="radAni" id="Sim" checked>
+                <label for="sim">Sim</label>
+                <input type="radio" name="radAni" id="Nao">
+                <label for="Nao">Nao</label>
+            </p>
+            <p>
+                <label for="radsex">Sexo:</label>
+                <input type="radio" name="radsex" id="outre" checked>
+                <label for="outre">Outre</label>
+                <input type="radio" name="radsex" id="fem">
+                <label for="fem">Feminina</label>
+                <input type="radio" name="radsex" id="masc">
+                <label for="masc">Masculino</label>         
+            </p>
+            <p id="botao">
+                <input type="button" value="Verificar" onclick="verificar();" >
+            </p>
+        </div>
+
+        <div id = "res">
+            Preencha os dados acima para ver o resultado!
+
+        </div>
+        <p id="classeIdade">
+            
+        </p>
+    </section>
+    
+    <footer>
+    
+        <p>
+            <span class="copyleft">&copy;</span>
+            Curso em Video
+        </p>
+
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
