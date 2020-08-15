@@ -7,9 +7,11 @@ function verificar () {
 
     var res2 = window.document.getElementById("classeIdade");
 
-    if (nasc.value.lenght ==0 || nasc.value > ano)  {
+    if (nasc.value.length == 0 || nasc.value > ano)  {
         res.innerHTML = "Verifique os dados";
+        res2.innerHTML = "";
     }
+
     else {
         var Fgenenro= window.document.getElementsByName("radsex");
 
@@ -42,13 +44,13 @@ function verificar () {
         if (idade>0 && idade<12) {
             res2.innerHTML = "Você é uma criança.";
         }
-        if (idade < 18) {
+        else if (idade < 18) {
             res2.innerHTML = "Você é uma Adolescente.";
         }
-        if (idade < 29) {
+        else if (idade < 29) {
             res2.innerHTML = "Você é uma Jovem Adulta.";
         }
-        if (idade < 65) {
+        else if (idade < 65) {
             res2.innerHTML = "Você é uma Adulta.";
         }
         else {
@@ -59,13 +61,13 @@ function verificar () {
             if (idade>0 && idade<12) {
                 res2.innerHTML = "Você é uma criança.";
             }
-            if (idade < 18) {
+            else if (idade < 18) {
                 res2.innerHTML = "Você é ume Adolescente.";
             }
-            if (idade < 29) {
+            else if (idade < 29) {
                 res2.innerHTML = "Você é ume Jovem Adulte.";
             }
-            if (idade < 65) {
+            else if (idade < 65) {
                 res2.innerHTML = "Você é ume Adulte.";
             }
             else {
@@ -76,13 +78,13 @@ function verificar () {
             if (idade>0 && idade<12) {
                 res2.innerHTML = "Você é uma criança.";
             }
-            if (idade < 18) {
+            else if (idade < 18) {
                 res2.innerHTML = "Você é uma Adolescente.";
             }
-            if (idade < 29) {
+            else if (idade < 29) {
                 res2.innerHTML = "Você é uma Jovem Adulta.";
             }
-            if (idade < 65) {
+            else if (idade < 65) {
                 res2.innerHTML = "Você é uma Adulta.";
             }
             else {
@@ -93,13 +95,13 @@ function verificar () {
             if (idade>0 && idade<12) {
                 res2.innerHTML = "Você é uma criança.";
             }
-            if (idade < 18) {
+            else if (idade < 18) {
                 res2.innerHTML = "Você é um Adolescente.";
             }
-            if (idade < 29) {
+            else if (idade < 29) {
                 res2.innerHTML = "Você é um Jovem Adulto.";
             }
-            if (idade < 65) {
+            else if (idade < 65) {
                 res2.innerHTML = "Você é um Adulto.";
             }
             else {
@@ -107,9 +109,5 @@ function verificar () {
             }
         }
     }
-
-
-
-
 
 }
