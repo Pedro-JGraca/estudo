@@ -21,6 +21,19 @@ section {
     box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.377);
 }
 
+section div#res {
+    margin: 10px;
+    text-align: center;
+}
+
+section div#res select {
+    font-size: 20px;
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+
 footer {
     color: white;
     text-align: center;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tabuada</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body> 
+    
+    <header>
+        <h1>Tabuada</h1>
+    </header>
+    
+    <section>
+
+        <div>
+            <label for="entrada">Número: </label>
+            <input type="number" name="entrada" id="entrada" max="50" min="-50" onchange="update()">
+            <input type="button" value="Gerar Tabuada" onclick="tabuada()">
+        </div>
+
+        <div id="res">
+            <select name="caixa" id="caixa" size="11">
+                <option value="titulo">Coloque um valor</option>
+                <option value="x1"></option>
+                <option value="x2"></option>
+                <option value="x3"></option>
+                <option value="x4"></option>
+                <option value="x5"></option>
+                <option value="x6"></option>
+                <option value="x7"></option>
+                <option value="x8"></option>
+                <option value="x9"></option>
+                <option value="x10"></option>
+            </select>
+        </div>
+
+    </section>
+    
+    <footer>
+    
+        <p>
+            <span class="copyleft">&copy;</span>
+            Curso em Video
+        </p>
+
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
