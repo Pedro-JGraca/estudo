@@ -1,0 +1,48 @@
+body{
+    background: rgb(107, 134, 245);
+    font: normal 15pt Arial;
+}
+
+header {
+    color: white;
+    text-align: center;
+}
+
+section {
+    background: white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    padding: 15px;
+    width: 500px;
+    margin: auto;
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.377);
+}
+
+section div {
+    text-align: center;
+    margin: 10px;
+}
+section div input {
+    margin-top: 10px ;
+}
+section div#limpar {
+    text-align: right;
+}
+
+
+section div#res select#caixa {
+    width: 150px;
+}
+footer {
+    color: white;
+    text-align: center;
+
+}
+
+.copyleft {
+    display:inline-block;
+    transform: rotate(180deg);
+}
