@@ -52,20 +52,21 @@ function disparar () {
             res.innerText ="";
         
             res.style.textAlign = "justify";
-            var c = Inicio;
+            let c = Inicio;
             if (Inicio<Fim) { //for crescente
                 for (;c<=Fim;c+=Passo) {
                     res.innerText += " " + c.toString();
-                    res.innerText += " ->";
+                    res.innerText += " \u{1F449}";
+
                 }
-                res.innerText += " fim";
+                res.innerText += " \u{1F3C1}";
             }
             else if (Inicio>Fim) {//for descrescente
                 for (;c>=Fim;c+=Passo) {
                     res.innerText += " " + c.toString();
-                    res.innerText += " ->";
+                    res.innerText += " \u{1F449}";
                 }
-                res.innerText += " fim";
+                res.innerText += " \u{1F3C1}";
             }
             else {
                 res.style.textAlign = "center";
