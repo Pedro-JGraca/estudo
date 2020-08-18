@@ -42,6 +42,12 @@ function disparar () {
             res.innerText ="Nesse Caso Passo precisa ser um valor negativo";
         }
 
+        else if (((Inicio + Passo + Fim)>500)||((Inicio+Passo+Fim)<-500)){
+            //valores muito altos ou muito baixos
+            res.style.textAlign = "center";
+            res.innerText ="Estorou os valores!";
+        }
+
         else {//se todos os valores testados são validos
             res.innerText ="";
         
