@@ -1,3 +1,6 @@
+#include <vector>
+
+using namespace std;
 
 class Estadual
 {
@@ -6,7 +9,7 @@ private:
 public:
     Estadual(/* args */);
 
-    void
+    vector <unsigned>
     mediaMovel(unsigned short);
 };
 

@@ -8,7 +8,7 @@ Estadual::Estadual() {
 
 }
 
-void
+vector <unsigned>
 Estadual::mediaMovel(unsigned short N=3){
     //CARREGAR DIAS puxando de arquivo
     vector <unsigned> dias = {3,1,10,3,4,5};
@@ -28,9 +28,10 @@ Estadual::mediaMovel(unsigned short N=3){
 
     //mostra
     for (unsigned index = 0;index<somados.size();index++){
-        cout << index << ". " << somados[index] << endl;
+        somados[index] = somados[index]/N;
     }
 
+    return somados;
 }
 
 
