@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "../classes/classes.h"
 
 using namespace std;
 
@@ -7,7 +7,9 @@ using namespace std;
 int main(int argc,char **argv,char **envp){
 
 
-	cout << "ola mundo!" << endl;
+	Estadual estado;
+
+	estado.mediaMovel(3);
 	
 
 
