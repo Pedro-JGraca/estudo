@@ -1,16 +1,18 @@
 #include <iostream>
-#include "../classes/classes.h"
+#include "classes/classes.h"
 
 using namespace std;
 
 
 int main(int argc,char **argv,char **envp){
 
+	vector <float> res;
+	Estadual estado("Rio de janeiro","TESTE");
 
-	Estadual estado;
-
-	estado.mediaMovel(3);
-	
+	res=estado.porcentagemMovel(100);
+	for(float elt : res){
+		cout << elt << endl;
+	}
 
 
 
