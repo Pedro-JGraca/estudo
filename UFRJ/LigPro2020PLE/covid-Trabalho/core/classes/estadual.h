@@ -1,5 +1,5 @@
-#ifndef MY_CLASSES_H
-#define MY_CLASSES_H
+#ifndef ESTADUAL_H
+#define ESTADUAL_H
 
 #include <vector>
 #include <string>
@@ -12,20 +12,31 @@ class Estadual
 		string fileName;
 		string initDate;
 		vector <unsigned>  dadosLidos;
+		vector <float> medias;
 		
 		void 
 		importarDados();
-    
 		
 		/* data */
-	public:
-    Estadual(string estado,string file);
+		Estadual(string estado,string file, unsigned n);
     
 		vector <float>  
 		mediaMovel(unsigned short);
     
 		vector <float>  
 		porcentagemMovel(unsigned short);
+
+		vector <unsigned long> //10 bilhao da quanto?
+		acumulados();
+
+		vector <unsigned long> 
+		somaMovel(unsigned short);
+		
+	public:
+
+
+
+
 };
 
 #endif

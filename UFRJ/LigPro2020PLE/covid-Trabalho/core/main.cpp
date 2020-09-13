@@ -1,5 +1,5 @@
 #include <iostream>
-#include "classes/classes.h"
+#include "classes/estadual.h"
 
 using namespace std;
 
@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc,char **argv,char **envp){
 
 	vector <float> res;
-	Estadual estado("Rio de janeiro","TESTE");
+	Estadual estado("Rio de janeiro","TESTE",3);
 
 	res=estado.porcentagemMovel(100);
 	for(float elt : res){
