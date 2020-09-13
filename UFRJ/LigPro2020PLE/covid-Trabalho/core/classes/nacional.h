@@ -3,27 +3,33 @@
 
 
 #include <vector>
+#include <string>
 #include "estadual.h"
 
 using namespace std;
 
 class Nacional
 {
-private:
-    string nome;
-    
-    vector <Estadual> Estados;
-public:
-    Nacional(string, ...);
+	private:
+		string nomePais;
+		unsigned short N;
+    vector <Estadual> estados;
 
-    vector <unsigned long> //10 bilhao da quanto
+	public:
+  	Nacional(string nome,unsigned short N, vector<string> nomeEstado);
+
+    vector <unsigned>
     acumulados();
 
-    vector <float>  
-    mediaMovel(unsigned short);
+    //vector <unsigned> 
+		//somaMovel();
 
-    vector <unsigned long> 
-	somaMovel(unsigned short);
+    //vector <float> 
+		//percentagemMovel();
+
+		//vector <Estadual>
+
+
 };
 
 #endif

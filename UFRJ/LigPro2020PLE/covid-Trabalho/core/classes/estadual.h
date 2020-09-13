@@ -5,36 +5,51 @@
 #include <string>
 using namespace std;
 
+template <class T>
+T computePercentage(T a,T b);
+
+
 class Estadual
 {
 	private:
-		string nomeEstado;
+		unsigned short N;
+		
 		string fileName;
 		string initDate;
-		vector <unsigned>  dadosLidos;
-		vector <float> medias;
+		unsigned dataSize;
 		
-		void 
+		//caching: assuming memory is cheap but cpu isnt
+		vector <unsigned> dadosLidos;
+		vector <unsigned> somaMovel;
+		vector <unsigned> acumulado;
+
+		
+		vector <unsigned>
+		computeSomaMovel(unsigned short);
+		
+		unsigned 
 		importarDados();
-		
-		/* data */
-		Estadual(string estado,string file, unsigned n);
-    
-		vector <float>  
-		mediaMovel(unsigned short);
-    
-		vector <float>  
-		porcentagemMovel(unsigned short);
 
-		vector <unsigned long> //10 bilhao da quanto?
-		acumulados();
-
-		vector <unsigned long> 
-		somaMovel(unsigned short);
+		float
+		percentageAtDay(unsigned day);
 		
 	public:
+		string nomeEstado;
+		Estadual(string estado,string file, unsigned short);
 
+		vector <unsigned> 
+		getSomaMovel(unsigned short);
 
+		vector <unsigned> //aguenta ate 4Bi, vamos ser positivos : D 
+		getAcumulados();
+
+		vector <float>  
+		porcentagemMovel();
+
+		float 
+		tendency();
+
+		unsigned getDataSize();
 
 
 };

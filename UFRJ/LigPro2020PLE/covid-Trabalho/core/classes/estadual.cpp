@@ -8,16 +8,29 @@
 
 using namespace std;
 
+template <class T> 
+T computePercentage(T a,T b){
+		T res;
+		if (b==0){
+			//pq nao tem divisao por zero
+			res=std::numeric_limits<T>::infinity();
+		}
+		else{
+			res=((a-b)/b)*100;
+		}
+		return res;
+}
 
-Estadual::Estadual(string estado,string file, unsigned n) {
+Estadual::Estadual(string estado,string file, unsigned short n) {
+	
+	N=n;
 	nomeEstado=estado;
 	fileName=file;
-	importarDados();
-	medias = porcentagemMovel(n);
+	dataSize=importarDados();
 	
 }
 
-void Estadual::importarDados()
+unsigned Estadual::importarDados()
 {
 	ifstream file;
 	unsigned line;
@@ -27,6 +40,7 @@ void Estadual::importarDados()
 
 	if (!file.is_open()){
 		cerr << "Unable to open " << path <<endl;
+		return 0;
 	}
 	else{
 		file >> initDate;	
@@ -35,86 +49,104 @@ void Estadual::importarDados()
 		}
 	}
 	file.close();
+	
+	return dadosLidos.size();
 
 }
 
 
-template <class T> 
-T computePercentage(T a,T b){
-		T res;
-		if (b==0){//pq nao tem divisao por zero
-			res=std::numeric_limits<T>::infinity();
-		}
-		else{
-			res=((a-b)/b)*100;
-		}
-		return res;
+float Estadual::percentageAtDay(unsigned day){
+	
+	vector <unsigned> soma=getSomaMovel(N);	
+	float dayAvg,lastAvg;
+
+	
+	if (day==0){
+		lastAvg=0;
+	}
+	else{
+		lastAvg=((float)soma[day-1])/N;
+	}
+	dayAvg=((float)soma[day])/N;
+
+	return computePercentage<float>(dayAvg,lastAvg);
 }
 
-
-vector <float> Estadual::porcentagemMovel(unsigned short N=3)
+//not cached cost M
+vector <float> Estadual::porcentagemMovel()
 {
-	vector <float> porcentagemMovel;
-	float last,temp;
 
-	if (N>dadosLidos.size()){
-		cerr<< "Atencao, Maximo o total da amostra eh " << dadosLidos.size() << endl;
+	//dont waste time calling realloc, total size is already known
+	vector <float> porcentagemMovel(dataSize,0);
+	if (N>dataSize){
+		cerr<< "Atencao, Maximo o total da amostra eh " << dataSize << endl;
 	}
 	
-	porcentagemMovel=mediaMovel(N);
-
-	//raise from 0
-	last=0;
-	for (int i=0;i<porcentagemMovel.size();i++){
-		temp=porcentagemMovel[i];
-		porcentagemMovel[i]=computePercentage<float>(porcentagemMovel[i],last);
-		last=temp;
+	for (int i=0;i<dataSize;i++){
+		porcentagemMovel[i]=percentageAtDay(i);
 	}
 
 	return porcentagemMovel;
 }
-//let mediaMovel as a separadted method for reuse in Nacional class
-vector <float> Estadual::mediaMovel(unsigned short N=3){
-    
-		vector <float> medias;
-		vector <unsigned long> somados;
-		somados = somaMovel(N);
 
-		for (int i=0;i<somados.size();i++){
-				medias.push_back(((float)somados[i])/3.0);
-		}	
-    return medias;
+vector <unsigned> 
+Estadual::computeSomaMovel(unsigned short n){
+  
+	vector <unsigned> somados;
+  unsigned hoje;
+	unsigned somado;
+  // complexidade M 
+	// M = Numero de dias N = janela
+
+	//inicializa o dia anterior
+	somados.push_back(dadosLidos[0]);
+	for (hoje=1; hoje<dadosLidos.size();hoje++){
+
+			//construir ate N
+			if(hoje<N){
+       	somado=somados[hoje-1]+dadosLidos[hoje];
+			}
+			else{
+       	somado=somados[hoje-1]+dadosLidos[hoje]-dadosLidos[hoje-(N)];
+   		}
+			somados.push_back(somado);
+	}
+  return somados;
 }
 
-vector <unsigned long> 
-Estadual::somaMovel(unsigned short N=3){
-    
-		vector <unsigned long> somados;
-    	unsigned hoje;
-		unsigned somado;
-    	// complexidade M 
-		// M = Numero de dias N = janela
+vector <unsigned>
+Estadual::getSomaMovel(unsigned short n){
+	
+	//caching default N responses
+	if (somaMovel.size()==0 && n==N){
+		somaMovel=computeSomaMovel(N);
+		return somaMovel;
+	}
+	else if(n==N){
+		return somaMovel;
+	}
+	else{
+		return computeSomaMovel(n);
+	}
 
-		//inicializa o dia anterior
-    somados.push_back((float)dadosLidos[0]);
-    
-		for (hoje=1; hoje<dadosLidos.size();hoje++){
-
-				//construir ate N
-				if(hoje<N){
-        	somado=somados[hoje-1]+dadosLidos[hoje];
-				}
-				else{
-        	somado=somados[hoje-1]+dadosLidos[hoje]-dadosLidos[hoje-(N)];
-    		}
-				somados.push_back((float)somado);
-		}
-    return somados;
 }
 
 
-vector <unsigned long>
-Estadual::acumulados(){
-	return somaMovel(dadosLidos.size());
+vector <unsigned>
+Estadual::getAcumulados(){
+
+	//caching: after first calling solves with cost 1
+  if (acumulado.size()==0){
+		acumulado=computeSomaMovel(dataSize);
+	}
+	return acumulado;
 }
+
+float tendency(){
+	return percentageAtDay(dataSize);
+}
+
+unsigned getDataSize(){	return dataSize;}
+
+
 
