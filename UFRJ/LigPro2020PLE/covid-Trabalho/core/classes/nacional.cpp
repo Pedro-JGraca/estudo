@@ -24,7 +24,7 @@ Nacional::Nacional(string nome,unsigned short N,vector<string> nomeEstado){
 vector <unsigned>
 Nacional::acumulados(){
 	
-	unsigned stateDataSize=estado[0].getDataSize();
+	unsigned stateDataSize=estados[0].getDataSize();
 
 	vector<unsigned> result(stateDataSize,0);
 
@@ -38,7 +38,7 @@ Nacional::acumulados(){
 		//for(unsigned i : acumulados)
 	}
 
-
+	return result;
 
 }
 

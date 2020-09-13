@@ -49,7 +49,8 @@ class Estadual
 		float 
 		tendency();
 
-		unsigned getDataSize();
+		unsigned 
+		getDataSize();
 
 
 };

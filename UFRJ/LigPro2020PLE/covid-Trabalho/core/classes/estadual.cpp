@@ -131,6 +131,16 @@ Estadual::getSomaMovel(unsigned short n){
 
 }
 
+float
+Estadual::tendency(){
+	return percentageAtDay(dataSize);
+}
+
+unsigned 
+Estadual::getDataSize()
+{	
+	return dataSize;
+}
 
 vector <unsigned>
 Estadual::getAcumulados(){
@@ -142,11 +152,6 @@ Estadual::getAcumulados(){
 	return acumulado;
 }
 
-float tendency(){
-	return percentageAtDay(dataSize);
-}
-
-unsigned getDataSize(){	return dataSize;}
 
 
 
