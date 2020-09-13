@@ -8,6 +8,9 @@
 
 using namespace std;
 
+bool
+compareTendency(Estadual a, Estadual b);
+
 class Nacional
 {
 	private:
@@ -16,6 +19,9 @@ class Nacional
     
 		vector <Estadual> estados;
 		
+    vector <unsigned> 
+		somaMovel();
+
 
 	public:
   	Nacional(string nome,unsigned short N, vector<string> nomeEstado);
@@ -23,13 +29,17 @@ class Nacional
     vector <unsigned>
     acumulados();
 
-    vector <unsigned> 
-		somaMovel();
-
     vector <float> 
 		porcentagemMovel();
 
-		//vector <Estadual>
+		void
+		sortEstados();
+
+		float
+		tendency();
+
+		vector <float>
+		stateTendency();
 
 
 };

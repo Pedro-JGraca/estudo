@@ -17,7 +17,7 @@ int main(int argc,char **argv,char **envp){
 
 	Nacional pais("Brasil",3,{"TESTE","TESTE"});
 	
-	for(unsigned elt : pais.somaMovel()){
+	for(unsigned elt : pais.porcentagemMovel()){
 		cout << elt << endl;
 	}
 

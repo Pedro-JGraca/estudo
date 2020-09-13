@@ -2,6 +2,7 @@
 #include <string>
 #include <exception>
 #include <algorithm>
+#include <bits/stdc++.h>
 
 #include "nacional.h"
 #include "estadual.h"
@@ -87,6 +88,39 @@ Nacional::porcentagemMovel(){
 
 	return res;
 }
+
+bool 
+compareTendency(Estadual a, Estadual b){
+	float t1,t2;
+	t1=a.tendency();
+	t2=b.tendency();
+	return (t1 < t2);
+}
+
+void
+Nacional::sortEstados(){	
+	sort(estados.begin(),estados.end(),compareTendency);
+}
+
+float 
+Nacional::tendency(){	
+	return porcentagemMovel().back();
+}
+
+vector <float> 
+Nacional::stateTendency(){
+	sortEstados();
+
+	vector<float> res;
+		
+	for (auto x: estados){
+		res.push_back(x.tendency());
+	}
+
+	return res;
+}
+
+
 
 
 
