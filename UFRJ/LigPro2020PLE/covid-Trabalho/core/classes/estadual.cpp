@@ -115,7 +115,12 @@ Estadual::computeSomaMovel(unsigned short n){
 }
 
 vector <unsigned>
-Estadual::getSomaMovel(unsigned short n){
+Estadual::getSomaMovel(unsigned short n=0){
+	
+	//check if its default
+	if (n==0){
+		n==N;
+	}
 	
 	//caching default N responses
 	if (somaMovel.size()==0 && n==N){
@@ -140,6 +145,10 @@ unsigned
 Estadual::getDataSize()
 {	
 	return dataSize;
+}
+unsigned short 
+Estadual::getN(){
+	return N;
 }
 
 vector <unsigned>

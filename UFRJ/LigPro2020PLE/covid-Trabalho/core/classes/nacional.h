@@ -13,7 +13,9 @@ class Nacional
 	private:
 		string nomePais;
 		unsigned short N;
-    vector <Estadual> estados;
+    
+		vector <Estadual> estados;
+		
 
 	public:
   	Nacional(string nome,unsigned short N, vector<string> nomeEstado);
@@ -21,11 +23,11 @@ class Nacional
     vector <unsigned>
     acumulados();
 
-    //vector <unsigned> 
-		//somaMovel();
+    vector <unsigned> 
+		somaMovel();
 
-    //vector <float> 
-		//percentagemMovel();
+    vector <float> 
+		porcentagemMovel();
 
 		//vector <Estadual>
 

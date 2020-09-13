@@ -15,8 +15,11 @@ int main(int argc,char **argv,char **envp){
 		cout << elt << endl;
 	}
 
-	Nacional pais("Brasil",7,{"TESTE"});
-
+	Nacional pais("Brasil",3,{"TESTE","TESTE"});
+	
+	for(unsigned elt : pais.somaMovel()){
+		cout << elt << endl;
+	}
 
 
 

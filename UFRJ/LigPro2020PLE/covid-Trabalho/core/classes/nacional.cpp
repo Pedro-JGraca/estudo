@@ -27,6 +27,8 @@ Nacional::acumulados(){
 	unsigned stateDataSize=estados[0].getDataSize();
 
 	vector<unsigned> result(stateDataSize,0);
+	vector<unsigned> estadoAcumulado;
+	
 
 	for(Estadual estado : estados){
 		if (estado.getDataSize()!=stateDataSize){
@@ -34,12 +36,56 @@ Nacional::acumulados(){
 		}
 
 		//shallow copy
-		//for (estado.getAcumulados().begin()
-		//for(unsigned i : acumulados)
+		estadoAcumulado=estado.getAcumulados();
+		for (int i=0;i<estadoAcumulado.size();i++){
+			result[i]=result[i]+estadoAcumulado[i];
+		}
+
 	}
 
 	return result;
+}
 
+
+vector <unsigned>
+Nacional::somaMovel(){
+	
+	unsigned stateDataSize=estados[0].getDataSize();
+
+	vector<unsigned> result(stateDataSize,0);
+	vector<unsigned> estadoSomaMovel;
+
+	for(Estadual estado : estados){
+		if (estado.getDataSize()!=stateDataSize){
+			throw std::out_of_range("Os Estados possuem listas incompativeis o tamanho nao bate");
+		}
+
+		//shallow copy by NRVO 
+		estadoSomaMovel=estado.getSomaMovel(estado.getN());
+		for (int i=0;i<stateDataSize;i++){
+			result[i]=result[i]+estadoSomaMovel[i];
+		}
+	}
+
+	return result;
+}
+
+vector <float>
+Nacional::porcentagemMovel(){
+
+	vector<unsigned>somaNacional = somaMovel();
+	unsigned last;
+
+	//initialize res vector w somaNacional size , avoid realloc
+	vector<float> res(somaNacional.size(),0);
+	
+	last=0;
+	for (unsigned i=0;i<somaNacional.size();i++){
+		res[i]=computePercentage<float>((float)somaNacional[i],(float)last);
+		last=somaNacional[i];
+	}
+
+	return res;
 }
 
 

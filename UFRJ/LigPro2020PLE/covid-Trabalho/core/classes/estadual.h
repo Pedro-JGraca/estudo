@@ -24,7 +24,7 @@ class Estadual
 		vector <unsigned> acumulado;
 
 		
-		vector <unsigned>
+		vector <unsigned> 
 		computeSomaMovel(unsigned short);
 		
 		unsigned 
@@ -38,7 +38,7 @@ class Estadual
 		Estadual(string estado,string file, unsigned short);
 
 		vector <unsigned> 
-		getSomaMovel(unsigned short);
+		getSomaMovel(unsigned short );
 
 		vector <unsigned> //aguenta ate 4Bi, vamos ser positivos : D 
 		getAcumulados();
@@ -46,11 +46,16 @@ class Estadual
 		vector <float>  
 		porcentagemMovel();
 
+
+		//get percentage changed on the last day
 		float 
 		tendency();
 
 		unsigned 
 		getDataSize();
+
+		unsigned short
+		getN();
 
 
 };
