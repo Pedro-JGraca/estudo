@@ -110,7 +110,7 @@ Estadual::porcentagemMovel2(vector <float> *ptr)
 
 
 
-
+/*
 vector <unsigned> 
 Estadual::computeSomaMovel(unsigned short n){
   
@@ -134,7 +134,35 @@ Estadual::computeSomaMovel(unsigned short n){
 			somados.push_back(somado);
 	}
   return somados;
+}*/
+
+void
+Estadual::computeSomaMovel2(unsigned short n, vector <unsigned> * ptr){
+	vector <unsigned> somados;
+ 	unsigned hoje;
+	unsigned somado;
+  	// complexidade M 
+	// M = Numero de dias N = janela
+
+	//inicializa o dia anterior
+	somados.push_back(dadosLidos[0]);
+	for (hoje=1; hoje<dadosLidos.size();hoje++){
+		//construir ate N
+		if(hoje<N){
+	       	somado=somados[hoje-1]+dadosLidos[hoje];
+		}
+		else{
+	       	somado=somados[hoje-1]+dadosLidos[hoje]-dadosLidos[hoje-(N)];
+   		}
+		somados.push_back(somado);
+	}
+	*ptr= somados;
 }
+
+
+
+
+
 /*
 vector <unsigned>
 Estadual::getSomaMovel(unsigned short n=0){
@@ -172,13 +200,15 @@ Estadual::getSomaMovel2(unsigned short n, vector <unsigned> *local){
 	//caching default N responses
 
 	if (somaMovel.size()==0 && n==N){
-		somaMovel=computeSomaMovel(N);
+		computeSomaMovel2(N,&somaMovel);
+		//somaMovel=computeSomaMovel(N);
 	}
 	else if(n==N){
 		;
 	}
 	else{
-		somaMovel=computeSomaMovel(n);
+		computeSomaMovel2(n,&somaMovel);
+		//somaMovel=computeSomaMovel(n);
 	}
 
 	*ptr = somaMovel;
@@ -217,8 +247,9 @@ Estadual::getAcumulados2(vector <unsigned> * local){
 	vector <unsigned> * ptr = local;
 
 	//caching: after first calling solves with cost 1
-  if (acumulado.size()==0){
-		acumulado=computeSomaMovel(dataSize);
+	if (acumulado.size()==0){
+	  //computeSomaMovel(dataSize); tirar
+	  computeSomaMovel2(dataSize,&acumulado);
 	}
 	*ptr= acumulado;
 }

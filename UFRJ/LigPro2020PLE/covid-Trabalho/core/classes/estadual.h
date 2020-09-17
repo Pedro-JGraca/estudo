@@ -26,6 +26,9 @@ class Estadual
 		
 		vector <unsigned> 
 		computeSomaMovel(unsigned short);
+
+		void
+		computeSomaMovel2(unsigned short,vector <unsigned> *);
 		
 		unsigned 
 		importarDados();
