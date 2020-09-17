@@ -37,7 +37,9 @@ Nacional::acumulados(){
 		}
 
 		//shallow copy
-		estadoAcumulado=estado.getAcumulados();
+		//estadoAcumulado=estado.getAcumulados();
+		estado.getAcumulados2(&estadoAcumulado);
+
 		for (int i=0;i<estadoAcumulado.size();i++){
 			result[i]=result[i]+estadoAcumulado[i];
 		}
@@ -61,8 +63,11 @@ Nacional::somaMovel(){
 			throw std::out_of_range("Os Estados possuem listas incompativeis o tamanho nao bate");
 		}
 
-		//shallow copy by NRVO 
-		estadoSomaMovel=estado.getSomaMovel(estado.getN());
+		//shallow copy by NRVO
+
+		//estadoSomaMovel=estado.getSomaMovel(estado.getN());
+		estado.getSomaMovel2(estado.getN(),&estadoSomaMovel);
+
 		for (int i=0;i<stateDataSize;i++){
 			result[i]=result[i]+estadoSomaMovel[i];
 		}

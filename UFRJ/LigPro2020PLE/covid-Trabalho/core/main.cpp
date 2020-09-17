@@ -10,7 +10,9 @@ int main(int argc,char **argv,char **envp){
 	vector <float> res;
 	Estadual estado("Rio de janeiro","TESTE",3);
 
-	res=estado.porcentagemMovel();
+	//res=estado.porcentagemMovel(); tirar
+	estado.porcentagemMovel2(&res);
+
 	for(float elt : res){
 		cout << elt << endl;
 	}

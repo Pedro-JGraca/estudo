@@ -56,8 +56,9 @@ unsigned Estadual::importarDados()
 
 
 float Estadual::percentageAtDay(unsigned day){
-	
-	vector <unsigned> soma=getSomaMovel(N);	
+		
+	vector <unsigned> soma;
+	getSomaMovel2(N,&soma);
 	float dayAvg,lastAvg;
 
 	
@@ -71,7 +72,7 @@ float Estadual::percentageAtDay(unsigned day){
 
 	return computePercentage<float>(dayAvg,lastAvg);
 }
-
+/*
 //not cached cost M
 vector <float> Estadual::porcentagemMovel()
 {
@@ -88,6 +89,27 @@ vector <float> Estadual::porcentagemMovel()
 
 	return porcentagemMovel;
 }
+*/
+
+void
+Estadual::porcentagemMovel2(vector <float> *ptr)
+{
+
+	//dont waste time calling realloc, total size is already known
+	vector <float> porcentagemMovel(dataSize,0);
+	if (N>dataSize){
+		cerr<< "Atencao, Maximo o total da amostra eh " << dataSize << endl;
+	}
+	
+	for (int i=0;i<dataSize;i++){
+		porcentagemMovel[i]=percentageAtDay(i);
+	}
+
+	*ptr= porcentagemMovel;
+}
+
+
+
 
 vector <unsigned> 
 Estadual::computeSomaMovel(unsigned short n){
@@ -113,7 +135,7 @@ Estadual::computeSomaMovel(unsigned short n){
 	}
   return somados;
 }
-
+/*
 vector <unsigned>
 Estadual::getSomaMovel(unsigned short n=0){
 	
@@ -134,6 +156,33 @@ Estadual::getSomaMovel(unsigned short n=0){
 		return computeSomaMovel(n);
 	}
 
+}//tirar
+*/
+void
+Estadual::getSomaMovel2(unsigned short n, vector <unsigned> *local){
+	
+
+	vector <unsigned>*ptr = local;
+	
+	//check if its default
+	if (n==0){
+		n==N;
+	}
+
+	//caching default N responses
+
+	if (somaMovel.size()==0 && n==N){
+		somaMovel=computeSomaMovel(N);
+	}
+	else if(n==N){
+		;
+	}
+	else{
+		somaMovel=computeSomaMovel(n);
+	}
+
+	*ptr = somaMovel;
+
 }
 
 float
@@ -151,7 +200,7 @@ Estadual::getN(){
 	return N;
 }
 
-vector <unsigned>
+/*vector <unsigned>
 Estadual::getAcumulados(){
 
 	//caching: after first calling solves with cost 1
@@ -159,7 +208,22 @@ Estadual::getAcumulados(){
 		acumulado=computeSomaMovel(dataSize);
 	}
 	return acumulado;
+}//tirar
+*/
+
+void
+Estadual::getAcumulados2(vector <unsigned> * local){
+
+	vector <unsigned> * ptr = local;
+
+	//caching: after first calling solves with cost 1
+  if (acumulado.size()==0){
+		acumulado=computeSomaMovel(dataSize);
+	}
+	*ptr= acumulado;
 }
+
+
 
 
 
