@@ -22,7 +22,7 @@ Nacional::Nacional(string nome,unsigned short N,vector<string> nomeEstado){
 
 }
 
-vector <unsigned>
+/*vector <unsigned>
 Nacional::acumulados(){
 	
 	unsigned stateDataSize=estados[0].getDataSize();
@@ -47,9 +47,37 @@ Nacional::acumulados(){
 	}
 
 	return result;
+}*/
+
+void
+Nacional::acumulados2(vector <unsigned> *ptr){
+	
+	unsigned stateDataSize=estados[0].getDataSize();
+
+	vector<unsigned> result(stateDataSize,0);
+	vector<unsigned> estadoAcumulado;
+	
+
+	for(Estadual estado : estados){
+		if (estado.getDataSize()!=stateDataSize){
+			throw std::out_of_range("Os Estados possuem listas incompativeis o tamanho nao bate");
+		}
+
+		//shallow copy
+		//estadoAcumulado=estado.getAcumulados();
+		estado.getAcumulados2(&estadoAcumulado);
+
+		for (int i=0;i<estadoAcumulado.size();i++){
+			result[i]=result[i]+estadoAcumulado[i];
+		}
+
+	}
+
+	*ptr= result;
 }
 
 
+/*
 vector <unsigned>
 Nacional::somaMovel(){
 	
@@ -74,9 +102,40 @@ Nacional::somaMovel(){
 	}
 
 	return result;
+}*/
+
+
+void
+Nacional::somaMovel2(vector <unsigned> *ptr){
+	
+	unsigned stateDataSize=estados[0].getDataSize();
+
+	vector<unsigned> result(stateDataSize,0);
+	vector<unsigned> estadoSomaMovel;
+
+	for(Estadual estado : estados){
+		if (estado.getDataSize()!=stateDataSize){
+			throw std::out_of_range("Os Estados possuem listas incompativeis o tamanho nao bate");
+		}
+
+		//shallow copy by NRVO
+
+		//estadoSomaMovel=estado.getSomaMovel(estado.getN());
+		estado.getSomaMovel2(estado.getN(),&estadoSomaMovel);
+
+		for (int i=0;i<stateDataSize;i++){
+			result[i]=result[i]+estadoSomaMovel[i];
+		}
+	}
+
+	*ptr= result;
 }
 
-vector <float>
+
+
+
+
+/*vector <float>
 Nacional::porcentagemMovel(){
 
 	vector<unsigned>somaNacional = somaMovel();
@@ -92,6 +151,25 @@ Nacional::porcentagemMovel(){
 	}
 
 	return res;
+}*/
+
+void
+Nacional::porcentagemMovel2(vector <float>* ptr){
+
+	vector<unsigned>somaNacional;
+	somaMovel2(&somaNacional);
+	unsigned last;
+
+	//initialize res vector w somaNacional size , avoid realloc
+	vector<float> res(somaNacional.size(),0);
+	
+	last=0;
+	for (unsigned i=0;i<somaNacional.size();i++){
+		res[i]=computePercentage<float>((float)somaNacional[i],(float)last);
+		last=somaNacional[i];
+	}
+
+	*ptr= res;
 }
 
 bool 
@@ -109,9 +187,11 @@ Nacional::sortEstados(){
 
 float 
 Nacional::tendency(){	
-	return porcentagemMovel().back();
+	vector <float> res;
+	porcentagemMovel2(&res);
+	return res.back();
 }
-
+/*
 vector <float> 
 Nacional::stateTendency(){
 	sortEstados();
@@ -123,6 +203,19 @@ Nacional::stateTendency(){
 	}
 
 	return res;
+}*/
+
+void
+Nacional::stateTendency2(vector <float> *ptr){
+	sortEstados();
+
+	vector<float> res;
+		
+	for (auto x: estados){
+		res.push_back(x.tendency());
+	}
+
+	*ptr= res;
 }
 
 

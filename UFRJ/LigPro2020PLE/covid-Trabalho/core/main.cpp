@@ -18,10 +18,13 @@ int main(int argc,char **argv,char **envp){
 	}
 
 	Nacional pais("Brasil",3,{"TESTE","TESTE"});
-	
-	for(unsigned elt : pais.porcentagemMovel()){
+	vector <float> res2;
+	pais.porcentagemMovel2(&res2);
+	for(unsigned elt : res2){
 		cout << elt << endl;
 	}
+
+
 
 
 
