@@ -11,7 +11,7 @@ int main(int argc,char **argv,char **envp){
 	Estadual estado("Rio de janeiro","TESTE",3);
 
 	//res=estado.porcentagemMovel(); tirar
-	estado.porcentagemMovel2(&res);
+	estado.porcentagemMovel(&res);
 
 	for(float elt : res){
 		cout << elt << endl;
@@ -19,15 +19,9 @@ int main(int argc,char **argv,char **envp){
 
 	Nacional pais("Brasil",3,{"TESTE","TESTE"});
 	vector <float> res2;
-	pais.porcentagemMovel2(&res2);
+	pais.porcentagemMovel(&res2);
 	for(unsigned elt : res2){
 		cout << elt << endl;
 	}
 
-
-
-
-
-
-	
 }

@@ -58,7 +58,7 @@ unsigned Estadual::importarDados()
 float Estadual::percentageAtDay(unsigned day){
 		
 	vector <unsigned> soma;
-	getSomaMovel2(N,&soma);
+	getSomaMovel(N,&soma);
 	float dayAvg,lastAvg;
 
 	
@@ -75,7 +75,7 @@ float Estadual::percentageAtDay(unsigned day){
 
 //not cached cost M
 void
-Estadual::porcentagemMovel2(vector <float> *ptr)
+Estadual::porcentagemMovel(vector <float> *ptr)
 {
 
 	//dont waste time calling realloc, total size is already known
@@ -92,7 +92,7 @@ Estadual::porcentagemMovel2(vector <float> *ptr)
 }
 
 void
-Estadual::computeSomaMovel2(unsigned short n, vector <unsigned> * ptr){
+Estadual::computeSomaMovel(unsigned short n, vector <unsigned> * ptr){
 	vector <unsigned> somados;
  	unsigned hoje;
 	unsigned somado;
@@ -115,7 +115,7 @@ Estadual::computeSomaMovel2(unsigned short n, vector <unsigned> * ptr){
 }
 
 void
-Estadual::getSomaMovel2(unsigned short n, vector <unsigned> *ptr){
+Estadual::getSomaMovel(unsigned short n, vector <unsigned> *ptr){
 	
 	
 	//check if its default
@@ -126,14 +126,14 @@ Estadual::getSomaMovel2(unsigned short n, vector <unsigned> *ptr){
 	//caching default N responses
 
 	if (somaMovel.size()==0 && n==N){
-		computeSomaMovel2(N,&somaMovel);
+		computeSomaMovel(N,&somaMovel);
 		//somaMovel=computeSomaMovel(N);
 	}
 	else if(n==N){
 		;
 	}
 	else{
-		computeSomaMovel2(n,&somaMovel);
+		computeSomaMovel(n,&somaMovel);
 		//somaMovel=computeSomaMovel(n);
 	}
 
@@ -157,18 +157,12 @@ Estadual::getN(){
 }
 
 void
-Estadual::getAcumulados2(vector <unsigned> * ptr){
+Estadual::getAcumulados(vector <unsigned> * ptr){
 
 	//caching: after first calling solves with cost 1
 	if (acumulado.size()==0){
 	  //computeSomaMovel(dataSize); tirar
-	  computeSomaMovel2(dataSize,&acumulado);
+	  computeSomaMovel(dataSize,&acumulado);
 	}
 	*ptr= acumulado;
 }
-
-
-
-
-
-

@@ -23,7 +23,7 @@ Nacional::Nacional(string nome,unsigned short N,vector<string> nomeEstado){
 }
 
 void
-Nacional::acumulados2(vector <unsigned> *ptr){
+Nacional::acumulados(vector <unsigned> *ptr){
 	
 	unsigned stateDataSize=estados[0].getDataSize();
 
@@ -38,7 +38,7 @@ Nacional::acumulados2(vector <unsigned> *ptr){
 
 		//shallow copy
 		//estadoAcumulado=estado.getAcumulados();
-		estado.getAcumulados2(&estadoAcumulado);
+		estado.getAcumulados(&estadoAcumulado);
 
 		for (int i=0;i<estadoAcumulado.size();i++){
 			result[i]=result[i]+estadoAcumulado[i];
@@ -50,7 +50,7 @@ Nacional::acumulados2(vector <unsigned> *ptr){
 }
 
 void
-Nacional::somaMovel2(vector <unsigned> *ptr){
+Nacional::somaMovel(vector <unsigned> *ptr){
 	
 	unsigned stateDataSize=estados[0].getDataSize();
 
@@ -65,7 +65,7 @@ Nacional::somaMovel2(vector <unsigned> *ptr){
 		//shallow copy by NRVO
 
 		//estadoSomaMovel=estado.getSomaMovel(estado.getN());
-		estado.getSomaMovel2(estado.getN(),&estadoSomaMovel);
+		estado.getSomaMovel(estado.getN(),&estadoSomaMovel);
 
 		for (int i=0;i<stateDataSize;i++){
 			result[i]=result[i]+estadoSomaMovel[i];
@@ -76,10 +76,10 @@ Nacional::somaMovel2(vector <unsigned> *ptr){
 }
 
 void
-Nacional::porcentagemMovel2(vector <float>* ptr){
+Nacional::porcentagemMovel(vector <float>* ptr){
 
 	vector<unsigned>somaNacional;
-	somaMovel2(&somaNacional);
+	somaMovel(&somaNacional);
 	unsigned last;
 
 	//initialize res vector w somaNacional size , avoid realloc
@@ -110,12 +110,12 @@ Nacional::sortEstados(){
 float 
 Nacional::tendency(){	
 	vector <float> res;
-	porcentagemMovel2(&res);
+	porcentagemMovel(&res);
 	return res.back();
 }
 
 void
-Nacional::stateTendency2(vector <float> *ptr){
+Nacional::stateTendency(vector <float> *ptr){
 	sortEstados();
 
 	vector<float> res;
@@ -126,10 +126,3 @@ Nacional::stateTendency2(vector <float> *ptr){
 
 	*ptr= res;
 }
-
-
-
-
-
-
-

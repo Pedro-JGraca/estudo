@@ -23,12 +23,8 @@ class Estadual
 		vector <unsigned> somaMovel;
 		vector <unsigned> acumulado;
 
-		
-		vector <unsigned> 
-		computeSomaMovel(unsigned short);
-
 		void
-		computeSomaMovel2(unsigned short,vector <unsigned> *);
+		computeSomaMovel(unsigned short,vector <unsigned> *);
 		
 		unsigned 
 		importarDados();
@@ -41,17 +37,17 @@ class Estadual
 		Estadual(string estado,string file, unsigned short);
 		
 		string nomeEstado;
-		
-		void
-		getSomaMovel2(unsigned short, vector <unsigned>*);
-
 
 		void
-		getAcumulados2(vector <unsigned>*);
+		getSomaMovel(unsigned short, vector <unsigned>*);
 
 
 		void
-		porcentagemMovel2(vector <float> *);
+		getAcumulados(vector <unsigned>*);
+
+
+		void
+		porcentagemMovel(vector <float> *);
 
 
 		//get percentage changed on the last day
