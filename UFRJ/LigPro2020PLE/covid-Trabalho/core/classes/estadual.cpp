@@ -72,25 +72,8 @@ float Estadual::percentageAtDay(unsigned day){
 
 	return computePercentage<float>(dayAvg,lastAvg);
 }
-/*
+
 //not cached cost M
-vector <float> Estadual::porcentagemMovel()
-{
-
-	//dont waste time calling realloc, total size is already known
-	vector <float> porcentagemMovel(dataSize,0);
-	if (N>dataSize){
-		cerr<< "Atencao, Maximo o total da amostra eh " << dataSize << endl;
-	}
-	
-	for (int i=0;i<dataSize;i++){
-		porcentagemMovel[i]=percentageAtDay(i);
-	}
-
-	return porcentagemMovel;
-}
-*/
-
 void
 Estadual::porcentagemMovel2(vector <float> *ptr)
 {
@@ -107,34 +90,6 @@ Estadual::porcentagemMovel2(vector <float> *ptr)
 
 	*ptr= porcentagemMovel;
 }
-
-
-
-/*
-vector <unsigned> 
-Estadual::computeSomaMovel(unsigned short n){
-  
-	vector <unsigned> somados;
-  unsigned hoje;
-	unsigned somado;
-  // complexidade M 
-	// M = Numero de dias N = janela
-
-	//inicializa o dia anterior
-	somados.push_back(dadosLidos[0]);
-	for (hoje=1; hoje<dadosLidos.size();hoje++){
-
-			//construir ate N
-			if(hoje<N){
-       	somado=somados[hoje-1]+dadosLidos[hoje];
-			}
-			else{
-       	somado=somados[hoje-1]+dadosLidos[hoje]-dadosLidos[hoje-(N)];
-   		}
-			somados.push_back(somado);
-	}
-  return somados;
-}*/
 
 void
 Estadual::computeSomaMovel2(unsigned short n, vector <unsigned> * ptr){
@@ -159,33 +114,6 @@ Estadual::computeSomaMovel2(unsigned short n, vector <unsigned> * ptr){
 	*ptr= somados;
 }
 
-
-
-
-
-/*
-vector <unsigned>
-Estadual::getSomaMovel(unsigned short n=0){
-	
-	//check if its default
-	if (n==0){
-		n==N;
-	}
-	
-	//caching default N responses
-	if (somaMovel.size()==0 && n==N){
-		somaMovel=computeSomaMovel(N);
-		return somaMovel;
-	}
-	else if(n==N){
-		return somaMovel;
-	}
-	else{
-		return computeSomaMovel(n);
-	}
-
-}//tirar
-*/
 void
 Estadual::getSomaMovel2(unsigned short n, vector <unsigned> *ptr){
 	
@@ -227,17 +155,6 @@ unsigned short
 Estadual::getN(){
 	return N;
 }
-
-/*vector <unsigned>
-Estadual::getAcumulados(){
-
-	//caching: after first calling solves with cost 1
-  if (acumulado.size()==0){
-		acumulado=computeSomaMovel(dataSize);
-	}
-	return acumulado;
-}//tirar
-*/
 
 void
 Estadual::getAcumulados2(vector <unsigned> * ptr){

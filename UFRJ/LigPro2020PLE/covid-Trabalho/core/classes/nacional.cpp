@@ -22,33 +22,6 @@ Nacional::Nacional(string nome,unsigned short N,vector<string> nomeEstado){
 
 }
 
-/*vector <unsigned>
-Nacional::acumulados(){
-	
-	unsigned stateDataSize=estados[0].getDataSize();
-
-	vector<unsigned> result(stateDataSize,0);
-	vector<unsigned> estadoAcumulado;
-	
-
-	for(Estadual estado : estados){
-		if (estado.getDataSize()!=stateDataSize){
-			throw std::out_of_range("Os Estados possuem listas incompativeis o tamanho nao bate");
-		}
-
-		//shallow copy
-		//estadoAcumulado=estado.getAcumulados();
-		estado.getAcumulados2(&estadoAcumulado);
-
-		for (int i=0;i<estadoAcumulado.size();i++){
-			result[i]=result[i]+estadoAcumulado[i];
-		}
-
-	}
-
-	return result;
-}*/
-
 void
 Nacional::acumulados2(vector <unsigned> *ptr){
 	
@@ -76,35 +49,6 @@ Nacional::acumulados2(vector <unsigned> *ptr){
 	*ptr= result;
 }
 
-
-/*
-vector <unsigned>
-Nacional::somaMovel(){
-	
-	unsigned stateDataSize=estados[0].getDataSize();
-
-	vector<unsigned> result(stateDataSize,0);
-	vector<unsigned> estadoSomaMovel;
-
-	for(Estadual estado : estados){
-		if (estado.getDataSize()!=stateDataSize){
-			throw std::out_of_range("Os Estados possuem listas incompativeis o tamanho nao bate");
-		}
-
-		//shallow copy by NRVO
-
-		//estadoSomaMovel=estado.getSomaMovel(estado.getN());
-		estado.getSomaMovel2(estado.getN(),&estadoSomaMovel);
-
-		for (int i=0;i<stateDataSize;i++){
-			result[i]=result[i]+estadoSomaMovel[i];
-		}
-	}
-
-	return result;
-}*/
-
-
 void
 Nacional::somaMovel2(vector <unsigned> *ptr){
 	
@@ -130,28 +74,6 @@ Nacional::somaMovel2(vector <unsigned> *ptr){
 
 	*ptr= result;
 }
-
-
-
-
-
-/*vector <float>
-Nacional::porcentagemMovel(){
-
-	vector<unsigned>somaNacional = somaMovel();
-	unsigned last;
-
-	//initialize res vector w somaNacional size , avoid realloc
-	vector<float> res(somaNacional.size(),0);
-	
-	last=0;
-	for (unsigned i=0;i<somaNacional.size();i++){
-		res[i]=computePercentage<float>((float)somaNacional[i],(float)last);
-		last=somaNacional[i];
-	}
-
-	return res;
-}*/
 
 void
 Nacional::porcentagemMovel2(vector <float>* ptr){
@@ -191,19 +113,6 @@ Nacional::tendency(){
 	porcentagemMovel2(&res);
 	return res.back();
 }
-/*
-vector <float> 
-Nacional::stateTendency(){
-	sortEstados();
-
-	vector<float> res;
-		
-	for (auto x: estados){
-		res.push_back(x.tendency());
-	}
-
-	return res;
-}*/
 
 void
 Nacional::stateTendency2(vector <float> *ptr){

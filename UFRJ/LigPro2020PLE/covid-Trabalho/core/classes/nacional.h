@@ -19,9 +19,6 @@ class Nacional
     
 		vector <Estadual> estados;
 		
-    	/*vector <unsigned> 
-		somaMovel();
-		*/
 		void
 		somaMovel2(vector <unsigned> *);
 
@@ -30,18 +27,13 @@ class Nacional
 
   		Nacional(string nome,unsigned short N, vector<string> nomeEstado);
 
-/*    	vector <unsigned>
-    	acumulados();*/
-
 		void
 		acumulados2(vector <unsigned> *);
 
     	void
 		porcentagemMovel2(vector <float> *);
 
-    	/*vector <float> 
-		porcentagemMovel();
-	*/
+
 		void
 		sortEstados();
 
@@ -50,11 +42,6 @@ class Nacional
 
 		void
 		stateTendency2(vector <float>*);
-
-		/*
-		vector <float>
-		stateTendency();*/
-
 
 };
 

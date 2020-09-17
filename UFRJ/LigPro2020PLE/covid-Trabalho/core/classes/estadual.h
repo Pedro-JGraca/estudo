@@ -41,21 +41,14 @@ class Estadual
 		Estadual(string estado,string file, unsigned short);
 		
 		string nomeEstado;
-
-/*		vector <unsigned> 
-		getSomaMovel(unsigned short );//tirar
-*/
+		
 		void
 		getSomaMovel2(unsigned short, vector <unsigned>*);
-/*
-		vector <unsigned> //aguenta ate 4Bi, vamos ser positivos : D 
-		getAcumulados(); //tirar*/
+
 
 		void
 		getAcumulados2(vector <unsigned>*);
-/*
-		vector <float>  
-		porcentagemMovel();//tirar*/
+
 
 		void
 		porcentagemMovel2(vector <float> *);
