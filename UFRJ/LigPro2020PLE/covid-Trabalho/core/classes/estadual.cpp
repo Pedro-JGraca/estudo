@@ -187,10 +187,8 @@ Estadual::getSomaMovel(unsigned short n=0){
 }//tirar
 */
 void
-Estadual::getSomaMovel2(unsigned short n, vector <unsigned> *local){
+Estadual::getSomaMovel2(unsigned short n, vector <unsigned> *ptr){
 	
-
-	vector <unsigned>*ptr = local;
 	
 	//check if its default
 	if (n==0){
@@ -242,9 +240,7 @@ Estadual::getAcumulados(){
 */
 
 void
-Estadual::getAcumulados2(vector <unsigned> * local){
-
-	vector <unsigned> * ptr = local;
+Estadual::getAcumulados2(vector <unsigned> * ptr){
 
 	//caching: after first calling solves with cost 1
 	if (acumulado.size()==0){
