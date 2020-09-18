@@ -67,6 +67,9 @@ class Nacional
 		void
 		showAcumulados();
 
+		Estadual
+		getEstadoByName(string);
+
 };
 
 #endif

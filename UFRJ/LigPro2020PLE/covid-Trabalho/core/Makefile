@@ -1,11 +1,8 @@
-
-
-
-EXECS = main
+EXECS = analiseCovid
 				
 
 main: main.cpp classes/estadual.cpp classes/nacional.cpp
-	g++ main.cpp classes/estadual.cpp classes/nacional.cpp -o main
+	g++ main.cpp classes/estadual.cpp classes/nacional.cpp -o analiseCovid
 	
 
 clean:

@@ -97,18 +97,18 @@ Estadual::computeSomaMovel(unsigned short n){
 	vector <unsigned> somados;
  	unsigned hoje;
 	unsigned somado;
-  	// complexidade M 
+  // complexidade M 
 	// M = Numero de dias N = janela
 
 	//inicializa o dia anterior
 	somados.push_back(dadosLidos[0]);
 	for (hoje=1; hoje<dadosLidos.size();hoje++){
 		//construir ate N
-		if(hoje<N){
+		if(hoje<n){
 	       	somado=somados[hoje-1]+dadosLidos[hoje];
 		}
 		else{
-	       	somado=somados[hoje-1]+dadosLidos[hoje]-dadosLidos[hoje-(N)];
+	       	somado=somados[hoje-1]+dadosLidos[hoje]-dadosLidos[hoje-(n)];
    		}
 		somados.push_back(somado);
 	}
@@ -158,10 +158,10 @@ vector <unsigned>
 Estadual::getAcumulados(){
 
 	//caching: after first calling solves with cost 1
-	if (acumulado.size()==0){
+	//if (acumulado.size()==0){
 	  //computeSomaMovel(dataSize); tirar
-	  acumulado=computeSomaMovel(dataSize);
-	}
+	acumulado=computeSomaMovel(dataSize);
+	
 	return acumulado;
 }
 
@@ -208,7 +208,7 @@ void Estadual::showAcumulados(){
 
 	cout << "obitos Acumulados  " << nomeEstado << endl;
 	acumulados= getAcumulados();
-	
+
 	c=0;
 	for (auto x : acumulados){
 		showTime(startTime+c*(60*60*24));

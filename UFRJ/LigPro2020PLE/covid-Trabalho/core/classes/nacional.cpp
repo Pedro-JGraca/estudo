@@ -227,7 +227,15 @@ Nacional::showAcumulados(){
 }
 
 
-
+Estadual
+Nacional::getEstadoByName(string name){
+	for (auto x: estados){
+		if(x.nomeEstado==name){
+			return x;
+		}
+	}
+	throw std::invalid_argument("Estado nao consta na lista");
+}
 
 
 
