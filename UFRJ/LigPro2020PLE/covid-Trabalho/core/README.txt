@@ -40,3 +40,9 @@ Como usar:
         
     As opções porcentagemEstado e acumuladoEstado requerem obrigatóriamente um estado como argumento.
 
+
+
+	ENTRADA DE DADOS
+	O programa é alimentado através de uma pasta chamada dados/estados com um arquivo txt por estado.
+	Cada linha do arquivo do estado significa o número de óbitos ocorridos no dia X+linha, onde X é o dia inicial das mediçoes, comum a todos os estados. O dia inicial das mediçoes é encontrado dentro do arquivo DATE.txt no formato unix epoch. Um armazenamento minimalista semelhante a lista permite tratar mais fácilmente as entradas e reduzir o espaço em disco gasto.
+
