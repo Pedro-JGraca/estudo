@@ -24,6 +24,8 @@ class Nacional
 		unsigned short N;
     
 		vector <Estadual> estados;
+
+		vector <string> ListaEstados;
 		
 		vector<unsigned>
 		somaMovel();
@@ -48,10 +50,10 @@ class Nacional
 		float
 		tendency();
 
-/*
-		vector<float>
-		stateTendency();
-*/
+
+		vector <string>
+		getListaEstados();
+
 		void
 		showPorcentagemMovel();
 

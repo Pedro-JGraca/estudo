@@ -20,7 +20,7 @@ Nacional::Nacional(string nome,unsigned short N,vector<string> nomeEstado){
 	time_t begin;
 		
 	file.open("dados/estados/DATE.txt");
-  if (!file.is_open()){
+	if (!file.is_open()){
 	  cerr << "Unable to open DATE.txt" <<endl;
 	  throw invalid_argument("O arquivo nao existe");
 	}
@@ -37,11 +37,18 @@ Nacional::Nacional(string nome,unsigned short N,vector<string> nomeEstado){
 
 	for(string nomeEstadual : nomeEstado){
 		estados.push_back(Estadual(nomeEstadual,nomeEstadual,N,startTime));
+		ListaEstados.push_back(nomeEstadual);
 	}
 
 	
 	sortEstados();
 }
+
+vector <string>
+Nacional::getListaEstados(){
+	return ListaEstados;
+}
+
 
 vector <unsigned>
 Nacional::acumulados(){
