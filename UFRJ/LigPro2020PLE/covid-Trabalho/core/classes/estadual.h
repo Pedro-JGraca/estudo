@@ -3,19 +3,21 @@
 
 #include <vector>
 #include <string>
+#include <ctime>
+
 using namespace std;
 
 template <class T>
 T computePercentage(T a,T b);
 
+void showTime(time_t t);
 
 class Estadual
 {
 	private:
 		unsigned short N;
-		
+		time_t startTime;
 		string fileName;
-		string initDate;
 		unsigned dataSize;
 		
 		//caching: assuming memory is cheap but cpu isnt
@@ -23,8 +25,8 @@ class Estadual
 		vector <unsigned> somaMovel;
 		vector <unsigned> acumulado;
 
-		void
-		computeSomaMovel(unsigned short,vector <unsigned> *);
+		vector <unsigned>
+		computeSomaMovel(unsigned short);
 		
 		unsigned 
 		importarDados();
@@ -34,21 +36,29 @@ class Estadual
 		
 	public:
 		
-		Estadual(string estado,string file, unsigned short);
+		Estadual(string estado,string file, unsigned short,time_t);
 		
 		string nomeEstado;
 
+		vector <unsigned>
+		getSomaMovel(unsigned short);
+
+
+		vector <unsigned>
+		getAcumulados();
+
+
+		vector <float>
+		porcentagemMovel();
+
 		void
-		getSomaMovel(unsigned short, vector <unsigned>*);
-
-
+		showPorcentagem();
+		
 		void
-		getAcumulados(vector <unsigned>*);
-
-
-		void
-		porcentagemMovel(vector <float> *);
-
+		showTendency();
+	
+		void 
+		showAcumulados();
 
 		//get percentage changed on the last day
 		float 

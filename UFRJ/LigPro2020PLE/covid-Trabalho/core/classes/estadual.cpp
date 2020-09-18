@@ -3,6 +3,9 @@
 #include <string>
 #include <fstream>
 #include <limits>
+#include <ctime>
+#include <iomanip>
+#include <string>
 
 #include "estadual.h"
 
@@ -21,29 +24,28 @@ T computePercentage(T a,T b){
 		return res;
 }
 
-Estadual::Estadual(string estado,string file, unsigned short n) {
+Estadual::Estadual(string estado,string file, unsigned short n, time_t t) {
 	
 	N=n;
 	nomeEstado=estado;
 	fileName=file;
 	dataSize=importarDados();
-	
+	startTime=t;
 }
 
 unsigned Estadual::importarDados()
 {
 	ifstream file;
 	unsigned line;
-	
+	string initDate;
 	string path="dados/estados/"+fileName+".txt";
 	file.open(path);
 
 	if (!file.is_open()){
 		cerr << "Unable to open " << path <<endl;
-		return 0;
+		throw invalid_argument("O arquivo nao existe");
 	}
 	else{
-		file >> initDate;	
 		while(file >> line){
 			dadosLidos.push_back(line);
 		}
@@ -58,9 +60,8 @@ unsigned Estadual::importarDados()
 float Estadual::percentageAtDay(unsigned day){
 		
 	vector <unsigned> soma;
-	getSomaMovel(N,&soma);
+	soma=getSomaMovel(N);
 	float dayAvg,lastAvg;
-
 	
 	if (day==0){
 		lastAvg=0;
@@ -74,8 +75,8 @@ float Estadual::percentageAtDay(unsigned day){
 }
 
 //not cached cost M
-void
-Estadual::porcentagemMovel(vector <float> *ptr)
+vector <float>
+Estadual::porcentagemMovel()
 {
 
 	//dont waste time calling realloc, total size is already known
@@ -88,11 +89,11 @@ Estadual::porcentagemMovel(vector <float> *ptr)
 		porcentagemMovel[i]=percentageAtDay(i);
 	}
 
-	*ptr= porcentagemMovel;
+	return porcentagemMovel;
 }
 
-void
-Estadual::computeSomaMovel(unsigned short n, vector <unsigned> * ptr){
+vector <unsigned>
+Estadual::computeSomaMovel(unsigned short n){
 	vector <unsigned> somados;
  	unsigned hoje;
 	unsigned somado;
@@ -111,11 +112,11 @@ Estadual::computeSomaMovel(unsigned short n, vector <unsigned> * ptr){
    		}
 		somados.push_back(somado);
 	}
-	*ptr= somados;
+	return somados;
 }
 
-void
-Estadual::getSomaMovel(unsigned short n, vector <unsigned> *ptr){
+vector <unsigned>
+Estadual::getSomaMovel(unsigned short n=0){
 	
 	
 	//check if its default
@@ -124,26 +125,23 @@ Estadual::getSomaMovel(unsigned short n, vector <unsigned> *ptr){
 	}
 
 	//caching default N responses
-
 	if (somaMovel.size()==0 && n==N){
-		computeSomaMovel(N,&somaMovel);
-		//somaMovel=computeSomaMovel(N);
+		somaMovel=computeSomaMovel(N);
+		return somaMovel;
 	}
 	else if(n==N){
-		;
+		return somaMovel;
 	}
 	else{
-		computeSomaMovel(n,&somaMovel);
-		//somaMovel=computeSomaMovel(n);
+		return computeSomaMovel(n);
 	}
 
-	*ptr = somaMovel;
 
 }
 
 float
 Estadual::tendency(){
-	return percentageAtDay(dataSize);
+	return percentageAtDay(dataSize-1);
 }
 
 unsigned 
@@ -156,13 +154,86 @@ Estadual::getN(){
 	return N;
 }
 
-void
-Estadual::getAcumulados(vector <unsigned> * ptr){
+vector <unsigned>
+Estadual::getAcumulados(){
 
 	//caching: after first calling solves with cost 1
 	if (acumulado.size()==0){
 	  //computeSomaMovel(dataSize); tirar
-	  computeSomaMovel(dataSize,&acumulado);
+	  acumulado=computeSomaMovel(dataSize);
 	}
-	*ptr= acumulado;
+	return acumulado;
 }
+
+
+void showTime(time_t t){
+	tm *date=gmtime(&t);
+
+	string date_str;
+	if (!date){
+		throw std::invalid_argument( "received invalid ptr");
+	}
+	date_str= to_string(date->tm_mday) + "/" + to_string(date->tm_mon+1) + "/" + to_string(date->tm_year+1900);
+
+	cout <<"|"<< left << setfill(' ') << setw(20) << date_str <<"|"; 
+}
+
+void
+Estadual::showPorcentagem(){
+	vector<float>	porcentagem;
+	unsigned c;
+
+	cout << "Porcentagem movel  " << nomeEstado << endl;
+	porcentagem= porcentagemMovel();
+
+
+	c=0;
+	for (auto x : porcentagem){
+		showTime(startTime+c*(60*60*24));
+		cout <<setw(20) << x <<"|" << endl;
+		c++;
+	}
+
+}
+
+void Estadual::showTendency(){
+	cout << "Tendencia " << nomeEstado << endl;
+	cout << setprecision(5) << tendency() << "%"<< endl;
+
+}
+
+void Estadual::showAcumulados(){
+	unsigned c;
+	vector<unsigned>	acumulados;
+
+	cout << "obitos Acumulados  " << nomeEstado << endl;
+	acumulados= getAcumulados();
+	
+	c=0;
+	for (auto x : acumulados){
+		showTime(startTime+c*(60*60*24));
+		cout <<setw(20) << x <<"|" << endl;
+		c++;
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

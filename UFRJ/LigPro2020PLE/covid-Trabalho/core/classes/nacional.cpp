@@ -1,8 +1,11 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <exception>
 #include <algorithm>
 #include <bits/stdc++.h>
+#include <ctime>
+#include <map>
 
 #include "nacional.h"
 #include "estadual.h"
@@ -11,25 +14,43 @@ using namespace std;
 
 Nacional::Nacional(string nome,unsigned short N,vector<string> nomeEstado){
 
+	ifstream file;
 	nomePais=nome;
+	
+	time_t begin;
+		
+	file.open("dados/estados/DATE.txt");
+  if (!file.is_open()){
+	  cerr << "Unable to open DATE.txt" <<endl;
+	  throw invalid_argument("O arquivo nao existe");
+	}
+	file >> begin;
+	file.close();
+ 	
+
+
+	startTime= begin;
+	
 	if (nomeEstado.size()==0){
 		throw std::invalid_argument("lista de estados deve ser maior que 0");
 	}
 
 	for(string nomeEstadual : nomeEstado){
-		estados.push_back(Estadual(nomeEstadual,nomeEstadual,N));
+		estados.push_back(Estadual(nomeEstadual,nomeEstadual,N,startTime));
 	}
 
+	
+	sortEstados();
 }
 
-void
-Nacional::acumulados(vector <unsigned> *ptr){
+vector <unsigned>
+Nacional::acumulados(){
 	
-	unsigned stateDataSize=estados[0].getDataSize();
+	unsigned stateDataSize;
+	stateDataSize=estados[0].getDataSize();
 
+	vector<unsigned> estadoAcumulado;	
 	vector<unsigned> result(stateDataSize,0);
-	vector<unsigned> estadoAcumulado;
-	
 
 	for(Estadual estado : estados){
 		if (estado.getDataSize()!=stateDataSize){
@@ -38,7 +59,7 @@ Nacional::acumulados(vector <unsigned> *ptr){
 
 		//shallow copy
 		//estadoAcumulado=estado.getAcumulados();
-		estado.getAcumulados(&estadoAcumulado);
+		estadoAcumulado=estado.getAcumulados();
 
 		for (int i=0;i<estadoAcumulado.size();i++){
 			result[i]=result[i]+estadoAcumulado[i];
@@ -46,11 +67,11 @@ Nacional::acumulados(vector <unsigned> *ptr){
 
 	}
 
-	*ptr= result;
+	return result;
 }
 
-void
-Nacional::somaMovel(vector <unsigned> *ptr){
+vector <unsigned>
+Nacional::somaMovel(){
 	
 	unsigned stateDataSize=estados[0].getDataSize();
 
@@ -63,23 +84,21 @@ Nacional::somaMovel(vector <unsigned> *ptr){
 		}
 
 		//shallow copy by NRVO
-
-		//estadoSomaMovel=estado.getSomaMovel(estado.getN());
-		estado.getSomaMovel(estado.getN(),&estadoSomaMovel);
+		estadoSomaMovel=estado.getSomaMovel(estado.getN());
 
 		for (int i=0;i<stateDataSize;i++){
 			result[i]=result[i]+estadoSomaMovel[i];
 		}
 	}
 
-	*ptr= result;
+	return result;
 }
 
-void
-Nacional::porcentagemMovel(vector <float>* ptr){
+vector <float>
+Nacional::porcentagemMovel(){
 
 	vector<unsigned>somaNacional;
-	somaMovel(&somaNacional);
+	somaNacional=somaMovel();
 	unsigned last;
 
 	//initialize res vector w somaNacional size , avoid realloc
@@ -91,7 +110,7 @@ Nacional::porcentagemMovel(vector <float>* ptr){
 		last=somaNacional[i];
 	}
 
-	*ptr= res;
+	return res;
 }
 
 bool 
@@ -99,7 +118,7 @@ compareTendency(Estadual a, Estadual b){
 	float t1,t2;
 	t1=a.tendency();
 	t2=b.tendency();
-	return (t1 < t2);
+	return (t1 > t2);
 }
 
 void
@@ -110,19 +129,124 @@ Nacional::sortEstados(){
 float 
 Nacional::tendency(){	
 	vector <float> res;
-	porcentagemMovel(&res);
+	res=porcentagemMovel();
 	return res.back();
 }
 
-void
-Nacional::stateTendency(vector <float> *ptr){
-	sortEstados();
-
-	vector<float> res;
-		
-	for (auto x: estados){
-		res.push_back(x.tendency());
+void 
+Nacional::showPorcentagemMovel(){
+	vector<float> porcentagem;
+	unsigned c;
+	cout << "Porcentagem movel  " << nomePais << endl;
+	porcentagem= porcentagemMovel();
+	c=0;
+	for (auto x : porcentagem){
+		showTime(startTime+c*(60*60*24));
+    cout <<setw(20) << x <<"|" << endl;
+  	c++;
 	}
 
-	*ptr= res;
+ 
 }
+
+
+
+
+string 
+generateTendencyName(float tendencia){
+	string res;
+	if (tendencia>10.0){
+		res="Subida";
+	}
+	else if (tendencia<10.0 && tendencia>-10.0){
+		res="Estavel";
+	}
+	else{
+		res="queda";
+	}
+	return res;
+}
+
+void 
+Nacional::showEstadosTendency(){
+
+	cout << "Tendencia dos estados " << nomePais << endl; 	
+	for (auto x : estados){			
+		cout <<"|" <<setw(20) << x.nomeEstado <<"|" << setw(20) << x.tendency() << "|" << setw(20) << generateTendencyName(x.tendency()) << "|" <<endl;	
+
+	}
+
+}
+
+void
+Nacional::showPaisTendency(){
+	float tendencia;
+	string res;
+	tendencia=tendency();
+	res=generateTendencyName(tendencia);
+
+	cout<< "Tendencia do Pais" << endl;
+	cout <<"|" <<setw(20) << nomePais <<"|" << setw(20) << tendency() << "|" << setw(20)<< res << "|"<<endl;	
+}
+
+
+void
+Nacional::showExtremes(){
+
+	Estadual *estado;
+	float tendency;
+	
+	estado=&estados[0];
+	tendency=estado->tendency();
+	
+	cout<< "Casos extremos: " << nomePais<< endl;
+	cout <<"|" <<setw(20) << estado->nomeEstado <<"|" << setw(20) << tendency << "|" << setw(20)<< generateTendencyName(tendency) << "|" <<endl;	
+	
+	estado=&estados[estados.size()-1];
+	tendency=estado->tendency();
+
+	cout <<"|" <<setw(20) << estado->nomeEstado <<"|" << setw(20) << tendency << "|" << setw(20)<< generateTendencyName(tendency) << "|" <<endl;	
+}
+
+void
+Nacional::showAcumulados(){
+	vector<unsigned> acumulado;
+	unsigned c;
+
+	cout << "Obitos acumulados  " << nomePais << endl;
+	acumulado=acumulados();
+	
+	c=0;
+	for (auto x : acumulado){
+		showTime(startTime+c*(60*60*24));
+    cout <<setw(20) << x <<"|" << endl;
+		c++;
+  }
+ 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

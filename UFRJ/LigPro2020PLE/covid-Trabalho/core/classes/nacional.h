@@ -4,9 +4,13 @@
 
 #include <vector>
 #include <string>
+#include <ctime>
 #include "estadual.h"
 
 using namespace std;
+
+string
+generateTendencyName(float tendencia);
 
 bool
 compareTendency(Estadual a, Estadual b);
@@ -15,23 +19,27 @@ class Nacional
 {
 	private:
 		string nomePais;
+		
+		time_t startTime;
 		unsigned short N;
     
 		vector <Estadual> estados;
 		
-		void
-		somaMovel(vector <unsigned> *);
+		vector<unsigned>
+		somaMovel();
+	
+
 
 
 	public:
+		
+  	Nacional(string nome,unsigned short N, vector<string> nomeEstado);
 
-  		Nacional(string nome,unsigned short N, vector<string> nomeEstado);
+		vector <unsigned>
+		acumulados();
 
-		void
-		acumulados(vector <unsigned> *);
-
-    	void
-		porcentagemMovel(vector <float> *);
+    vector <float>
+		porcentagemMovel();
 
 
 		void
@@ -40,8 +48,24 @@ class Nacional
 		float
 		tendency();
 
+/*
+		vector<float>
+		stateTendency();
+*/
 		void
-		stateTendency(vector <float>*);
+		showPorcentagemMovel();
+
+		void
+		showEstadosTendency();
+		
+		void
+		showPaisTendency();
+
+		void
+		showExtremes();
+	
+		void
+		showAcumulados();
 
 };
 
