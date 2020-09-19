@@ -1,4 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "util.h"
+#include "estadual.h"
 
 
 util::util()
@@ -21,14 +25,74 @@ util::showInicial () {
 }
 
 
+
+unsigned char
+util::nizador(string entrada){
+    unsigned short a = 3;
+    bool digito = true;
+    if (entrada.size()<3){
+        cout 
+        << "Erro: Formato do N invalido." << endl 
+        << "formato do N: n=<numero-inteiro-sem-sinal>" <<endl;
+        digito = false;
+    }
+    if (entrada.substr(2).size()>3){
+        cout 
+        << "Erro: N muito grande." << endl 
+        << "formato do N: n=<numero-inteiro-sem-sinal-menor-que-255>" <<endl;
+        digito = false;
+    }
+    
+    if (entrada.size()>2){
+    if (entrada.substr(0,2) == "n=") {
+    if ((entrada.substr(2)).size()<4) {
+        for (unsigned char index = 0;index < entrada.substr(2).size();index ++){
+            if (!isdigit(entrada.substr(2)[index])){
+                digito = false;
+        }
+    }}}
+    }
+
+    if (digito){
+        a = stoi(entrada.substr(2));
+    }
+    else {
+        cout 
+        << "Erro: N não é numero natural." << endl
+        << "formato do N: n=<numero-inteiro-sem-sinal-menor-que-255>" <<endl;
+    }
+
+    if (a > 255) {
+        cout 
+        << "Erro: N muito grande." << endl 
+        << "formato do N: n=<numero-inteiro-sem-sinal-menor-que-255>" <<endl;
+        a=3;
+    }
+
+
+    
+    cout << "Considerado N=" << a << endl;
+
+    return (unsigned char) a;
+}
+
+
 tipoErro
 util::entrada(vector <string> argv, int numeroArgumentos){
+    
     if (argv[0]=="help") {
         return showH(argv,numeroArgumentos);
     }
     else if (argv[0] == "mediaMovelEstado")
     {
-        cout << "executar: " << argv[0];
+        if (numeroArgumentos!=4){
+            cout << "Erro: numero de argumentos invalido" << endl << "Uso:"<<endl;
+            cout <<"\t ./analiseCovid "<< argv[0] <<" [estado] [N=base-para-media-movel (padrao: 3)]" <<endl;
+            return numeroArgumentosInvalido;
+        }
+        unsigned short n;
+        n = nizador(argv[2]);
+        estadual estado(argv[1],n);
     }
     else if (argv[0] == "mediaMovelNacao")
     {
@@ -126,7 +190,7 @@ util::showH(vector <string> argv, int numeroArgumentos){
                 {
                     cout << "Uso:" << endl;
                     cout <<"\t ./analiseCovid "<< PossivelComando <<" [N=base-para-media-movel (padrao: 3)]" <<endl;
-                    cout << "comando para ver a situação dos 2 piores estados"<< endl;
+                    cout << "comando para ver os estados com a melhor e a pior situação"<< endl;
                 }
                 else if (PossivelComando == "acumuladoEstado")
                 {
@@ -152,5 +216,3 @@ util::showH(vector <string> argv, int numeroArgumentos){
     }
     return ok;
 }
-
-

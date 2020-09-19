@@ -9,6 +9,9 @@ typedef enum {
     ok,
     numeroArgumentosInvalido,
     comandoNaoAchado,
+    Ninvalido,
+    estadoNaoAchado,
+    erroAbrirArquivo,
     erroDesconhecido
 }tipoErro;
 
@@ -18,6 +21,9 @@ private:
     /* data */
     tipoErro
     showH(vector <string> argv, int numeroArgumentos);
+
+    unsigned char
+    nizador(string);
 public:
     util(/* args */);
 
@@ -26,9 +32,6 @@ public:
 
     tipoErro
     entrada(vector <string> argv, int numeroArgumentos);
-
-    
-
 };
 
 const vector <string> comandos = {"help","mediaMovelEstado","mediaMovelNacao","categoriaEstado","categoriaNacao","extremos","acumuladoEstado","acumuladoNacao"};

@@ -7,11 +7,13 @@ LFLAGS= 		-Wall
 
 MAIN_OBJS=		main.o
 UTIL_OBJS=		util.o
-#ESTADUAL_OBJS=	estadual.o
+ESTADUAL_OBJS=	estadual.o
+#NACIONAL_OBJS=	nacional.o
 
 OBJETOS=		$(MAIN_OBJS)\
-				$(UTIL_OBJS)
-#				$(ESTADUAL_OBJS)
+				$(UTIL_OBJS)\
+				$(ESTADUAL_OBJS)
+#				$(NACIONAL_OBJS)
 
 EXEC=	AnalisadorCovid		
 
@@ -22,21 +24,24 @@ ALL = 		compila\
 
 MAIN=		main-compile
 UTIL=		util-compile	
-#estadual =	estadual-compile
+ESTADUAL=	estadual-compile
+#NACIONAL=	nacional-compile
 
 #regras
 all: $(ALL)
 
 compila: 	$(MAIN)\
-			$(UTIL)
-#			$(estadual)
+			$(UTIL)\
+			$(ESTADUAL)
 
 main-compile:
 	$(CC) $(CFLAGS) main.cpp -o $(MAIN_OBJS)
-util-compile:
+util-compile: 
 	$(CC) $(CFLAGS) classes/util.cpp -o $(UTIL_OBJS)
-#estadual-compile:
-#	$(CC) $(CFLAGS) estadual.cpp -o $(ESTADUAL_OBJS)
+estadual-compile: 
+	$(CC) $(CFLAGS) classes/estadual.cpp -o $(ESTADUAL_OBJS)
+#nacional-compile: $(ESTADUAL_OBJS)
+#	$(CC) $(CFLAGS) classes/nacional.cpp -o $(NACIONAL_OBJS)
 
 linka:
 	$(LD) $(LFLAGS) $(OBJETOS) -o $(EXEC)
