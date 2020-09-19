@@ -24,8 +24,9 @@ util::showInicial () {
 }
 
 tipoErro
-showH(string help,string comando, int numeroArgumentos){
-    if (help != "help"){
+util::showH(vector <string> argv, int numeroArgumentos){
+    numeroArgumentos--;
+    if (argv[0] != "help"){
         cout<< "condicao nao prevista" << endl;
         return erroDesconhecido;
     }
@@ -36,7 +37,7 @@ showH(string help,string comando, int numeroArgumentos){
             return numeroArgumentosInvalido;
         }
         else {
-            
+            ;
         }
 
     }

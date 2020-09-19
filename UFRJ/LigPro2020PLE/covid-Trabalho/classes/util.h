@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 typedef enum {
@@ -20,8 +21,9 @@ public:
 
     void
     showInicial();
+
     tipoErro
-    showH(string help, string comando, int numeroArgumentos);
+    showH(vector <string> argv, int numeroArgumentos);
 };
 
 #endif
