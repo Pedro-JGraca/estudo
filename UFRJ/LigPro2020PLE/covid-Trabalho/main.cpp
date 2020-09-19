@@ -15,11 +15,10 @@ main(int argc, char const *argv[])
     for (unsigned char i=0; i<(argc-1) ;i++){
         entrada.push_back(argv[i+1]);
     }
-   
-    if (entrada[0]=="help") {
-        erros = utils.showH(entrada,argc);
-        return erros;
-    }
 
-    return ok;
+    erros = utils.entrada(entrada,argc);
+   
+ 
+
+    return erros;
 }
