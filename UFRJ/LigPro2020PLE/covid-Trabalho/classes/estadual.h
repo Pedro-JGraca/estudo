@@ -14,15 +14,27 @@ private:
     unsigned char N;
     string estado;
 
-    tipoErro
+    vector <unsigned short> dados;
+
+    void
     setEstado(string);
-    
+
 public:
     estadual(string,unsigned char);
 
-
+    bool
+    verificaEstado(string);
     tipoErro
     listaEstados(vector <string> *);
+
+    string
+    getEstado();
+
+    unsigned char
+    getN();
+
+    void
+    importarDados();
 
 
 };

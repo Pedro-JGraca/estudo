@@ -18,20 +18,23 @@ typedef enum {
 class util
 {
 private:
-    /* data */
+
     tipoErro
     showH(vector <string> argv, int numeroArgumentos);
 
     unsigned char
     nizador(string);
 public:
-    util(/* args */);
+    util();
 
     void
     showInicial();
 
     tipoErro
     entrada(vector <string> argv, int numeroArgumentos);
+
+    bool
+    isDigit(string);
 };
 
 const vector <string> comandos = {"help","mediaMovelEstado","mediaMovelNacao","categoriaEstado","categoriaNacao","extremos","acumuladoEstado","acumuladoNacao"};

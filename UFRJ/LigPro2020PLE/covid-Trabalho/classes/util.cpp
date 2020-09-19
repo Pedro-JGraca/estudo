@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
 #include "util.h"
 #include "estadual.h"
 
@@ -46,12 +43,8 @@ util::nizador(string entrada){
     if (entrada.size()>2){
     if (entrada.substr(0,2) == "n=") {
     if ((entrada.substr(2)).size()<4) {
-        for (unsigned char index = 0;index < entrada.substr(2).size();index ++){
-            if (!isdigit(entrada.substr(2)[index])){
-                digito = false;
-        }
+        digito = isDigit(entrada.substr(2));
     }}}
-    }
 
     if (digito){
         a = stoi(entrada.substr(2));
@@ -69,12 +62,21 @@ util::nizador(string entrada){
         a=3;
     }
 
-
-    
     cout << "Considerado N=" << a << endl;
 
     return (unsigned char) a;
 }
+
+bool
+util::isDigit(string a) {
+    for (unsigned char i; i < a.size();i++) {
+        if (!isdigit(a[i])){
+            return false;
+        }
+    }
+    return true;
+}
+         
 
 
 tipoErro
@@ -93,6 +95,11 @@ util::entrada(vector <string> argv, int numeroArgumentos){
         unsigned short n;
         n = nizador(argv[2]);
         estadual estado(argv[1],n);
+
+        vector <unsigned char> mediaMovel;
+        //estado.calculaMediaMovel(&medialMovel);
+        //for para exibir a media movel
+        
     }
     else if (argv[0] == "mediaMovelNacao")
     {
