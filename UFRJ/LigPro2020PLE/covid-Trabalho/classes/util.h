@@ -6,19 +6,22 @@ using namespace std;
 
 typedef enum {
 ok,
-numeroArgumentosInvalido
+numeroArgumentosInvalido,
+erroDesconhecido
 
 }tipoErro;
 
-class ultil
+class util
 {
 private:
     /* data */
 public:
-    ultil(/* args */);
+    util(/* args */);
 
     void
     showInicial();
+    tipoErro
+    showH(string help, string comando, int numeroArgumentos);
 };
 
 #endif

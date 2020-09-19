@@ -4,10 +4,20 @@
 int
 main(int argc, char const *argv[])
 {
-    ultil ultils;
-    if (argc == 1) {
-        ultils.showInicial();
+    util utils;
+    tipoErro erros;
+    if (argc < 2) {
+        utils.showInicial();
         return ok;
     }
+    
+    string primeiro = argv[1];
+    string segundo = argv[2];
+    
+    if (primeiro=="help") {
+        erros = utils.showH(primeiro,segundo,argc);
+        return erros;
+    }
+
     return ok;
 }

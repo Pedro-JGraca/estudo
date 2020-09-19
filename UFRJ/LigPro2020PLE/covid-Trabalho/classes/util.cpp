@@ -1,7 +1,7 @@
 #include "util.h"
 
 
-ultil::ultil()
+util::util()
 {
 }
 
@@ -9,9 +9,9 @@ ultil::ultil()
 
 
 void
-ultil::showInicial () {
+util::showInicial () {
     cout << 
-    "formato padrão: ./analiseCovid <comando> [N=base-para-media-movel (padrao: 3)] [estado]" << endl <<
+    "formato padrão: ./analiseCovid <comando> [estado] [N=base-para-media-movel (padrao: 3)]" << endl <<
     "Comandos:" << endl <<
     "[help]                       -> Dá uma orientacao do uso dos comandos" << endl <<
     "[mediaMovelEstado]           -> Plota a tabela da série histórica da media movel de N dias do numero de mortos do estado pedido." << endl <<
@@ -21,6 +21,25 @@ ultil::showInicial () {
     "[extremos]                   -> Informa o estado que está com maior crescente e maior queda" << endl <<
     "[acumuladoEstado]            -> Faz a série histórica dos valor acumulado do estado pedido." << endl <<
     "[acumuladoNacao]             -> Faz a série histórica dos valor acumulado da nação." << endl;
+}
+
+tipoErro
+showH(string help,string comando, int numeroArgumentos){
+    if (help != "help"){
+        cout<< "condicao nao prevista" << endl;
+        return erroDesconhecido;
+    }
+    else {
+        if (numeroArgumentos!=2) {
+            cout << "Erro: numero de argumentos invalido" << endl << "Uso:"<<endl;
+            cout <<"\t ./analiseCovid [help] [comando desejado]"<<endl;
+            return numeroArgumentosInvalido;
+        }
+        else {
+            
+        }
+
+    }
 }
 
 
