@@ -6,31 +6,37 @@ CFLAGS= 		-Wall -c
 LFLAGS= 		-Wall
 
 MAIN_OBJS=		main.o
-AGENDA_OBJS=	agenda.o
+UTIL_OBJS=		util.o
+#ESTADUAL_OBJS=	estadual.o
 
 OBJETOS=		$(MAIN_OBJS)\
-				$(AGENDA_OBJS)
+				$(UTIL_OBJS)
+#				$(ESTADUAL_OBJS)
 
-EXEC=	agendador		
+EXEC=	AnalisadorCovid		
 
 
 #macros de regras
 ALL = 		compila\
 			linka
 
-MAIN =		main-compile
-AGENDA =	agenda-compile
+MAIN=		main-compile
+UTIL=		util-compile	
+#estadual =	estadual-compile
 
 #regras
 all: $(ALL)
 
 compila: 	$(MAIN)\
-			$(AGENDA)
+			$(UTIL)
+#			$(estadual)
 
 main-compile:
 	$(CC) $(CFLAGS) main.cpp -o $(MAIN_OBJS)
-agenda-compile:
-	$(CC) $(CFLAGS) agenda.cpp -o $(AGENDA_OBJS)
+util-compile:
+	$(CC) $(CFLAGS) classes/util.cpp -o $(UTIL_OBJS)
+#estadual-compile:
+#	$(CC) $(CFLAGS) estadual.cpp -o $(ESTADUAL_OBJS)
 
 linka:
 	$(LD) $(LFLAGS) $(OBJETOS) -o $(EXEC)
