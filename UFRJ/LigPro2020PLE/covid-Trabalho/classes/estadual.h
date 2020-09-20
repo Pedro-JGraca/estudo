@@ -18,6 +18,9 @@ private:
 
     void
     setEstado(string);
+    
+    void
+    setDados(vector <unsigned short>);
 
 public:
     estadual(string,unsigned char);
@@ -34,7 +37,19 @@ public:
     getN();
 
     void
-    importarDados();
+    importarDados(vector <unsigned short>*);
+
+    void
+    somaMovel(vector <unsigned>*);
+    
+    void
+    mediaMovel(vector <unsigned short>*);
+
+    void
+    porcentagemMovel(vector <float>*);
+
+    float
+    porcentagem(unsigned short, unsigned short);
 
 
 };

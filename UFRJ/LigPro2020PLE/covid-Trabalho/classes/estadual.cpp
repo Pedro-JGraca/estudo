@@ -1,4 +1,6 @@
+#include <stdlib.h>
 #include <fstream>
+#include <limits>
 #include "estadual.h"
 
 
@@ -7,7 +9,7 @@ estadual::estadual(string estadoNome, unsigned char n)
 {
     setEstado(estadoNome);
     this->N = n;
-    importarDados();
+    importarDados(&dados);
 }
 
 void
@@ -76,7 +78,9 @@ estadual::getN(){
 }
 
 void
-estadual::importarDados(){
+estadual::importarDados(vector <unsigned short> *ptr){
+
+
     if (getEstado().size()) {
         util uteis;
         char a[6];
@@ -87,9 +91,91 @@ estadual::importarDados(){
         while (fin){
             fin.getline(a,6);
             if (uteis.isDigit((string)a)) {
-                dados.push_back((unsigned short) stoul(a));
+                int obitosDia = stoi(a);
+                dados.push_back((unsigned short) obitosDia);
             }
         }
         
     }
+
+    *ptr = dados;
 } 
+
+void
+estadual::somaMovel(vector <unsigned>* ptr) {
+    
+    vector <unsigned> somados;
+    unsigned hoje=0;
+    unsigned somado;
+    
+    //n=3
+    //1,4,5,7,3
+    //1,(1)+4,((1)+4)+5,(((1)+4)+5)+7-(1),((((1)+4)+5)+7+3)-(1)+3
+    
+    //inicializa o dia 1
+    somados.push_back(dados[0]);
+    for (hoje=1; hoje<dados.size();hoje++){
+        //construir ate N
+        if(hoje<getN()){
+            somado=somados[hoje-1]+dados[hoje];
+        }
+        else{//depois de N avancamos no procimo dia e tiramos do N anterior
+            somado=somados[hoje-1]+dados[hoje]-dados[hoje-(getN())];
+        }
+        somados.push_back(somado);
+    }
+
+    *ptr = somados;
+}
+
+void
+estadual::mediaMovel(vector <unsigned short>* ptr){
+
+    vector <unsigned short> mediados;
+    vector <unsigned> somados;
+    somaMovel(&somados);
+    
+    for (unsigned i=0; i<somados.size();i++){
+        mediados.push_back((somados[i]/getN()));
+    }
+    
+    *ptr = mediados;
+
+}
+
+void
+estadual::porcentagemMovel(vector <float>* ptr){
+    vector <float> porcentagem;
+    vector <unsigned short> mediaMovel;
+    estadual::mediaMovel(&mediaMovel);
+    if (mediaMovel[0]!=0){
+        porcentagem.push_back(numeric_limits<float>::infinity());
+    }
+    else
+    {
+        porcentagem.push_back(0);
+    }
+        
+
+    for (unsigned i=1 ; i < mediaMovel.size(); i++){
+        unsigned short hoje =mediaMovel[i];
+        unsigned short ontem =mediaMovel[i-1];
+        porcentagem.push_back(estadual::porcentagem(hoje,ontem));
+    }
+
+
+    *ptr = porcentagem;
+
+}
+
+float
+estadual::porcentagem(unsigned short a, unsigned short b){
+    if (b){
+        return ((((float)a)-b)/b)*100;
+    }
+    else{//b = 0
+        return numeric_limits<float>::infinity();
+    }
+}
+
+

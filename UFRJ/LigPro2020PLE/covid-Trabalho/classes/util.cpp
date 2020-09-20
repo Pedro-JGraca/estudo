@@ -74,6 +74,9 @@ util::isDigit(string a) {
             return false;
         }
     }
+    if (!a.size()){
+        return false;
+    }
     return true;
 }
          
@@ -96,10 +99,13 @@ util::entrada(vector <string> argv, int numeroArgumentos){
         n = nizador(argv[2]);
         estadual estado(argv[1],n);
 
-        vector <unsigned char> mediaMovel;
-        //estado.calculaMediaMovel(&medialMovel);
-        //for para exibir a media movel
-        
+        vector <float> porcentagem;
+        estado.porcentagemMovel(&porcentagem);
+
+        for (unsigned i=0 ; i < porcentagem.size(); i++){
+            cout << porcentagem[i] << endl;
+        }
+
     }
     else if (argv[0] == "mediaMovelNacao")
     {
