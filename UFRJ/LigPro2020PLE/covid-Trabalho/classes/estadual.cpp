@@ -85,8 +85,8 @@ estadual::importarDados(vector <unsigned short> *ptr){
         util uteis;
         char a[6];
         
-        //ifstream fin("./dados/estados/" + getEstado() + ".txt");
-        ifstream fin("./dados/TESTE2.txt");
+        ifstream fin("./dados/estados/" + getEstado() + ".txt");
+        //ifstream fin("./dados/TESTE2.txt");
         
         while (fin){
             fin.getline(a,6);

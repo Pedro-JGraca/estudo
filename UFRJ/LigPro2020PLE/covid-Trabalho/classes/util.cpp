@@ -31,13 +31,15 @@ util::nizador(string entrada){
         cout 
         << "Erro: Formato do N invalido." << endl 
         << "formato do N: n=<numero-inteiro-sem-sinal>" <<endl;
-        digito = false;
+        cout << "Considerado N=" << a << endl;
+        return a;
     }
     if (entrada.substr(2).size()>3){
         cout 
         << "Erro: N muito grande." << endl 
         << "formato do N: n=<numero-inteiro-sem-sinal-menor-que-255>" <<endl;
-        digito = false;
+        cout << "Considerado N=" << a << endl;
+        return a;
     }
     
     if (entrada.size()>2){
@@ -53,6 +55,9 @@ util::nizador(string entrada){
         cout 
         << "Erro: N não é numero natural." << endl
         << "formato do N: n=<numero-inteiro-sem-sinal-menor-que-255>" <<endl;
+        cout << "Considerado N=" << a << endl;
+        return a;
+
     }
 
     if (a > 255) {
@@ -98,14 +103,14 @@ util::entrada(vector <string> argv, int numeroArgumentos){
         unsigned short n;
         n = nizador(argv[2]);
         estadual estado(argv[1],n);
+        if (estado.getEstado().size()!=0){
+            vector <float> porcentagem;
+            estado.porcentagemMovel(&porcentagem);
 
-        vector <float> porcentagem;
-        estado.porcentagemMovel(&porcentagem);
-
-        for (unsigned i=0 ; i < porcentagem.size(); i++){
-            cout << porcentagem[i] << endl;
+            for (unsigned i=0 ; i < porcentagem.size(); i++){
+                cout << porcentagem[i] << endl;
+            }
         }
-
     }
     else if (argv[0] == "mediaMovelNacao")
     {
