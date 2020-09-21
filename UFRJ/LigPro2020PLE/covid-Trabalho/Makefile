@@ -1,4 +1,4 @@
-#macros de marcacao
+#macros
 CC=				g++
 LD=				g++
 
@@ -17,30 +17,26 @@ OBJETOS=		$(MAIN_OBJS)\
 
 EXEC=	AnalisadorCovid		
 
-
-#macros de regras
-ALL = 		compila\
-			linka
-
-MAIN=		main-compile
-UTIL=		util-compile	
-ESTADUAL=	estadual-compile
-#NACIONAL=	nacional-compile
-
 #regras
-all: $(ALL)
+all: $(EXEC)
 
-compila: 	$(MAIN)\
-			$(UTIL)\
-			$(ESTADUAL)
+$(EXEC): $(OBJETOS)
+	$(LD) $(LFLAGS) $(OBJETOS) -o $@
 
-main-compile:
+.cpp.o:
+	$(CC) $(CFLAGS) $<
+
+compila: 	$(MAIN_OBJS)\
+			$(UTIL_OBJS)\
+			$(ESTADUAL_OBJS)
+
+$(MAIN_OBJS):
 	$(CC) $(CFLAGS) main.cpp -o $(MAIN_OBJS)
-util-compile: 
+$(UTIL_OBJS): 
 	$(CC) $(CFLAGS) classes/util.cpp -o $(UTIL_OBJS)
-estadual-compile: 
+$(ESTADUAL_OBJS): 
 	$(CC) $(CFLAGS) classes/estadual.cpp -o $(ESTADUAL_OBJS)
-#nacional-compile: $(ESTADUAL_OBJS)
+#$(NACIONAL_OBJS): $(ESTADUAL_OBJS)
 #	$(CC) $(CFLAGS) classes/nacional.cpp -o $(NACIONAL_OBJS)
 
 linka:
