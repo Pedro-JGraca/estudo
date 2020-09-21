@@ -51,6 +51,9 @@ public:
     float
     porcentagem(unsigned short, unsigned short);
 
+    unsigned
+    getSizeDados();
+
 
 };
 

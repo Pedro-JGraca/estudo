@@ -1,7 +1,7 @@
 #include "util.h"
 #include "estadual.h"
 
-
+//feito comandos help e mediaMovelEstado, acumuladoEstado. Proximo: acumuladoNacao (classe NACIONAL). 4/10 feito
 util::util()
 {
 }
@@ -103,13 +103,21 @@ util::entrada(vector <string> argv, int numeroArgumentos){
         unsigned short n;
         n = nizador(argv[2]);
         estadual estado(argv[1],n);
-        if (estado.getEstado().size()!=0){
-            vector <float> porcentagem;
-            estado.porcentagemMovel(&porcentagem);
+        if (estado.getSizeDados()!=0){
+            if (estado.getEstado().size()!=0){
+                vector <float> porcentagem;
+                estado.porcentagemMovel(&porcentagem);
 
-            for (unsigned i=0 ; i < porcentagem.size(); i++){
-                cout << porcentagem[i] << endl;
+                for (unsigned i=0 ; i < porcentagem.size(); i++){
+                    cout << porcentagem[i] << endl;
+                }
             }
+            else {
+                return estadoNaoAchado;
+            }
+        }
+        else {
+            return erroAbrirArquivo;
         }
     }
     else if (argv[0] == "mediaMovelNacao")
@@ -130,7 +138,30 @@ util::entrada(vector <string> argv, int numeroArgumentos){
     }
     else if (argv[0] == "acumuladoEstado")
     {
-        cout << "executar: " << argv[0];
+        if (numeroArgumentos!=3){
+            cout << "Erro: numero de argumentos invalido" << endl << "Uso:"<<endl;
+            cout <<"\t ./analiseCovid "<< argv[0] <<" [estado]" <<endl;
+            return numeroArgumentosInvalido;
+        }
+        else {
+            estadual estado(argv[1],0); // zero é a entrada para quando se quer calcular o acomulado do estado, pois nao pode exitir n = 0 para a media movel
+
+            if (estado.getSizeDados()!=0){
+                if (estado.getEstado().size()!=0){
+                    vector <unsigned> acumulado;
+                    estado.somaMovel(&acumulado);
+                    for (unsigned short i = 0 ;i < acumulado.size();i++){
+                        cout << acumulado[i] << endl;
+                    }
+                }
+                else {
+                    return estadoNaoAchado;
+                }
+            }
+            else {
+                return erroAbrirArquivo;
+            }
+        }
     }
     else if (argv[0] == "acumuladoNacao")
     {

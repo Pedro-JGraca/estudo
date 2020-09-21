@@ -8,8 +8,15 @@
 estadual::estadual(string estadoNome, unsigned char n)
 {
     setEstado(estadoNome);
-    this->N = n;
     importarDados(&dados);
+    
+    if (n!=0){
+        this->N = n;
+    }
+    else {
+        this->N = dados.size();
+    }
+
 }
 
 void
@@ -79,27 +86,36 @@ estadual::getN(){
 
 void
 estadual::importarDados(vector <unsigned short> *ptr){
-
-
     if (getEstado().size()) {
         util uteis;
         char a[6];
         
         ifstream fin("./dados/estados/" + getEstado() + ".txt");
-        //ifstream fin("./dados/TESTE2.txt");
-        
-        while (fin){
-            fin.getline(a,6);
-            if (uteis.isDigit((string)a)) {
-                int obitosDia = stoi(a);
-                dados.push_back((unsigned short) obitosDia);
+        //ifstream fin("./dados/TESTE.txt");
+        if (fin){
+            while (fin){
+                fin.getline(a,6);
+                if (uteis.isDigit((string)a)) {
+                    int obitosDia = stoi(a);
+                    dados.push_back((unsigned short) obitosDia);
+                }
             }
         }
-        
+        else {
+            cout << "Arquivo nao achado" << endl;
+            cout << "O Arquivo deve se encontrar dento do diretorio ./dados/estados/" << endl;
+            cout << "onde ./ siginifica o local onde esta o binario AnalisadorCovid" << endl;
+        }
     }
 
     *ptr = dados;
 } 
+
+
+unsigned
+estadual::getSizeDados(){
+    return dados.size();
+}
 
 void
 estadual::somaMovel(vector <unsigned>* ptr) {
