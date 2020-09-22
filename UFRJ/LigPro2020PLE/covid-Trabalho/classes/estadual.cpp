@@ -23,6 +23,7 @@ void
 estadual::setEstado(string estadoNome){
     if (verificaEstado(estadoNome)){
         this->estado = estadoNome;
+        
     }
 }
 
