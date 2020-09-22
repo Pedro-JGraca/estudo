@@ -6,12 +6,12 @@ CFLAGS= 		-Wall -c
 LFLAGS= 		-Wall
 
 MAIN_OBJS=		main.o
-UTIL_OBJS=		util.o
+COVID_OBJS=		covid.o
 ESTADUAL_OBJS=	estadual.o
 #NACIONAL_OBJS=	nacional.o
 
 OBJETOS=		$(MAIN_OBJS)\
-				$(UTIL_OBJS)\
+				$(COVID_OBJS)\
 				$(ESTADUAL_OBJS)
 #				$(NACIONAL_OBJS)
 
@@ -27,13 +27,13 @@ $(EXEC): $(OBJETOS)
 	$(CC) $(CFLAGS) $<
 
 compila: 	$(MAIN_OBJS)\
-			$(UTIL_OBJS)\
+			$(COVID_OBJS)\
 			$(ESTADUAL_OBJS)
 
 $(MAIN_OBJS):
 	$(CC) $(CFLAGS) main.cpp -o $(MAIN_OBJS)
-$(UTIL_OBJS): 
-	$(CC) $(CFLAGS) classes/util.cpp -o $(UTIL_OBJS)
+$(COVID_OBJS): 
+	$(CC) $(CFLAGS) classes/covid.cpp -o $(COVID_OBJS)
 $(ESTADUAL_OBJS): 
 	$(CC) $(CFLAGS) classes/estadual.cpp -o $(ESTADUAL_OBJS)
 #$(NACIONAL_OBJS): $(ESTADUAL_OBJS)

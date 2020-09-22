@@ -1,5 +1,5 @@
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef COVID_H
+#define COVID_H
 
 #include <iostream>
 #include <vector>
@@ -15,7 +15,7 @@ typedef enum {
     erroDesconhecido
 }tipoErro;
 
-class util
+class covid
 {
 private:
 
@@ -25,7 +25,7 @@ private:
     unsigned char
     nizador(string);
 public:
-    util();
+    covid();
 
     void
     showInicial();
