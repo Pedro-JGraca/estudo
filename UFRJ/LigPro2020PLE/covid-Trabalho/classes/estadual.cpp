@@ -7,7 +7,7 @@
 
 estadual::estadual(string estadoNome, unsigned char n)
 {
-    setEstado(estadoNome);
+    setEstado(estadoNome); //original?
     importarDados(&dados);
     
     if (n!=0){
