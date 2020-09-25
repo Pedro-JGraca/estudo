@@ -1,13 +1,16 @@
-#include "classes/util.h" //typedef
-
+#include "classes/covid.h" //typedef
+#include "classes/estadual.h"
+#include <iostream>
+#include <vector>
+using namespace std;
 
 int
 main(int argc, char const *argv[])
 {
-    util utils;
+    covid analise;
     tipoErro erros;
     if (argc < 2) {
-        utils.showInicial();
+        analise.showInicial();
         return ok;
     }
     
@@ -16,7 +19,9 @@ main(int argc, char const *argv[])
         entrada.push_back(argv[i+1]);
     }
 
-    erros = utils.entrada(entrada,argc);
+    //
+    
+    erros = analise.entrada(entrada,argc);
    
  
 

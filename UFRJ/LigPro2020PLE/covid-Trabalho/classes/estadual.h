@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <dirent.h>
-#include "util.h"
+#include "covid.h"
 using namespace std;
 
 
@@ -27,6 +27,7 @@ public:
 
     bool
     verificaEstado(string);
+    
     tipoErro
     listaEstados(vector <string> *);
 

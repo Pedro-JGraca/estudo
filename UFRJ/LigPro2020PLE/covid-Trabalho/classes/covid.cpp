@@ -1,13 +1,13 @@
-#include "util.h"
+#include "covid.h"
 #include "estadual.h"
 
 //feito comandos help e mediaMovelEstado, acumuladoEstado. Proximo: acumuladoNacao (classe NACIONAL). 4/10 feito
-util::util()
+covid::covid()
 {
 }
 
 void
-util::showInicial () {
+covid::showInicial () {
     cout << 
     "formato padrão: ./analiseCovid <comando> [estado] [N=base-para-media-movel (padrao: 3)]" << endl <<
     "Comandos:" << endl <<
@@ -24,7 +24,7 @@ util::showInicial () {
 
 
 unsigned char
-util::nizador(string entrada){
+covid::nizador(string entrada){
     unsigned short a = 3;
     bool digito = true;
     if (entrada.size()<3){
@@ -73,7 +73,7 @@ util::nizador(string entrada){
 }
 
 bool
-util::isDigit(string a) {
+covid::isDigit(string a) {
     for (unsigned char i; i < a.size();i++) {
         if (!isdigit(a[i])){
             return false;
@@ -88,7 +88,7 @@ util::isDigit(string a) {
 
 
 tipoErro
-util::entrada(vector <string> argv, int numeroArgumentos){
+covid::entrada(vector <string> argv, int numeroArgumentos){
     
     if (argv[0]=="help") {
         return showH(argv,numeroArgumentos);
@@ -122,7 +122,12 @@ util::entrada(vector <string> argv, int numeroArgumentos){
     }
     else if (argv[0] == "mediaMovelNacao")
     {
-        cout << "executar: " << argv[0];
+        if (numeroArgumentos != 3){
+            cout << "Uso:" << endl;
+            cout <<"\t ./analiseCovid "<< argv[0] <<" [N=base-para-media-movel (padrao: 3)]" <<endl;
+            return numeroArgumentosInvalido;
+        }
+        unsigned short n= nizador(argv[1]);
     }
     else if (argv[0] == "categoriaEstado")
     {
@@ -178,7 +183,7 @@ util::entrada(vector <string> argv, int numeroArgumentos){
 
 
 tipoErro
-util::showH(vector <string> argv, int numeroArgumentos){
+covid::showH(vector <string> argv, int numeroArgumentos){
     numeroArgumentos--;
     if (argv[0] != "help"){
         cout<< "condicao nao prevista" << endl;

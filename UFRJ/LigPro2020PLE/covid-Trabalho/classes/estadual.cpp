@@ -3,8 +3,6 @@
 #include <limits>
 #include "estadual.h"
 
-
-
 estadual::estadual(string estadoNome, unsigned char n)
 {
     setEstado(estadoNome); //original?
@@ -23,6 +21,7 @@ void
 estadual::setEstado(string estadoNome){
     if (verificaEstado(estadoNome)){
         this->estado = estadoNome;
+        
     }
 }
 
@@ -87,7 +86,7 @@ estadual::getN(){
 void
 estadual::importarDados(vector <unsigned short> *ptr){
     if (getEstado().size()) {
-        util uteis;
+        covid uteis;
         char a[6];
         
         ifstream fin("./dados/estados/" + getEstado() + ".txt");

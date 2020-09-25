@@ -22,7 +22,7 @@ Como usar:
 
     $./analiseCovid <comando> [estado] [-n=tamanho (padrao: 7)]
 
-    Onde o primeiro colchete implica em um comando obrigatório o segundo implica no nome do estado passado como argumento para algumas chamdas. É possível alterar o parametro de dias utilizados na média móvel através da opção -n=DIAS.
+    Onde o primeiro colchete implica em um comando obrigatório o segundo implica no nome do estado passado como argumento para algumas chamdas. É possível alterar o parametro de dias covidizados na média móvel através da opção -n=DIAS.
 
     formato: ./analiseCovid <comando> [estado] [-n=tamanho (padrao: 7)]
     Comandos:
