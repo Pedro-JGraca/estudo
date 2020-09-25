@@ -8,12 +8,12 @@ LFLAGS= 		-Wall
 MAIN_OBJS=		main.o
 COVID_OBJS=		covid.o
 ESTADUAL_OBJS=	estadual.o
-#NACIONAL_OBJS=	nacional.o
+NACIONAL_OBJS=	nacional.o
 
 OBJETOS=		$(MAIN_OBJS)\
 				$(COVID_OBJS)\
-				$(ESTADUAL_OBJS)
-#				$(NACIONAL_OBJS)
+				$(ESTADUAL_OBJS)\
+				$(NACIONAL_OBJS)
 
 EXEC=	AnalisadorCovid		
 
@@ -28,7 +28,8 @@ $(EXEC): $(OBJETOS)
 
 compila: 	$(MAIN_OBJS)\
 			$(COVID_OBJS)\
-			$(ESTADUAL_OBJS)
+			$(ESTADUAL_OBJS)\
+			$(NACIONAL_OBJS)
 
 $(MAIN_OBJS):
 	$(CC) $(CFLAGS) main.cpp -o $(MAIN_OBJS)
@@ -36,8 +37,8 @@ $(COVID_OBJS):
 	$(CC) $(CFLAGS) classes/covid.cpp -o $(COVID_OBJS)
 $(ESTADUAL_OBJS): 
 	$(CC) $(CFLAGS) classes/estadual.cpp -o $(ESTADUAL_OBJS)
-#$(NACIONAL_OBJS): $(ESTADUAL_OBJS)
-#	$(CC) $(CFLAGS) classes/nacional.cpp -o $(NACIONAL_OBJS)
+$(NACIONAL_OBJS): $(ESTADUAL_OBJS)
+	$(CC) $(CFLAGS) classes/nacional.cpp -o $(NACIONAL_OBJS)
 
 linka:
 	$(LD) $(LFLAGS) $(OBJETOS) -o $(EXEC)

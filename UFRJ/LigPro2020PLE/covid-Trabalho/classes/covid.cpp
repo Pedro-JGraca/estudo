@@ -1,5 +1,6 @@
 #include "covid.h"
 #include "estadual.h"
+#include "nacional.h"
 
 //feito comandos help e mediaMovelEstado, acumuladoEstado. Proximo: acumuladoNacao (classe NACIONAL). 4/10 feito
 covid::covid()
@@ -67,6 +68,13 @@ covid::nizador(string entrada){
         a=3;
     }
 
+    if (a == 0) {
+        cout 
+        << "Erro: N nao pode ser zero" << endl 
+        << "formato do N: n=<numero-inteiro-sem-sinal-menor-que-255>" <<endl;
+        a=3;
+    }    
+
     cout << "Considerado N=" << a << endl;
 
     return (unsigned char) a;
@@ -109,7 +117,7 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
                 estado.porcentagemMovel(&porcentagem);
 
                 for (unsigned i=0 ; i < porcentagem.size(); i++){
-                    cout << porcentagem[i] << endl;
+                    cout << i << " " << porcentagem[i] << "%"  << endl;
                 }
             }
             else {
@@ -128,6 +136,12 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
             return numeroArgumentosInvalido;
         }
         unsigned short n= nizador(argv[1]);
+        nacional pais(n);
+        vector <float> porcent;
+        pais.porcentagemMovel(&porcent);
+        for (unsigned i = 0; i < porcent.size(); i++){
+            cout << i << " " << porcent[i] << "%" << endl;
+        }
     }
     else if (argv[0] == "categoriaEstado")
     {
@@ -171,7 +185,7 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
                     vector <unsigned> acumulado;
                     estado.somaMovel(&acumulado);
                     for (unsigned short i = 0 ;i < acumulado.size();i++){
-                        cout << acumulado[i] << endl;
+                        cout << i << " " << acumulado[i] << endl;
                     }
                 }
                 else {
@@ -190,6 +204,14 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
             cout <<"\t ./analiseCovid "<< argv[0] <<endl;
             return numeroArgumentosInvalido;
         }
+
+        nacional pais(0);
+        vector <unsigned> soma;
+        pais.somaMovel(&soma);
+        for (unsigned i = 0; i < soma.size(); i++){
+            cout << i << " " << soma[i] << endl;
+        }
+
     }
 
     else {
