@@ -122,7 +122,12 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
     }
     else if (argv[0] == "mediaMovelNacao")
     {
-        cout << "executar: " << argv[0];
+        if (numeroArgumentos != 3){
+            cout << "Uso:" << endl;
+            cout <<"\t ./analiseCovid "<< argv[0] <<" [N=base-para-media-movel (padrao: 3)]" <<endl;
+            return numeroArgumentosInvalido;
+        }
+        unsigned short n= nizador(argv[1]);
     }
     else if (argv[0] == "categoriaEstado")
     {
