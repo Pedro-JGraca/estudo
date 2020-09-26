@@ -12,6 +12,7 @@ typedef enum {
     Ninvalido,
     estadoNaoAchado,
     erroAbrirArquivo,
+    dataInvalida,
     erroDesconhecido
 }tipoErro;
 
@@ -24,8 +25,22 @@ private:
 
     unsigned char
     nizador(string);
+
+    tipoErro
+    setData();
+
+    unsigned short dia;
+    unsigned short mes;
+    unsigned short ano;
+
+
+    unsigned short
+    strTouc(string a);
+
 public:
+
     covid();
+
 
     void
     showInicial();
@@ -35,6 +50,9 @@ public:
 
     bool
     isDigit(string);
+
+    string
+    datar(unsigned);
 };
 
 const vector <string> comandos = {"help","mediaMovelEstado","mediaMovelNacao","categoriaEstado","categoriaNacao","extremos","acumuladoEstado","acumuladoNacao"};

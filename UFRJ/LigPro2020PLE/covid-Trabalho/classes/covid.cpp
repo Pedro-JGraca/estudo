@@ -1,11 +1,20 @@
+#include <fstream>
+#include <math.h>
 #include "covid.h"
 #include "estadual.h"
 #include "nacional.h"
 
-//feito comandos help e mediaMovelEstado, acumuladoEstado. Proximo: acumuladoNacao (classe NACIONAL). 4/10 feito
 covid::covid()
 {
+    if (setData()!=ok){
+        cout <<"data Corrompida"<< endl;
+        dia = 01;
+        mes = 03;
+        ano = 2020;
+        cout << "usando: " << dia << "/" << mes << "/" << ano << endl;
+    }
 }
+
 
 void
 covid::showInicial () {
@@ -90,6 +99,106 @@ covid::isDigit(string a) {
     }
     return true;
 }
+
+unsigned short
+covid::strTouc(string a){
+    unsigned short b=0;
+    for (unsigned char i = 0; i<a.size() ;i++){
+        b += ((a[i] - '0')*pow(10,(a.size() - (i+1))));
+    }
+    return b;
+}
+
+tipoErro
+covid::setData(){
+    char a[11];
+    ifstream fin("./dados/dataInicio.txt");
+    if (fin){
+        fin.getline(a,11);
+        string b = a;
+        if (isDigit(b.substr(0,2))){
+            dia = strTouc(b.substr(0,2));
+        }
+        else
+        {
+            cout << "dia" << endl;
+            return dataInvalida;
+        }
+
+        if (isDigit(b.substr(3,2))){
+            mes = strTouc(b.substr(3,2));
+        }
+        else
+        {
+            cout << "mes" << endl;
+            return dataInvalida;
+        }
+            
+        if (isDigit(b.substr(6,4))){
+            ano = strTouc(b.substr(6,4));
+        }
+        else
+        {
+            cout << "ano" << endl;
+            return dataInvalida;
+        }
+    }
+    else {
+        cout << "arquivo" << endl;
+        return dataInvalida;
+    }
+
+    return ok;
+
+}
+
+string
+covid::datar(unsigned entrada){
+    unsigned short D = dia;
+    unsigned short M = mes;
+    unsigned A = ano;
+    //cout << entrada << " " << D<<  " " << M << " " <<  A << endl;
+    D += entrada;
+    unsigned limite_dia ;
+    if (M==1 or M == 3 or M == 5 or M == 7 or M == 8 or M == 10 or M == 12){
+        limite_dia =31;
+    }
+    else if (M == 2){
+        if (A%4 != 0){
+            limite_dia = 29;
+        }
+        else {
+            limite_dia = 28;
+        }
+    }
+    else {
+        limite_dia = 30;
+    }
+    while (D>limite_dia){
+        D-=limite_dia;
+        M +=1;
+        if (M==1 or M == 3 or M == 5 or M == 7 or M == 8 or M == 10 or M == 12){
+            limite_dia =31;
+        }
+        else if (M == 2){
+            if (A%4 != 0){
+                limite_dia = 29;
+            }
+            else {
+                limite_dia = 28;
+            }
+        }
+        else {
+            limite_dia = 30;
+        }
+    }
+    while (M > 12){
+        M -=12;
+        A +=1;
+    }
+    string todo = to_string(D) + "/" + to_string(M) + "/" + to_string(A);
+    return todo;
+}
          
 
 
@@ -115,7 +224,7 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
                 estado.porcentagemMovel(&porcentagem);
 
                 for (unsigned i=0 ; i < porcentagem.size(); i++){
-                    cout << i << " " << porcentagem[i] << "%"  << endl;
+                    cout << datar(i) << " " << porcentagem[i] << "%"  << endl;
                 }
             }
             else {
@@ -138,7 +247,7 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
         vector <float> porcent;
         pais.porcentagemMovel(&porcent);
         for (unsigned i = 0; i < porcent.size(); i++){
-            cout << i << " " << porcent[i] << "%" << endl;
+            cout << datar(i) << " " << porcent[i] << "%" << endl;
         }
     }
     else if (argv[0] == "categoriaEstado")
@@ -213,7 +322,7 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
                     vector <unsigned> acumulado;
                     estado.somaMovel(&acumulado);
                     for (unsigned short i = 0 ;i < acumulado.size();i++){
-                        cout << i << " " << acumulado[i] << endl;
+                        cout << datar(i) << " " << acumulado[i] << endl;
                     }
                 }
                 else {
@@ -237,7 +346,7 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
         vector <unsigned> soma;
         pais.somaMovel(&soma);
         for (unsigned i = 0; i < soma.size(); i++){
-            cout << i << " " << soma[i] << endl;
+            cout << datar(i) << " " << soma[i] << endl;
         }
 
     }

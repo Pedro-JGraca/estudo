@@ -3,10 +3,7 @@
 #include "nacional.h"
 #include <vector>
 #include <limits>
-#include <iostream>
-#include <sstream>
 
-using namespace std;
 
 nacional::nacional(unsigned char n)
 {

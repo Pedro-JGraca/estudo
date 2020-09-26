@@ -21,7 +21,6 @@ void
 estadual::setEstado(string estadoNome){
     if (verificaEstado(estadoNome)){
         this->estado = estadoNome;
-        
     }
 }
 
@@ -90,7 +89,6 @@ estadual::importarDados(vector <unsigned short> *ptr){
         char a[6];
         
         ifstream fin("./dados/estados/" + getEstado() + ".txt");
-        //ifstream fin("./dados/TESTE.txt");
         if (fin){
             while (fin){
                 fin.getline(a,6);
