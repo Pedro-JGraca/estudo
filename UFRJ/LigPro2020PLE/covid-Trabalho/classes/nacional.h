@@ -13,6 +13,8 @@ private:
 
     bool
     verificaTamanho();
+    string
+    zeroCasas(float a);
 
 public:
     nacional(unsigned char);
@@ -24,6 +26,12 @@ public:
     porcentagemMovel(vector <float> *);
     float
     porcent(unsigned short a, unsigned short b);
+
+    string
+    categoria(vector <string> *alta,vector <string> *media,vector <string> *baixa);
+
+    string
+    situacaoNacional();
 };
 
 

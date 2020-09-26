@@ -3,6 +3,10 @@
 #include "nacional.h"
 #include <vector>
 #include <limits>
+#include <iostream>
+#include <sstream>
+
+using namespace std;
 
 nacional::nacional(unsigned char n)
 {
@@ -103,4 +107,87 @@ nacional::verificaTamanho(){
     }
     return true;
 
+}
+
+string
+nacional::categoria(vector <string> *alto, vector <string> *medio, vector <string> *baixo){
+    vector <float> lista;
+    
+    vector <float> categoria;
+    
+    vector <string> alta;
+    vector <string> baixa;
+    vector <string> media;
+    string tmp;
+    string maior;
+    string menor;
+    float auxMaior= 0;
+    float auxMenor= 0;
+    for (unsigned i = 0; i < listaEstados.size(); i++){
+        estados[i].porcentagemMovel(&lista);
+        categoria.push_back(lista[lista.size() -1]);
+        if (categoria[i] > 15){
+            tmp = "[" + listaEstados[i] + "](" + zeroCasas(categoria[i]) + "%)  ";
+            alta.push_back(tmp);
+            if (categoria[i]>auxMaior){
+                auxMaior = categoria[i];
+                maior = "maior: [" + listaEstados[i] + "] (" + zeroCasas(categoria[i]) + "%) ";
+            }
+        }
+        else if (categoria[i] < -15){
+            tmp = "[" + listaEstados[i] + "](" + zeroCasas(categoria[i]) + "%)  ";
+            baixa.push_back(tmp);
+            if (categoria[i]<auxMenor){
+                auxMenor = categoria[i];
+                menor = "menor: [" + listaEstados[i] + "] (" + zeroCasas(categoria[i]) + "%) ";
+            }
+        }
+        else {
+            tmp = "[" + listaEstados[i] + "](" + zeroCasas(categoria[i]) + "%)  ";
+            media.push_back(tmp);
+        }
+    }
+
+    *alto = alta;
+    *medio = media;
+    *baixo = baixa;
+    if (maior == "") {
+        maior = "maior: Não existem estados em alta";
+    }
+    if (menor == "") {
+        menor = "menor: Não existem estados em baixa";
+    }
+    return maior + "\n" + menor;
+}
+
+string
+nacional::zeroCasas(float a){
+    char str[7];
+    sprintf(str,"%2.f",a);
+    return str;
+}
+
+
+string
+nacional::situacaoNacional(){
+    vector <unsigned> soma;
+    somaMovel(&soma);
+    unsigned short ontem = (soma [soma.size() -2])/n;
+    unsigned short hoje = (soma [soma.size() -1])/n;
+
+    float atual = porcent(hoje,ontem);
+    string sit;
+    if (atual > 15){
+        sit = "em Alta (";
+    }
+    else if (atual < -15){
+        sit = "em Baixa (";
+    }
+    else {
+        sit = "estavel (";
+    }
+
+    sit += zeroCasas(atual) + "%) ";
+    
+    return sit;
 }

@@ -22,8 +22,6 @@ covid::showInicial () {
     "[acumuladoNacao]             -> Faz a série histórica dos valor acumulado da nação." << endl;
 }
 
-
-
 unsigned char
 covid::nizador(string entrada){
     unsigned short a = 3;
@@ -151,6 +149,30 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
             return numeroArgumentosInvalido;
         }
         unsigned short n= nizador(argv[1]);
+        nacional pais(n);
+
+        vector <string> alto,medio,baixo;
+
+        pais.categoria(&alto,&medio,&baixo);
+
+        cout << "Estados em alta:" << endl;
+        for (unsigned i = 0; i < alto.size() ; i++){
+            cout << alto[i];
+        }
+        cout << endl;
+
+        cout << "Estados estaveis:" << endl;
+        for (unsigned i = 0; i < medio.size() ; i++){
+            cout << medio[i];
+        }
+        cout << endl;
+            
+        cout << "Estados em baixa:" << endl;
+        for (unsigned i = 0; i < baixo.size() ; i++){
+            cout << baixo[i];
+        }
+        cout << endl;
+
     }
     else if (argv[0] == "categoriaNacao")
     {
@@ -160,6 +182,9 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
             return numeroArgumentosInvalido;
         }
         unsigned short n= nizador(argv[1]);
+        nacional pais(n);
+        
+        cout << "Brasil: "<< pais.situacaoNacional() << endl;
     }
     else if (argv[0] == "extremos")
     {
@@ -169,6 +194,9 @@ covid::entrada(vector <string> argv, int numeroArgumentos){
             return numeroArgumentosInvalido;
         }
         unsigned short n= nizador(argv[1]);
+        nacional pais(n);
+        vector <string> lixo;
+        cout << pais.categoria(&lixo,&lixo,&lixo) << endl;
     }
     else if (argv[0] == "acumuladoEstado")
     {
