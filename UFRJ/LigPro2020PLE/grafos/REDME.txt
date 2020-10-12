@@ -1,0 +1,25 @@
+Projeto de analise de texto usando grafo
+
+Sobre o software:
+    Esse software é aplicado em CLI. Vc passará argumentos via linha de comando para conseguir obter as informações desejadas.
+
+Como compilar:
+    dentro do diretório do programa
+    $ make
+
+Como remover os arquivos compilados:
+    dentro do diretório do prgrama
+    $ make clean
+    (assim vc tem so o executavel)
+
+Como usar:
+    Ao compilar o programa ele estará contido dentro do arquivo binário "grafo".
+
+    Se você rodar esse programa dessa forma:
+
+    $ ./grafo
+
+    O programa fará uma breve descrição de como rodar o programa bem como uma lista de todas as funções possíveis
+
+	ENTRADA DE DADOS
+	O programa é alimentado através de um arquivo txt que você fornece via CLI
