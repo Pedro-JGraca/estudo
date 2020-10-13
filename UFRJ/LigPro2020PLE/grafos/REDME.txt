@@ -23,3 +23,4 @@ Como usar:
 
 	ENTRADA DE DADOS
 	O programa é alimentado através de um arquivo txt que você fornece via CLI
+    Existe um arquivo chamado de exemplo.txt que está lá para servir de exemplo
