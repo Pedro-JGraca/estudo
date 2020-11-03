@@ -69,6 +69,9 @@ public:
     void
     getFilmeByNome(string Nome, filme *);
 
+    filme*
+    operator()(string nome);
+
 };
 
 

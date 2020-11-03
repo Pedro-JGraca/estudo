@@ -262,3 +262,11 @@ proxyCatalogo::removerFilme(string Filme){
     Catalogo-= novo;
     
 }
+
+bool 
+proxyCatalogo::buscarFilme(string nome){
+    if (Catalogo(nome)){
+        return true;
+    }
+    return false;
+}

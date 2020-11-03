@@ -147,6 +147,20 @@ operator>(filme novo, filme outro){//global para esse contexto
 
 }
 
+
+filme*
+catalogo::operator()(string nome){//busca sobrecarregada
+    if (nome.size() == 0){
+        return nullptr;
+    }
+    for (unsigned short index = 0; index< filmes.size(); index++){
+        if(filmes[index].nome==nome){
+            return &filmes[index];
+        }
+    }
+    return nullptr;//se nao achar
+}
+
 void
 catalogo::ordenar(){
     

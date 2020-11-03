@@ -4,6 +4,9 @@ a27
 a nova onda
 produdex
 9.200000
+teste
+pri
+9.600000
 teste3
 pri
 9.600000

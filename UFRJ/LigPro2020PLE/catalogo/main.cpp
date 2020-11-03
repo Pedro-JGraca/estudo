@@ -110,7 +110,9 @@ main(int argc, char const *argv[])
                         break;
 
                     case 6:
-                        cout << "rode Buscar Filme: " << comando << " " <<filme << endl;
+                        cout << "O filme \""<< filme << "\" " << 
+                        (catalogo.buscarFilme(filme)?"":"nao ")
+                        << "foi encontrado" << endl;
                         break;
 
                     case 7:
