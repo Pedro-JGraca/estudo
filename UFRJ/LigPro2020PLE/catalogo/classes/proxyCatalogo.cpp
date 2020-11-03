@@ -102,12 +102,19 @@ proxyCatalogo::inserirFilme(string Filme, string Produtora, string Nota){
     novo.produtora = Produtora;
     //converter int(Nota)
     novo.nota = 0;
+    string saida ;
+    saida +=( Catalogo+=novo);
+    novo.nome = "olha-so";
+    saida += (Catalogo+=novo);
 
-    Catalogo+=novo;
-    Catalogo+=novo;
+    novo.nome = "aaaaaaaaaaaa";
+    saida += (Catalogo+=novo);
+    novo.nome = "aa";
+    saida += (Catalogo+=novo);
+
 
 
     listarCatalogo();
 
-    return "foi";
+    return saida;
 }

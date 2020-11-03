@@ -18,6 +18,13 @@ typedef struct
 bool 
 operator==(filme,filme);
 
+bool 
+operator<(filme,filme);
+
+bool
+operator>(filme,filme);
+
+
 
 class catalogo
 {
@@ -26,11 +33,14 @@ private:
 
 public:
     
-    void 
+    string  
     operator+=(filme);
     
     bool 
     filmeIn(filme);
+
+    void
+    ordenar();
 
 
     bool 
