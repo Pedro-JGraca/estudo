@@ -36,6 +36,41 @@ catalogo::operator+=(vector<filme> rajada){
     return "";
 }
 
+void
+catalogo::operator-=(filme novo){
+
+    unsigned short index = 0;
+    for (; index< filmes.size(); index++){
+        if(filmes[index]==novo){
+            filmes.erase(filmes.begin()+index);
+            index = filmes.size() +2;
+            cout << "removido" << endl;
+        }
+    }
+    if (index == filmes.size()){
+        cout << "Não removido" << endl;
+    }
+
+}
+void
+catalogo::getFilmeByNome(string Nome, filme * local){
+
+    unsigned short index = 0;
+    for (; index< filmes.size(); index++){
+        if(filmes[index].nome==Nome){
+            *local =  filmes[index];
+            index = filmes.size() +2;
+        }
+    }
+    if (index == filmes.size()){
+        cout << "Filme não encontrado" << endl;
+
+        local = nullptr;
+    }
+    
+}
+
+
 
 bool
 operator==(filme novo, filme outro){//global para esse contexto
@@ -158,10 +193,31 @@ catalogo::getLista(){
     return saida;
 }
 
+string
+catalogo::getFilmes(){
+    string saida ="";
+    for (unsigned short index = 0; index < filmes.size(); index++){
+        if (index!=0) saida +="\n";
+        saida += filmes[index].nome + "\n";
+        saida += filmes[index].produtora + "\n";
+        saida += to_string(filmes[index].nota);
+    }
+    return saida;
+}
+
+string
+catalogo::getNomes(){
+    string saida ="";
+    for (unsigned short index = 0; index < filmes.size(); index++){
+        saida += filmes[index].nome + "\n";
+    }
+    return saida;
+}
 
 
 bool 
 catalogo::filmeIn(filme novo){
+
     if (filmes.size()==0){
         return false;
     }
@@ -172,4 +228,19 @@ catalogo::filmeIn(filme novo){
     }
     
     return false;
+}
+
+filme* 
+catalogo::getFilmeMaiorNota(){ // como é impossivel eu sobrescrever > e < para o mesmo contexto, só que para nota por simples lógica, irei simplesmente ignorar o pedido de ser por > e <, por que eu já implementei isso para ordenar por ordem alfabética.
+    unsigned maiorNota = 0;
+    filme * maior;
+    for (unsigned short index = 0; index < filmes.size(); index++){
+        if (maiorNota<filmes[index].nota){
+            maiorNota = filmes[index].nota;
+            maior = &filmes[index];
+        }
+    }
+
+    return maior;
+
 }

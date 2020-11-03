@@ -38,6 +38,9 @@ public:
 
     string  
     operator+=(vector <filme>);
+
+    void
+    operator-=(filme);
     
     bool 
     filmeIn(filme);
@@ -53,6 +56,18 @@ public:
 
     string
     getLista();
+
+    string
+    getFilmes();
+
+    string
+    getNomes();
+
+    filme*
+    getFilmeMaiorNota();
+
+    void
+    getFilmeByNome(string Nome, filme *);
 
 };
 

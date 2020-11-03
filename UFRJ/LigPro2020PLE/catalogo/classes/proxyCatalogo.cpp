@@ -6,11 +6,11 @@
 
 
 proxyCatalogo::proxyCatalogo(){
-    erro = construirPersistencia();
+    erro = lerBD();
 }
 
 tipoErro 
-proxyCatalogo::construirPersistencia(){
+proxyCatalogo::lerBD(){
     //le do arquivo
     string entrada = "";
     char a[BUFFER];
@@ -57,7 +57,17 @@ proxyCatalogo::construirPersistencia(){
     else {
 
         cout << "Arquivo nao achado" << endl;
-        cout << "O Arquivo deve se encontrar dentro do mesmo diretorio do programa " << endl;
+        cout << "Iremos criar o diretorio \"BD\" onde se encontrará o arquivo" << endl
+        << "É nesse diretório onde está os dados os programa" << endl
+        << "Se mover o programa de lugar, lembre de mover o diretorio BD se desejar ter persistência" << endl
+        << "Rode o programa novamente que deverá funcionar do \"zero\"" << endl;
+        system("mkdir BD");
+        string comando = "touch ";
+        comando += ARQUIVO;
+        char *c;
+        c = (char *) malloc(sizeof(char *) * comando.size());
+        c = &comando[0];
+        system(c);
         return erroAbrirArquivo;
     }
     return ok;
@@ -88,6 +98,11 @@ proxyCatalogo::paraDouble(string entrada){
 
     if (*validacao!=EOS){
         cout << "caracter não permitido:" << *validacao << endl;
+        return -1;
+    }
+
+    if (saida > 10){
+        cout << "Nota acima de 10 não permitida." << endl;
         return -1;
     }
 
@@ -198,15 +213,52 @@ proxyCatalogo::inserirFilme(string Filme, string Produtora, string Nota){
     novo.nota = paraDouble(Nota);
     string saida ;
     saida +=( Catalogo+=novo);
-    
-
-    listarCatalogo();
-
     return saida;
 }
 
-void 
+tipoErro 
 proxyCatalogo::escreverBD(){
-    //criar o ListarFilme e rodar em cada um, para ir escrevendo.
-    //escrever os 4 gets.
+    string entrada = "";
+    ofstream fin(ARQUIVO);
+    if (fin){
+        fin << Catalogo.getFilmes();
+    }
+    else {
+        cout << "Arquivo nao achado" << endl;
+        cout << "Iremos criar o diretorio \"BD\" onde se encontrará o arquivo" << endl
+        << "É nesse diretório onde está os dados os programa" << endl
+        << "Se mover o programa de lugar, lembre de mover o diretorio BD se desejar ter persistência" << endl
+        << "Rode o programa novamente que deverá funcionar do \"zero\"" << endl;
+        system("mkdir BD");
+        string comando = "touch ";
+        comando += ARQUIVO;
+        char *c;
+        c = (char *) malloc(sizeof(char *) * comando.size());
+        c = &comando[0];
+        system(c);
+        return erroAbrirArquivo;
+    }
+    return ok;
+}
+
+void
+proxyCatalogo::listarFilmes(){
+    cout << Catalogo.getNomes();
+}
+
+string
+proxyCatalogo::melhorFilme(){
+    filme * maior = Catalogo.getFilmeMaiorNota();
+    return "Maior filme: " +maior->nome + "\nCom a nota: " + to_string(maior->nota) + "\n" ;
+}
+
+void
+proxyCatalogo::removerFilme(string Filme){
+    
+    filme novo;
+
+    Catalogo.getFilmeByNome(Filme,&novo);
+
+    Catalogo-= novo;
+    
 }

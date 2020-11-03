@@ -46,7 +46,7 @@ public:
     help(string argv, string);
 
     tipoErro 
-    construirPersistencia();
+    lerBD();
 
     void
     listarCatalogo();
@@ -57,14 +57,14 @@ public:
     string
     melhorFilme();
 
-    string
+    void
     removerFilme(string Filme);
 
     bool
-    BuscarFilme(string Filme);
+    buscarFilme(string Filme);
 
     void 
-    ListarFilme(string Filme);
+    listarFilme(string Filme);
 
     string
     inserirFilme(string Filme, string Produtora, string Nota);
@@ -72,7 +72,7 @@ public:
     void
     editarFilme(string Filme, string Produtora, string Nota);
     
-    void
+    tipoErro
     escreverBD();
     
 

@@ -75,11 +75,11 @@ main(int argc, char const *argv[])
                         break;
 
                     case 2:
-                        cout << "rode Listar Filmes: " << comando << endl;
+                        catalogo.listarFilmes();
                         break;
 
                     case 3:
-                        cout << "rode Melhor Filme: " << comando << endl;
+                        cout << catalogo.melhorFilme();
                         break;
 
                     default:
@@ -100,13 +100,13 @@ main(int argc, char const *argv[])
                 }
 
                 switch (aux){
-                    case 0:
+                    case 0://pq temos 2 helps, em 0 e 4. Ele irá encontrar primeiro o help em 0
                     case 4:
                         cout << catalogo.help(argv[0],filme) << endl;
                         break;
 
                     case 5:
-                        cout << "rode remover Filme: " << comando << " " << filme << endl;
+                        catalogo.removerFilme(filme);
                         break;
 
                     case 6:
@@ -165,6 +165,6 @@ main(int argc, char const *argv[])
         return comandoNaoAchado;
     }
 
-    //escreve?
+    catalogo.escreverBD();
     return ok;
 }
