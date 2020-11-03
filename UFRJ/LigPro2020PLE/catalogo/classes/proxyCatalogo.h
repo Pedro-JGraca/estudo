@@ -16,6 +16,7 @@ typedef enum {
     numeroArgumentosInvalido,
     numeroArgumentosInvalidoParaComando,
     erroAbrirArquivo,
+    arquivoCorrompido,
     comandoNaoAchado,
     Ninvalido,
     erroDesconhecido
@@ -27,11 +28,16 @@ class proxyCatalogo
 {
 private:
 
+    tipoErro erro;
+
     catalogo Catalogo; 
 
 public:
 
     proxyCatalogo();
+
+    tipoErro
+    getErro();
 
     double 
     paraDouble(string);
@@ -68,8 +74,7 @@ public:
     
     void
     escreverBD();
-
-
+    
 
 };
 

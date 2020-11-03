@@ -6,7 +6,7 @@
 
 
 proxyCatalogo::proxyCatalogo(){
-    construirPersistencia();
+    erro = construirPersistencia();
 }
 
 tipoErro 
@@ -15,26 +15,43 @@ proxyCatalogo::construirPersistencia(){
     string entrada = "";
     char a[BUFFER];
     ifstream fin(ARQUIVO);
-    filme novo;
+    vector<filme> escrita;
     if (fin){
         unsigned short i=0;
-        while (fin){
-            fin.getline(a,BUFFER);
-            if (strlen(a)){
-                switch (i){
-                    case 0://nome
-                        novo.nome=a;
-                        break;
-                    case 1://produtora
-                        novo.produtora=a;
-                        break;
-                    case 2:
-                        novo.nota=paraDouble((string)a);
-                        break;
+        const unsigned short index=0;
+        while (((bool)fin)+(!(i==1))){
+            filme novo;
+            if (i == 0){
+                escrita.push_back(novo);
+            }
+            if (i==3){
+                i=0;
+                if (Catalogo.isEmpty(escrita[index])){
+                    cout << "Arquivo corrompido" << endl;
+                    return arquivoCorrompido;
+                }
+                else {
+                    Catalogo+=escrita[index];
+                    filme novo;
+                    escrita[index] = novo;
                 }
             }
+            if (fin.getline(a,BUFFER));
+            else {
+                a[0] = EOS;
+            }
+            switch (i){
+                    case 0://nome
+                        escrita[index].nome=a;
+                        break;
+                    case 1://produtora
+                        escrita[index].produtora=a;
+                        break;
+                    case 2:
+                        escrita[index].nota=paraDouble((string)a);
+                        break;
+            }
             i++;
-            if (i==3)i=0;
         }
     }
     else {
@@ -46,6 +63,11 @@ proxyCatalogo::construirPersistencia(){
     return ok;
 }
 
+tipoErro
+proxyCatalogo::getErro(){
+    return erro;
+}
+
 double
 proxyCatalogo::paraDouble(string entrada){
     char * validacao;
@@ -55,14 +77,18 @@ proxyCatalogo::paraDouble(string entrada){
     double saida;
     if (*a == '-'){
         cout << "nota negativa" << endl;
-        return 0;
+        return -1;
+    }
+    else if(*a == EOS){
+        cout << "nota vazia" << endl;
+        return -1;
     }
 
     saida = strtod(a,&validacao);
 
     if (*validacao!=EOS){
         cout << "caracter não permitido:" << *validacao << endl;
-        return 0;
+        return -1;
     }
 
     return saida;

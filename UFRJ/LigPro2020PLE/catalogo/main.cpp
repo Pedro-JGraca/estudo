@@ -19,7 +19,10 @@ int
 main(int argc, char const *argv[])
 {
 
-    proxyCatalogo catalogo; // le?
+    proxyCatalogo catalogo;
+    if (catalogo.getErro()){
+        return catalogo.getErro();
+    }
 
     bool achouComando = false;
 
@@ -68,7 +71,7 @@ main(int argc, char const *argv[])
                         break;
 
                     case 1:
-                        cout << "rode Listar Catalogo: " << comando << endl;
+                        catalogo.listarCatalogo();
                         break;
 
                     case 2:

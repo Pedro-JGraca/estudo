@@ -7,7 +7,7 @@ catalogo::operator+=(filme novo){
     string saida = "";
     
     if (isEmpty(novo)){ //verificar se novo é vazio
-        saida +="filme vazio. Não adicionado.\n";
+        saida +="filme com seus campos não preenchidos. Não adicionado.\n";
     }
     else{//verificar se novo já existe ( implementar == para filmes, verificando o nome)
         if (filmeIn(novo)){
@@ -143,7 +143,8 @@ catalogo::isEmpty(filme novo){
 
     bool nomeIsEmpty = novo.nome.empty();
     bool produtoraIsEmpty = novo.produtora.empty();
-    return nomeIsEmpty && produtoraIsEmpty;
+    bool notaIsEmpty = (novo.nota<0);
+    return nomeIsEmpty || produtoraIsEmpty || notaIsEmpty;
 
 }
 
@@ -151,11 +152,13 @@ string
 catalogo::getLista(){
     string saida = "";
     for (unsigned short index = 0; index < filmes.size(); index++){
-        saida += filmes[index].nome;
-        saida += "\n";
+        saida += to_string(index+1);
+        saida += ": Nome: " + filmes[index].nome + "\t|\tProdutora: " + filmes[index].produtora + "\t|\tNota: " + to_string(filmes[index].nota) + "\n";
     }
     return saida;
 }
+
+
 
 bool 
 catalogo::filmeIn(filme novo){
