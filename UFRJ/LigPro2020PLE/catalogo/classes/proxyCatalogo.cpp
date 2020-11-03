@@ -1,5 +1,74 @@
 #include "proxyCatalogo.h"
 
+#include <cstring>
+#include <stdlib.h>
+#include <fstream>
+
+
+proxyCatalogo::proxyCatalogo(){
+    construirPersistencia();
+}
+
+tipoErro 
+proxyCatalogo::construirPersistencia(){
+    //le do arquivo
+    string entrada = "";
+    char a[BUFFER];
+    ifstream fin(ARQUIVO);
+    filme novo;
+    if (fin){
+        unsigned short i=0;
+        while (fin){
+            fin.getline(a,BUFFER);
+            if (strlen(a)){
+                switch (i){
+                    case 0://nome
+                        novo.nome=a;
+                        break;
+                    case 1://produtora
+                        novo.produtora=a;
+                        break;
+                    case 2:
+                        novo.nota=paraDouble((string)a);
+                        break;
+                }
+            }
+            i++;
+            if (i==3)i=0;
+        }
+    }
+    else {
+
+        cout << "Arquivo nao achado" << endl;
+        cout << "O Arquivo deve se encontrar dentro do mesmo diretorio do programa " << endl;
+        return erroAbrirArquivo;
+    }
+    return ok;
+}
+
+double
+proxyCatalogo::paraDouble(string entrada){
+    char * validacao;
+    char * a;
+    a= (char *) malloc(sizeof(char)*BUFFER);
+    a = &entrada[0];
+    double saida;
+    if (*a == '-'){
+        cout << "nota negativa" << endl;
+        return 0;
+    }
+
+    saida = strtod(a,&validacao);
+
+    if (*validacao!=EOS){
+        cout << "caracter não permitido:" << *validacao << endl;
+        return 0;
+    }
+
+    return saida;
+}
+
+
 string 
 proxyCatalogo::help(string argv,string comando){
 
@@ -100,21 +169,18 @@ proxyCatalogo::inserirFilme(string Filme, string Produtora, string Nota){
     filme novo;
     novo.nome = Filme;
     novo.produtora = Produtora;
-    //converter int(Nota)
-    novo.nota = 0;
+    novo.nota = paraDouble(Nota);
     string saida ;
     saida +=( Catalogo+=novo);
-    novo.nome = "olha-so";
-    saida += (Catalogo+=novo);
-
-    novo.nome = "aaaaaaaaaaaa";
-    saida += (Catalogo+=novo);
-    novo.nome = "aa";
-    saida += (Catalogo+=novo);
-
-
+    
 
     listarCatalogo();
 
     return saida;
+}
+
+void 
+proxyCatalogo::escreverBD(){
+    //criar o ListarFilme e rodar em cada um, para ir escrevendo.
+    //escrever os 4 gets.
 }

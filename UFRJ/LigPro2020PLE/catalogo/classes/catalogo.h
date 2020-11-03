@@ -35,6 +35,9 @@ public:
     
     string  
     operator+=(filme);
+
+    string  
+    operator+=(vector <filme>);
     
     bool 
     filmeIn(filme);
@@ -42,6 +45,8 @@ public:
     void
     ordenar();
 
+    void
+    construir();
 
     bool 
     isEmpty(filme);

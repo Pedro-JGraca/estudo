@@ -19,7 +19,7 @@ int
 main(int argc, char const *argv[])
 {
 
-    proxyCatalogo catalogo;
+    proxyCatalogo catalogo; // le?
 
     bool achouComando = false;
 
@@ -162,6 +162,6 @@ main(int argc, char const *argv[])
         return comandoNaoAchado;
     }
 
-
+    //escreve?
     return ok;
 }

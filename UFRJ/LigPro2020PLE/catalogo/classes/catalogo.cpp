@@ -28,6 +28,14 @@ catalogo::operator+=(filme novo){
     return saida;
 }
 
+string 
+catalogo::operator+=(vector<filme> rajada){
+    for (unsigned short index=0;index<rajada.size();index++){
+        operator+=(rajada[index]);
+    }
+    return "";
+}
+
 
 bool
 operator==(filme novo, filme outro){//global para esse contexto
@@ -135,7 +143,7 @@ catalogo::isEmpty(filme novo){
 
     bool nomeIsEmpty = novo.nome.empty();
     bool produtoraIsEmpty = novo.produtora.empty();
-    return nomeIsEmpty + produtoraIsEmpty;
+    return nomeIsEmpty && produtoraIsEmpty;
 
 }
 

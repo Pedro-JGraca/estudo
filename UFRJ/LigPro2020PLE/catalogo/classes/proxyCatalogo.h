@@ -6,8 +6,22 @@
 
 #define NUMERO_ARGUMENTOS                   3
 #define ARQUIVO                 "./BD/catalogo.txt"
-
+#define BUFFER                              500
+#define EOS                                 '\0'
 using namespace std;
+
+
+typedef enum {
+    ok,
+    numeroArgumentosInvalido,
+    numeroArgumentosInvalidoParaComando,
+    erroAbrirArquivo,
+    comandoNaoAchado,
+    Ninvalido,
+    erroDesconhecido
+}tipoErro;
+
+
 
 class proxyCatalogo
 {
@@ -17,8 +31,16 @@ private:
 
 public:
 
+    proxyCatalogo();
+
+    double 
+    paraDouble(string);
+
     string
     help(string argv, string);
+
+    tipoErro 
+    construirPersistencia();
 
     void
     listarCatalogo();
@@ -44,20 +66,13 @@ public:
     void
     editarFilme(string Filme, string Produtora, string Nota);
     
+    void
+    escreverBD();
 
 
 
 };
 
-typedef enum {
-    ok,
-    numeroArgumentosInvalido,
-    numeroArgumentosInvalidoParaComando,
-    erroAbrirArquivo,
-    comandoNaoAchado,
-    Ninvalido,
-    erroDesconhecido
-}tipoErro;
 
 
 
