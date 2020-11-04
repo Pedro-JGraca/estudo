@@ -54,6 +54,19 @@ catalogo::operator-=(filme novo){
     return "removido";
 
 }
+
+
+unsigned short 
+catalogo::getTamanho(){
+    return filmes.size();
+}
+
+filme
+catalogo::getFilmebyIndex(unsigned short index){
+    return filmes[index];
+}
+
+
 void
 catalogo::getFilmeByNome(string Nome, filme * local){
 

@@ -93,6 +93,7 @@ main(int argc, char const *argv[])
 
             if (argc == 3) {//,"help","removerFilme","buscarFilme","ListarFilme"
                 string filme = argv[2];
+                tipoErro erro;
                 if(!(((rang[1] <= aux) and (aux < rang[2])) or (aux == 0))){
                     cout << "Numero errado de argumentos pro comando." << endl;
                     cout << catalogo.help(argv[0],comando) << endl;
@@ -116,7 +117,10 @@ main(int argc, char const *argv[])
                         break;
 
                     case 7:
-                        cout << "rode Listar Filme: " << comando << " " <<filme << endl;
+                        erro = catalogo.listarFilme(filme);
+                        if (erro!=ok){
+                            return erro;
+                        }
                         break;
 
                     default:
@@ -166,7 +170,7 @@ main(int argc, char const *argv[])
 
             }
 
-            if (argc == 5) {//"InserirFilme","EditarFilme"
+            if (argc == 5) {//"InserirFilme"
 
                 string filme = argv[2];
                 string produtora = argv[3];
@@ -182,10 +186,7 @@ main(int argc, char const *argv[])
                     case 11:
                         cout << catalogo.inserirFilme(filme,produtora,nota) << endl;
                         break;
-
-                    case 12:
-                        cout << "rode Editar Filme: " << comando << " " << filme << produtora << " " << nota  << endl;
-                        break;
+                    
                     default:
                         cout << "Erro indesperado: " << comando<< " " <<filme << produtora << " " << nota<< endl;
                         return erroDesconhecido;
@@ -205,3 +206,6 @@ main(int argc, char const *argv[])
     catalogo.escreverBD();
     return ok;
 }
+
+
+//cout<<catalogo, cout<<filme , cin >> filme 

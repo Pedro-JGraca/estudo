@@ -41,6 +41,8 @@ public:
 
     string
     operator-=(filme);
+
+    friend ostream & operator<<(ostream &, const catalogo);
     
     bool 
     filmeIn(filme);
@@ -80,6 +82,12 @@ public:
 
     void
     novoNome(const string Entrada, string novoNome);
+
+    unsigned short 
+    getTamanho();
+
+    filme
+    getFilmebyIndex(unsigned short index);
 
 };
 

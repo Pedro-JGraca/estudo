@@ -37,6 +37,9 @@ public:
 
     proxyCatalogo();
 
+    catalogo
+    getCatalogo();
+
     tipoErro
     getErro();
 
@@ -64,13 +67,13 @@ public:
     bool
     buscarFilme(string Filme);
 
-    void 
+    tipoErro 
     listarFilme(string Filme);
 
     string
     inserirFilme(string Filme, string Produtora, string Nota);
 
-    void
+    tipoErro 
     editarFilme(string Filme, string Produtora, string Nota);
     
     tipoErro
@@ -95,7 +98,7 @@ public:
 
 const vector <string> comandos = {"help","listarCatalogo","listarFilmes","melhorFilme","help","removerFilme","buscarFilme","listarFilme","editarNome","editarProdutora","editarNota","inserirFilme","editarFilme"};
 
-const vector <unsigned short> rang = {0,4,8,11,13};
+const vector <unsigned short> rang = {0,4,8,11,12};
 
 
 

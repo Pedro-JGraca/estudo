@@ -136,8 +136,7 @@ proxyCatalogo::help(string argv,string comando){
         saida+="editarProdutora\t\t\t\tBusca o filme a partir do nome dado e troca pela produtora pedida. Se falhar, informa \n";
         saida+="editarNota\t\t\t\tBusca o filme a partir do nome dado e troca pela nota pedida. Se falhar, informa \n";
         saida+="inserirFilme\t\t\t\tInsere um filme novo no catálogo\n";
-        saida+="editarFilme\t\t\t\tBusca um Filme e edita ele se for possível, se não encontrar, informa.\n";
-     
+             
        return saida;
     }
 
@@ -212,23 +211,44 @@ proxyCatalogo::help(string argv,string comando){
         saida+="$" + argv + " inserirFilme [FILME] [PRODUTORA] [NOTA]\n\n";
         return saida; 
     }
-    else if (comando  == comandos[12]){//editarFilme
-        string saida ="Busca um Filme e edita ele se for possível, se não encontrar, ele informa.";
-        saida+="\nUso: \n\n";
-        saida+="$" + argv + " editarFilme [FILME] [PRODUTORA] [NOTA]\n\n";
-        return saida; 
-    }
 
     return "Erro.";
 }
 
 void
 proxyCatalogo::listarCatalogo(){
-    cout << Catalogo.getLista() << endl;
+    cout << Catalogo;
+}
+
+ostream & operator<<(ostream &output, const catalogo A){//precisa ser global
+    string saida = "";
+    proxyCatalogo cat;
+    for (unsigned short index = 0; index < cat.getCatalogo().getTamanho(); index++){
+        saida += to_string(index+1);
+        saida += ": Nome: " + cat.getCatalogo().getFilmebyIndex(index).nome + "\t|\tProdutora: " + cat.getCatalogo().getFilmebyIndex(index).produtora + "\t|\tNota: " + to_string(cat.getCatalogo().getFilmebyIndex(index).nota) + "\n";
+    }
+
+    output << saida;
+    return output;    
+}
+
+ostream & operator<<(ostream &output, const filme A){//precisa ser global
+    string saida = "";
+    proxyCatalogo cat;
+    filme * ptr = cat.getCatalogo()(A.nome);
+    saida += "Nome: " + ptr->nome + "\t\t\tProdutora: "+ ptr->produtora + "\t\t\tNota: " + to_string(ptr->nota);
+    output << saida;
+    return output;    
+}
+
+catalogo
+proxyCatalogo::getCatalogo(){
+    return Catalogo;
 }
 
 string
-proxyCatalogo::inserirFilme(string Filme, string Produtora, string Nota){
+proxyCatalogo::inserirFilme(string Filme, string Produtora, string Nota){//como nao quero escrever os dados por menu, não usarei cin >> filme. Porêm essa opção foi desenvolvida dentro do catalogo.cpp e testada.
+
     filme novo;
     novo.nome = Filme;
     novo.produtora = Produtora;
@@ -268,6 +288,19 @@ proxyCatalogo::listarFilmes(){
     cout << Catalogo.getNomes();
 }
 
+tipoErro
+proxyCatalogo::listarFilme(string Nome){
+    if(buscarFilme(Nome)){
+        cout << *Catalogo(Nome);
+        cout << endl;
+        return ok;
+    }
+    else {
+        cout << "Filme não achado" << endl;
+        return filmeNaoAchado;
+    }
+}
+
 string
 proxyCatalogo::melhorFilme(){
     filme * maior = Catalogo.getFilmeMaiorNota();
@@ -293,8 +326,20 @@ proxyCatalogo::buscarFilme(string nome){
     return false;
 }
 
-void
+tipoErro
 proxyCatalogo::editarFilme(string Filme, string Produtora, string Nota){
+    filme * filme= Catalogo(Filme);
+    
+    if(filme!=nullptr){
+        cout << "Filme cuja produtora foi editada:" << endl;
+        cout << filme->nome << endl ;
+        return ok;
+    }
+    else {
+        cout << "editora não pode ser editada";
+        return filmeNaoAchado;
+    }
+
 
 }
 
