@@ -197,11 +197,15 @@ main(int argc, char const *argv[])
 
         }
     }
-
+    
     if (!achouComando){
-        cout << "roda erro de comando nao encontrado" << endl;
+        cout << "Comando não encontrado" << endl;
+        cout << "Para saber como usar a função, por favor use o comando:" << endl;
+        cout << argv[0] << " help" << endl;
         return comandoNaoAchado;
     }
+
+    
 
     catalogo.escreverBD();
     return ok;

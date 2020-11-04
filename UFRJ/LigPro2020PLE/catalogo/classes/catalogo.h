@@ -24,8 +24,6 @@ operator<(filme,filme);
 bool
 operator>(filme,filme);
 
-
-
 class catalogo
 {
 private:
@@ -92,7 +90,9 @@ public:
 };
 
 
-
+istream & operator>>(istream &input, filme &saida);
+ostream & operator<<(ostream &output, const filme A);
+ostream & operator<<(ostream &output, const catalogo A);
 
 
 

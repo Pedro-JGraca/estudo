@@ -1,4 +1,5 @@
 #include "proxyCatalogo.h"
+#include "catalogo.h"
 
 #include <cstring>
 #include <stdlib.h>
@@ -239,6 +240,22 @@ ostream & operator<<(ostream &output, const filme A){//precisa ser global
     saida += "Nome: " + ptr->nome + "\t\t\tProdutora: "+ ptr->produtora + "\t\t\tNota: " + to_string(ptr->nota);
     output << saida;
     return output;    
+}
+
+istream & operator>>(istream &input, filme &saida) {
+    string Nota;
+    double n;
+    input >> saida.nome;
+    input >> saida.produtora;
+    input >> Nota;
+    n = proxyCatalogo().paraDouble(Nota);
+    if (n>0){
+        saida.nota = n;
+    }
+    else {
+        cout << "Não conseguiu escrever no filme";
+    }
+    return input;
 }
 
 catalogo

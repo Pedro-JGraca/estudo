@@ -6,7 +6,7 @@ produdex
 9.200000
 teste2
 veja
-5.765000
+9.000000
 teste3
 pri
 9.600000
