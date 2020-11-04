@@ -36,7 +36,7 @@ catalogo::operator+=(vector<filme> rajada){
     return "";
 }
 
-void
+string
 catalogo::operator-=(filme novo){
 
     unsigned short index = 0;
@@ -44,12 +44,14 @@ catalogo::operator-=(filme novo){
         if(filmes[index]==novo){
             filmes.erase(filmes.begin()+index);
             index = filmes.size() +2;
-            cout << "removido" << endl;
+            return "removido";
         }
     }
     if (index == filmes.size()){
-        cout << "Não removido" << endl;
+        return  "Não removido";
     }
+
+    return "removido";
 
 }
 void
@@ -160,6 +162,35 @@ catalogo::operator()(string nome){//busca sobrecarregada
     }
     return nullptr;//se nao achar
 }
+
+
+filme*
+catalogo::operator()(const string nome, string novaProdutora){//sobrecarga de alterar produtora
+    filme *ptr = operator()(nome);
+    if (ptr != nullptr){
+        ptr->produtora=novaProdutora;
+        return ptr;
+    }
+    else {
+        cout << "Não encontrado" << endl;
+        return nullptr;
+    }
+    
+}
+
+filme*
+catalogo::operator()(const string nome, double novaNota){//sobrecarga de alterar nota
+    filme *ptr = operator()(nome);
+    if (ptr != nullptr){
+        ptr->nota=novaNota;
+        return ptr;
+    }
+    else {
+        cout << "Não encontrado" << endl;
+        return nullptr;
+    }
+}
+
 
 void
 catalogo::ordenar(){

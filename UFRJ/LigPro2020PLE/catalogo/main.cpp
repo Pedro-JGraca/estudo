@@ -26,7 +26,7 @@ main(int argc, char const *argv[])
 
     bool achouComando = false;
 
-    if ((argc < 1 ) or (argc==4) or (argc>5)){
+    if (argc>5){
         if (argc > 1){
             for (unsigned short i =0; i < comandos.size() ; i++){
                 if (argv[COMANDO] == comandos[i]){
@@ -128,12 +128,10 @@ main(int argc, char const *argv[])
 
             }
 
-            if (argc == 5) {//"InserirFilme","EditarFilme"
-
+            if (argc == 4) {// "editarNome","editarProdutora","editarNota"
                 string filme = argv[2];
-                string produtora = argv[3];
-                string nota = argv[4];
-
+                string troca = argv[3];
+                tipoErro erro;
                 if(!((rang[2] <= aux) and (aux < rang[3]))){
                     cout << "Numero de argumentos pro comando errado" << endl;
                     cout << catalogo.help(argv[0],comando) << endl;
@@ -142,10 +140,50 @@ main(int argc, char const *argv[])
 
                 switch (aux){
                     case 8:
-                        cout << catalogo.inserirFilme(filme,produtora,nota) << endl;
+                        erro = catalogo.editarNome(filme,troca);
+                        if (erro!=ok){
+                            return erro;
+                        }
                         break;
 
                     case 9:
+                        erro = catalogo.editarProdutora(filme,troca);
+                        if (erro!=ok){
+                            return erro;
+                        }
+                        break;
+                    case 10:
+                        erro = catalogo.editarNota(filme,troca);
+                        if (erro!=ok){
+                            return erro;
+                        }
+                        break;
+                    default:
+                        cout << "Erro inesperado:" << comando << " " << filme << " " << troca<< endl;   
+                        return erroDesconhecido;
+                        break;
+                }
+
+            }
+
+            if (argc == 5) {//"InserirFilme","EditarFilme"
+
+                string filme = argv[2];
+                string produtora = argv[3];
+                string nota = argv[4];
+
+                if(!((rang[3] <= aux) and (aux < rang[4]))){
+                    cout << "Numero de argumentos pro comando errado" << endl;
+                    cout << catalogo.help(argv[0],comando) << endl;
+                    return numeroArgumentosInvalidoParaComando;
+                }
+
+                switch (aux){
+                    case 11:
+                        cout << catalogo.inserirFilme(filme,produtora,nota) << endl;
+                        break;
+
+                    case 12:
                         cout << "rode Editar Filme: " << comando << " " << filme << produtora << " " << nota  << endl;
                         break;
                     default:
@@ -153,9 +191,6 @@ main(int argc, char const *argv[])
                         return erroDesconhecido;
                         break;
                 }
-
-
-
             }
 
 

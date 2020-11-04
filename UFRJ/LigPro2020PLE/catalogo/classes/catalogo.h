@@ -39,7 +39,7 @@ public:
     string  
     operator+=(vector <filme>);
 
-    void
+    string
     operator-=(filme);
     
     bool 
@@ -71,6 +71,15 @@ public:
 
     filme*
     operator()(string nome);
+
+    filme*
+    operator()(const string nome, string novaProdutora);
+
+    filme*
+    operator()(const string nome, double novaNota);
+
+    void
+    novoNome(const string Entrada, string novoNome);
 
 };
 

@@ -132,8 +132,11 @@ proxyCatalogo::help(string argv,string comando){
         saida+="removerFilme\t\t\t\tRemove um filme informado\n";
         saida+="buscarFilme\t\t\t\tBusca o filme e diz se achou ou não. Se achar ele printa os detalhes.\n";
         saida+="listarFilme\t\t\t\tRetorna os dados de um filme específico\n";
+        saida+="editarNome\t\t\t\tBusca o filme a partir do nome dado e troca pelo nome pedido. Se falhar, informa \n";
+        saida+="editarProdutora\t\t\t\tBusca o filme a partir do nome dado e troca pela produtora pedida. Se falhar, informa \n";
+        saida+="editarNota\t\t\t\tBusca o filme a partir do nome dado e troca pela nota pedida. Se falhar, informa \n";
         saida+="inserirFilme\t\t\t\tInsere um filme novo no catálogo\n";
-        saida+="editarFilme\t\t\t\tBusca um Filme e edita ele se for possível, se não encontrar, ele informa.\n";
+        saida+="editarFilme\t\t\t\tBusca um Filme e edita ele se for possível, se não encontrar, informa.\n";
      
        return saida;
     }
@@ -178,19 +181,38 @@ proxyCatalogo::help(string argv,string comando){
         saida+="$" + argv + " buscarFilme [FILME]\n\n";
         return saida; 
     }
-    else if (comando  == comandos[7]){//ListarFilme
+    else if (comando  == comandos[7]){//listarFilme
         string saida ="Retorna os dados de um filme específico";
         saida+="\nUso: \n\n";
         saida+="$" + argv + " listarFilme [FILME]\n\n";
         return saida; 
     }
-    else if (comando  == comandos[8]){//InserirFilme
+    else if (comando == comandos[8]){//editaNome
+        string saida ="Busca o filme a partir do nome dado e troca pelo nome pedido. Se falhar, informa";
+        saida+="\nUso: \n\n";
+        saida+="$" + argv + " editarNome [FILME-QUE-DESEJA-TROCAR] [NOVO NOME]\n\n";
+        return saida;
+    }
+    else if (comando == comandos[9]){//editarProdutora
+        string saida ="Busca o filme a partir do nome dado e troca pela produtora pedida. Se falhar, informa";
+        saida+="\nUso: \n\n";
+        saida+="$" + argv + " editarNome [FILME-QUE-DESEJA-TROCAR] [NOVA PRODUTORA]\n\n";
+        return saida;
+    }
+    else if (comando == comandos[10]){//editaNota
+        string saida ="Busca o filme a partir do nome dado e troca pela nota pedida. Se falhar, informa";
+        saida+="\nUso: \n\n";
+        saida+="$" + argv + " editarNome [FILME-QUE-DESEJA-TROCAR] [NOVA NOTA]\n\n";
+        return saida;
+    }
+
+    else if (comando  == comandos[11]){//inserirFilme
         string saida ="Insere um filme novo no catálogo";
         saida+="\nUso: \n\n";
         saida+="$" + argv + " inserirFilme [FILME] [PRODUTORA] [NOTA]\n\n";
         return saida; 
     }
-    else if (comando  == comandos[9]){//EditarFilme
+    else if (comando  == comandos[12]){//editarFilme
         string saida ="Busca um Filme e edita ele se for possível, se não encontrar, ele informa.";
         saida+="\nUso: \n\n";
         saida+="$" + argv + " editarFilme [FILME] [PRODUTORA] [NOTA]\n\n";
@@ -259,7 +281,7 @@ proxyCatalogo::removerFilme(string Filme){
 
     Catalogo.getFilmeByNome(Filme,&novo);
 
-    Catalogo-= novo;
+    cout << (Catalogo-= novo) << endl;
     
 }
 
@@ -269,4 +291,67 @@ proxyCatalogo::buscarFilme(string nome){
         return true;
     }
     return false;
+}
+
+void
+proxyCatalogo::editarFilme(string Filme, string Produtora, string Nota){
+
+}
+
+tipoErro
+proxyCatalogo::editarProdutora(const string Filme, string produtora){
+    filme * filme= Catalogo(Filme,produtora);
+    
+    if(filme!=nullptr){
+        cout << "Filme cuja produtora foi editada:" << endl;
+        cout << filme->nome << endl ;
+        return ok;
+    }
+    else {
+        cout << "editora não pode ser editada";
+        return filmeNaoAchado;
+    }
+
+}
+
+tipoErro
+proxyCatalogo::editarNota(const string Filme, string Nota){
+    double nota = paraDouble(Nota);
+    if (nota < 0){
+        cout << "Nota não pode ser editada." << endl;
+        return Ninvalido;
+    }
+    filme * filme= Catalogo(Filme,nota);
+    
+    if(filme!=nullptr){
+        cout << "Filme cuja nota foi editada:" << endl;
+        cout << filme->nome << endl ;
+    }
+
+    return ok;
+}
+
+tipoErro
+proxyCatalogo::editarNome(const string Filme, string Nome){
+    filme * ptrF = Catalogo(Filme);
+    filme novo;
+    
+    if(ptrF!=nullptr){
+        novo.nome = Nome;
+        novo.produtora = ptrF->produtora;
+        novo.nota = ptrF->nota;
+        Catalogo-=*ptrF;
+        Catalogo+=novo;
+        cout << "Filme cujo nome foi editado:" << endl;
+        cout << Filme << endl ;
+        cout << "Novo Nome:" << endl;
+        cout << Nome << endl;
+    }
+    else {
+        cout << "filme não achado" << endl;
+        cout << "Nome do filme não pode ser editado" << endl;
+    }
+
+    return ok;
+
 }

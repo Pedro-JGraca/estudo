@@ -19,6 +19,7 @@ typedef enum {
     arquivoCorrompido,
     comandoNaoAchado,
     Ninvalido,
+    filmeNaoAchado,
     erroDesconhecido
 }tipoErro;
 
@@ -74,6 +75,15 @@ public:
     
     tipoErro
     escreverBD();
+
+    tipoErro
+    editarProdutora(const string Filme, string Produtora);
+
+    tipoErro
+    editarNota(const string Filme, string Nota);
+
+    tipoErro
+    editarNome(const string Filme, string Nome);
     
 
 };
@@ -83,9 +93,9 @@ public:
 
 
 
-const vector <string> comandos = {"help","listarCatalogo","listarFilmes","melhorFilme","help","removerFilme","buscarFilme","listarFilme","inserirFilme","editarFilme"};
+const vector <string> comandos = {"help","listarCatalogo","listarFilmes","melhorFilme","help","removerFilme","buscarFilme","listarFilme","editarNome","editarProdutora","editarNota","inserirFilme","editarFilme"};
 
-const vector <unsigned short> rang = {0,4,8,10};
+const vector <unsigned short> rang = {0,4,8,11,13};
 
 
 
