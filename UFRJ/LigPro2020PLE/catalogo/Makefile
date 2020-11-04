@@ -13,9 +13,9 @@ OBJETOS=		$(MAIN_OBJS)\
 				$(PROXY_CATALOGO_OBJS)\
 				$(CATALOGO_OBJS)
 
-MAIN_ARQ=		main.cpp
+MAIN_ARQ=				main.cpp
 PROXY_CATALOGO_ARQ=		classes/proxyCatalogo.cpp
-CATALOGO_ARQ=		classes/catalogo.cpp
+CATALOGO_ARQ=			classes/catalogo.cpp
 
 ARQUIVOS= 		$(MAIN_ARQ)\
 				$(PROXY_CATALOGO_ARQ)\

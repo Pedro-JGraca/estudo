@@ -1,9 +1,129 @@
 #include "proxyCatalogo.h"
 #include "catalogo.h"
+#include "globalCatalogo.h"
 
-#include <cstring>
-#include <stdlib.h>
 #include <fstream>
+
+#include <iomanip>
+
+//GLOBAL
+//seria mais interessante colocar essas funções dentro de catalogo, mas para isso eu teria que melhor dividir os métodos de catalogo e proxyCatalogo, como o método "paraDouble" e o "lerBD". Como estou atrasado, não irei fazer isso.
+ostream & operator<<(ostream &output, const catalogo A){//precisa ser global
+    string saida = "";
+    proxyCatalogo cat;
+    for (unsigned short index = 0; index < cat.getCatalogo().getTamanho(); index++){
+        output << setfill(' ') << to_string(index+1)
+        << ": Nome: " << cat.getCatalogo().getFilmebyIndex(index).nome
+        << setw(40) << "| Produtora: " << cat.getCatalogo().getFilmebyIndex(index).produtora
+        << setw(40) << "| Nota: " << to_string(cat.getCatalogo().getFilmebyIndex(index).nota) << endl;
+    }
+    return output;    
+}
+
+ostream & operator<<(ostream &output, const filme A){//precisa ser global
+    string saida = "";
+    proxyCatalogo cat;
+    filme * ptr = cat.getCatalogo()(A.nome);
+    saida += "Nome: " + ptr->nome + "\t\t\tProdutora: "+ ptr->produtora + "\t\t\tNota: " + to_string(ptr->nota);
+    output << saida;
+    return output;    
+}
+
+istream & operator>>(istream &input, filme &saida) {//precisa ser global
+    string Nota;
+    double n;
+    input >> saida.nome;
+    input >> saida.produtora;
+    input >> Nota;
+    n = proxyCatalogo().paraDouble(Nota);
+    if (n>0){
+        saida.nota = n;
+    }
+    else {
+        cout << "Não conseguiu escrever no filme";
+    }
+    return input;
+}
+
+
+bool
+operator==(filme novo, filme outro){//global para esse contexto
+    
+    if(novo.nome.size()!=outro.nome.size())
+    {
+        return false;
+    }
+    for (unsigned short i = 0 ;i < novo.nome.size();i++){
+        if(novo.nome[i]!=outro.nome[i]){
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+bool 
+operator<(filme novo, filme outro){//global para esse contexto
+    
+    unsigned short menor;
+    if(novo.nome.size()<outro.nome.size())
+    {
+        menor = novo.nome.size();
+    }
+    else{
+        menor = outro.nome.size();
+    }
+
+    for (unsigned short i=0 ; i < menor ; i++){
+        if (novo.nome[i]<outro.nome[i]){  //a é menor que b?
+            return true;
+        }
+        else if (novo.nome[i]>outro.nome[i]){
+            return false;
+        }
+    }
+    
+    if (novo.nome.size() == menor){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool
+operator>(filme novo, filme outro){//global para esse contexto
+
+    unsigned short menor;
+    if(novo.nome.size()<outro.nome.size())
+    {
+        menor = novo.nome.size();
+    }
+    else{
+        menor = outro.nome.size();
+    }
+
+    for (unsigned short i=0 ; i < menor ; i++){
+        if (novo.nome[i]<outro.nome[i]){  //a é menor que b?
+            return false;
+        }
+        else if (novo.nome[i]>outro.nome[i]){
+            return true;
+        }
+    }
+    
+    if (novo.nome.size() == menor){
+        return false;
+    }
+    else{
+        return true;
+    }
+
+}
+
+
+
+//FIM DOS GLOBAIS
 
 
 proxyCatalogo::proxyCatalogo(){
@@ -131,7 +251,7 @@ proxyCatalogo::help(string argv,string comando){
         saida+="listarFilmes\t\t\t\tLista o nome de todos os filmes\n";
         saida+="melhorFilme\t\t\t\tInforma qual filme tem a maior nota\n";
         saida+="removerFilme\t\t\t\tRemove um filme informado\n";
-        saida+="buscarFilme\t\t\t\tBusca o filme e diz se achou ou não. Se achar ele printa os detalhes.\n";
+        saida+="buscarFilme\t\t\t\tBusca o filme e diz se achou ou não.\n";
         saida+="listarFilme\t\t\t\tRetorna os dados de um filme específico\n";
         saida+="editarNome\t\t\t\tBusca o filme a partir do nome dado e troca pelo nome pedido. Se falhar, informa \n";
         saida+="editarProdutora\t\t\t\tBusca o filme a partir do nome dado e troca pela produtora pedida. Se falhar, informa \n";
@@ -154,7 +274,7 @@ proxyCatalogo::help(string argv,string comando){
     else if (comando  == comandos[1]){//ListarCatalogo
         string saida ="Lista todos os filmes com seus detalhes.";
         saida+="\nUso: \n\n";
-        saida+="$" + argv + "ListarCatalogo\n\n";
+        saida+="$" + argv + " listarCatalogo\n\n";
         return saida;
     }
     else if (comando  == comandos[2]){//ListarFilmes
@@ -176,7 +296,7 @@ proxyCatalogo::help(string argv,string comando){
         return saida; 
     }
     else if (comando  == comandos[6]){//"buscarFilme"
-        string saida ="Busca o filme e diz se achou ou não. Se achar ele printa os detalhes.";
+        string saida ="Busca o filme e diz se achou ou não.";
         saida+="\nUso: \n\n";
         saida+="$" + argv + " buscarFilme [FILME]\n\n";
         return saida; 
@@ -187,7 +307,7 @@ proxyCatalogo::help(string argv,string comando){
         saida+="$" + argv + " listarFilme [FILME]\n\n";
         return saida; 
     }
-    else if (comando == comandos[8]){//editaNome
+    else if (comando == comandos[8]){//editarNome
         string saida ="Busca o filme a partir do nome dado e troca pelo nome pedido. Se falhar, informa";
         saida+="\nUso: \n\n";
         saida+="$" + argv + " editarNome [FILME-QUE-DESEJA-TROCAR] [NOVO NOME]\n\n";
@@ -196,13 +316,13 @@ proxyCatalogo::help(string argv,string comando){
     else if (comando == comandos[9]){//editarProdutora
         string saida ="Busca o filme a partir do nome dado e troca pela produtora pedida. Se falhar, informa";
         saida+="\nUso: \n\n";
-        saida+="$" + argv + " editarNome [FILME-QUE-DESEJA-TROCAR] [NOVA PRODUTORA]\n\n";
+        saida+="$" + argv + " editarProdutora [FILME-QUE-DESEJA-TROCAR] [NOVA PRODUTORA]\n\n";
         return saida;
     }
-    else if (comando == comandos[10]){//editaNota
+    else if (comando == comandos[10]){//editarNota
         string saida ="Busca o filme a partir do nome dado e troca pela nota pedida. Se falhar, informa";
         saida+="\nUso: \n\n";
-        saida+="$" + argv + " editarNome [FILME-QUE-DESEJA-TROCAR] [NOVA NOTA]\n\n";
+        saida+="$" + argv + " editarNota [FILME-QUE-DESEJA-TROCAR] [NOVA NOTA]\n\n";
         return saida;
     }
 
@@ -213,7 +333,7 @@ proxyCatalogo::help(string argv,string comando){
         return saida; 
     }
 
-    return "Erro.";
+    return "Comando pedido não listado. Por favor escreva:\n" + argv + " help\n\nCom isso temos a lista de todos os comandos aceitos\n";
 }
 
 void
@@ -221,42 +341,6 @@ proxyCatalogo::listarCatalogo(){
     cout << Catalogo;
 }
 
-ostream & operator<<(ostream &output, const catalogo A){//precisa ser global
-    string saida = "";
-    proxyCatalogo cat;
-    for (unsigned short index = 0; index < cat.getCatalogo().getTamanho(); index++){
-        saida += to_string(index+1);
-        saida += ": Nome: " + cat.getCatalogo().getFilmebyIndex(index).nome + "\t|\tProdutora: " + cat.getCatalogo().getFilmebyIndex(index).produtora + "\t|\tNota: " + to_string(cat.getCatalogo().getFilmebyIndex(index).nota) + "\n";
-    }
-
-    output << saida;
-    return output;    
-}
-
-ostream & operator<<(ostream &output, const filme A){//precisa ser global
-    string saida = "";
-    proxyCatalogo cat;
-    filme * ptr = cat.getCatalogo()(A.nome);
-    saida += "Nome: " + ptr->nome + "\t\t\tProdutora: "+ ptr->produtora + "\t\t\tNota: " + to_string(ptr->nota);
-    output << saida;
-    return output;    
-}
-
-istream & operator>>(istream &input, filme &saida) {
-    string Nota;
-    double n;
-    input >> saida.nome;
-    input >> saida.produtora;
-    input >> Nota;
-    n = proxyCatalogo().paraDouble(Nota);
-    if (n>0){
-        saida.nota = n;
-    }
-    else {
-        cout << "Não conseguiu escrever no filme";
-    }
-    return input;
-}
 
 catalogo
 proxyCatalogo::getCatalogo(){
@@ -308,7 +392,8 @@ proxyCatalogo::listarFilmes(){
 tipoErro
 proxyCatalogo::listarFilme(string Nome){
     if(buscarFilme(Nome)){
-        cout << *Catalogo(Nome);
+        filme novo = *Catalogo(Nome);
+        cout << novo; // normalmente não iria alocar um objeto para dar cout nele, iria apenas escrever: cout<<*Catalogo(Nome); . Como queria deixar claro o cout<<filme. Dexei assim
         cout << endl;
         return ok;
     }
@@ -370,7 +455,7 @@ proxyCatalogo::editarProdutora(const string Filme, string produtora){
         return ok;
     }
     else {
-        cout << "editora não pode ser editada";
+        cout << "editora não pode ser editada" << endl;
         return filmeNaoAchado;
     }
 

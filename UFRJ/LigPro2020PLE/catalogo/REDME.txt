@@ -1,30 +1,72 @@
-Projeto de analise de texto usando grafo
+Projeto de gerenciador de catalogo.
 
 Sobre o software:
-    Esse software é aplicado em CLI. Vc passará argumentos via linha de comando para conseguir obter as informações desejadas.
+    Esse software é aplicado em CLI. Vc passará argumentos via linha de comando para constrolar as inserções de dados e ler os dados.
 
 Como compilar:
     dentro do diretório do programa
     $ make
 
 Como remover os arquivos compilados:
-    dentro do diretório do prgrama
+    Dentro do diretório do programa
     $ make clean
     (assim vc tem so o executavel)
+    Existem várias regras previstas dentro do makefile para diversos fins.
+        
+        - all (faz o mesmo que apenas excrever make, ela compila linha a linha e link-edita depois)
+        
+        - compila (compila todos os os 3 arquivos .cpp em objetos .o)
+        
+        - linka (linka todos os 3 objetos .o no programa em si (arquivo binário))
+        
+        - se vc quiser compilar apenas um dos códigos fonte pode apenas digitando o nome do arquivo e tirando o .cpp e colocando .o. Exemplo:
+            Se vc quer compilar apenas a main.cpp basta escrever:
+            $ make main.o
+        
+        - clean (remove todos os .o)
+
+        - clean-exec (remove o executavel)
+
+        - clean-all (remove todos os .o e os executaveis)
 
 Como usar:
-    Ao compilar o programa ele estará contido dentro do arquivo binário "grafo".
+    Ao compilar o programa ele estará contido dentro do arquivo binário "catalogo".
 
     Se você rodar esse programa dessa forma:
 
-    $ ./grafo
+    $ ./catalogo
+    
+    O programa irá pedir para escrever "help" como argumento para descrever o programa.
+
+    rodando então:
+
+    $ ./catalogo help
 
     O programa fará uma breve descrição de como rodar o programa bem como uma lista de todas as funções possíveis
 
-	ENTRADA DE DADOS
-	O programa é alimentado através de um arquivo txt que você fornece via CLI
-    Existe um arquivo chamado de exemplo.txt que está lá para servir de exemplo
+Entrada/Saida de dados:
+	O programa manipula um arquivo chamado "catalogo.txt" dentro de um diretorio chamado "BD". Esse diretório está no mesmo local do arquivo binário.
+    Se aonde o programa for usado dentro não estiver um diretório chamado "BD", ele irá criar um diretório chamado "BD" e criará o "catalogo.txt" dentro dele.
+    Além disso se tiver um diretório chamado "BD" e não tiver um arquivo chamado "catalogo.txt", ele irá criar um "catalogo.txt" dentro deste.
+    Se o arquivo estiver fora da formatação compreensivel para o programa, ele irá reclamar que o arquivo está corrompido e não fará nada. Nesse caso é sugerido colocar o programa em outro lugar ou simplesmente apagar/mudar de nome o arquivo "catalogo.txt".
 
+Implementação do programa:
+    Esse programa foi totalmente desenvolvido em C++ e usa as bilbiotecas: 
+        iostream, para saida de textos no terminal.
+        vector, para a utilização do objeto vector.
+        fstream, para a manipulação de arquivos texto.
+        string, para a manipulação de strings.
+        iomanip, para funções mais específicas de saida de texto no terminal.
+    
+    A estrutura de diretórios do program é:
+        "./" -> raiz onde se compila o programa
+        "./classes" -> diretório onde se encontra as classes desenvolvidas para esse programa
+        "./BD" -> diretório onde se encontra o "Banco de dados"
+    
+    O código do programa está dividido em 7 arquivos. 3 arquivos de código fonte (.cpp), 3 arquivos header (.h) e 1 arquivo de compilação (Makefile).
+
+    Códigos fonte:
+        main.cpp. Está localizado     
 
 -1 programa                                           1
 

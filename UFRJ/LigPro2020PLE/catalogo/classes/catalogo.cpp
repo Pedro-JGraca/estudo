@@ -1,5 +1,5 @@
 #include "catalogo.h"
-#include <algorithm>
+#include "globalCatalogo.h"
 
 string  
 catalogo::operator+=(filme novo){
@@ -83,83 +83,6 @@ catalogo::getFilmeByNome(string Nome, filme * local){
         local = nullptr;
     }
     
-}
-
-
-
-bool
-operator==(filme novo, filme outro){//global para esse contexto
-    
-    if(novo.nome.size()!=outro.nome.size())
-    {
-        return false;
-    }
-    for (unsigned short i = 0 ;i < novo.nome.size();i++){
-        if(novo.nome[i]!=outro.nome[i]){
-            return false;
-        }
-    }
-    
-    return true;
-}
-
-bool 
-operator<(filme novo, filme outro){//global para esse contexto
-    
-    unsigned short menor;
-    if(novo.nome.size()<outro.nome.size())
-    {
-        menor = novo.nome.size();
-    }
-    else{
-        menor = outro.nome.size();
-    }
-
-    for (unsigned short i=0 ; i < menor ; i++){
-        if (novo.nome[i]<outro.nome[i]){  //a é menor que b?
-            return true;
-        }
-        else if (novo.nome[i]>outro.nome[i]){
-            return false;
-        }
-    }
-    
-    if (novo.nome.size() == menor){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-bool
-operator>(filme novo, filme outro){//global para esse contexto
-
-    unsigned short menor;
-    if(novo.nome.size()<outro.nome.size())
-    {
-        menor = novo.nome.size();
-    }
-    else{
-        menor = outro.nome.size();
-    }
-
-    for (unsigned short i=0 ; i < menor ; i++){
-        if (novo.nome[i]<outro.nome[i]){  //a é menor que b?
-            return false;
-        }
-        else if (novo.nome[i]>outro.nome[i]){
-            return true;
-        }
-    }
-    
-    if (novo.nome.size() == menor){
-        return false;
-    }
-    else{
-        return true;
-    }
-
 }
 
 
@@ -291,7 +214,7 @@ catalogo::filmeIn(filme novo){
 filme* 
 catalogo::getFilmeMaiorNota(){ // como é impossivel eu sobrescrever > e < para o mesmo contexto, só que para nota por simples lógica, irei simplesmente ignorar o pedido de ser por > e <, por que eu já implementei isso para ordenar por ordem alfabética.
     unsigned maiorNota = 0;
-    filme * maior;
+    filme *maior;
     for (unsigned short index = 0; index < filmes.size(); index++){
         if (maiorNota<filmes[index].nota){
             maiorNota = filmes[index].nota;

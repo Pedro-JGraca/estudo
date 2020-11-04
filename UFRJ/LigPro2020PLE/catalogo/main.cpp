@@ -1,11 +1,11 @@
 #include "classes/proxyCatalogo.h"
 #include "classes/catalogo.h"
+#include "classes/globalCatalogo.h"
 
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <string>
-#include <cstring>
 
 using namespace std;
 
@@ -184,6 +184,12 @@ main(int argc, char const *argv[])
 
                 switch (aux){
                     case 11:
+                        /*a escolha do projeto ser CLI me impede de escrever:
+                        cin >> filme
+                        E passar o filme. Basicamente eu fiz um programa que recebe os dados do filme e constroi um struct filme com os dados e insere ele no catalogo.
+                        De qlqr forma fica registrado aqui que eu implementei o :
+                        cin >> filme e ele foi testado e funciona. O código está no final desse arquivo main.cpp, uma vez que é global
+                        */
                         cout << catalogo.inserirFilme(filme,produtora,nota) << endl;
                         break;
                     
@@ -210,6 +216,3 @@ main(int argc, char const *argv[])
     catalogo.escreverBD();
     return ok;
 }
-
-
-//cout<<catalogo, cout<<filme , cin >> filme 

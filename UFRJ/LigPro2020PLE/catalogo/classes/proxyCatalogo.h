@@ -3,8 +3,8 @@
 #include <iostream>
 #include <vector>
 #include "catalogo.h"
+#include "globalCatalogo.h"
 
-#define NUMERO_ARGUMENTOS                   3
 #define ARQUIVO                 "./BD/catalogo.txt"
 #define BUFFER                              500
 #define EOS                                 '\0'
@@ -90,11 +90,6 @@ public:
     
 
 };
-
-
-
-
-
 
 const vector <string> comandos = {"help","listarCatalogo","listarFilmes","melhorFilme","help","removerFilme","buscarFilme","listarFilme","editarNome","editarProdutora","editarNota","inserirFilme","editarFilme"};
 
