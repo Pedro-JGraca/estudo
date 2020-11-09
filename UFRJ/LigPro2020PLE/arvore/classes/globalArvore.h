@@ -1,7 +1,7 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include "catalogo.h"
+#include "arvore.h"
 
 bool 
 operator==(filme,filme);

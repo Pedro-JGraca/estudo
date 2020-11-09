@@ -1,6 +1,6 @@
-#include "proxyCatalogo.h"
-#include "catalogo.h"
-#include "globalCatalogo.h"
+#include "proxyArvore.h"
+#include "arvore.h"
+#include "globalArvore.h"
 
 #include <fstream>
 

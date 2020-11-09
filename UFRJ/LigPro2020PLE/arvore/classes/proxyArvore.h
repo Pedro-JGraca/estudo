@@ -2,8 +2,8 @@
 #define PROXY_H
 #include <iostream>
 #include <vector>
-#include "catalogo.h"
-#include "globalCatalogo.h"
+#include "arvore.h"
+#include "globalArvore.h"
 
 #define ARQUIVO                 "./BD/catalogo.txt"
 #define BUFFER                              500

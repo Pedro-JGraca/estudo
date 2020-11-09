@@ -1,5 +1,5 @@
-#include "catalogo.h"
-#include "globalCatalogo.h"
+#include "arvore.h"
+#include "globalArvore.h"
 
 string  
 catalogo::operator+=(filme novo){

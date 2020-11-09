@@ -1,6 +1,6 @@
-#include "classes/proxyCatalogo.h"
-#include "classes/catalogo.h"
-#include "classes/globalCatalogo.h"
+#include "classes/proxyArvore.h"
+#include "classes/arvore.h"
+#include "classes/globalArvore.h"
 
 #include <iostream>
 #include <vector>
