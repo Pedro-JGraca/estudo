@@ -20,7 +20,6 @@ main(int argc, char const *argv[])
 {
 
     proxyCatalogo catalogo;
-    
     if (catalogo.getErro()){
         return catalogo.getErro();
     }
