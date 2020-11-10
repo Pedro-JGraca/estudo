@@ -1,206 +1,137 @@
-#include "classes/proxyArvore.h"
-#include "classes/arvore.h"
-#include "classes/globalArvore.h"
-
 #include <iostream>
 #include <vector>
-#include <fstream>
 #include <string>
 
 using namespace std;
 
+
+#include "main.h"
+#include "classes/cadastro.h"
+#include "classes/paciente.h"
+
+//arvore paciente paciente-especial cadastro
+
 #define EOS                                              '\0'
+#define PROGRAMA                                           0
 #define COMANDO                                            1
-#define FILME                                              2
-#define PRODUTORA                                          3
-#define NOTA                                               4
+#define NOME                                               2
+#define NUMERO_ARGUMENTOS_LIMITE                           3
+//./cadastro-pacientes comando nome/comando/""
 
 int
 main(int argc, char const *argv[])
 {
+    cadastro sistema;
 
-    proxyCatalogo catalogo;
-    if (catalogo.getErro()){
-        return catalogo.getErro();
+    if (sistema.getErroBD()!= ok){
+        cout << "erroBD" << endl;
+        return sistema.getErroBD();
     }
+
 
     bool achouComando = false;
 
-    if (argc>5){
-        if (argc > 1){
-            for (unsigned short i =0; i < comandos.size() ; i++){
-                if (argv[COMANDO] == comandos[i]){
-                    cout << "Numero errado de argumentos pro comando" << endl;
-                    cout << catalogo.help(argv[0],argv[COMANDO]) << endl;
+    if ((argc>NUMERO_ARGUMENTOS_LIMITE) or (argc<=(PROGRAMA+1))){
+        if (argc > (PROGRAMA+1)){
+            for (unsigned index = 0; index < comandos.size() ; index ++){
+                if (argv[COMANDO] == comandos[index]){
+                    cout << "Numero errado de argumentos pro comando" << endl << endl;
+                    cout << argv[COMANDO] << ":" << endl;
+                    cout << help(argv[PROGRAMA],argv[COMANDO]) << endl;
                     return numeroArgumentosInvalidoParaComando;
-                }
-            } 
+            }
         }
-
+        }
+        //else
         cout << "Numero argumentos errado." << endl;
         cout << "Para saber como usar a função, por favor use o comando:" << endl;
         cout << argv[0] << " help" << endl;
         return numeroArgumentosInvalido;
     }
-
-    unsigned index = 0;
-    for (;index < comandos.size();index ++){
-        if (argc == 1){
-                cout << "Para saber como usar a função, por favor use o comando:" << endl;
-                cout << argv[0] << " help" << endl;
-                return ok;
-        }
-            
+    for (unsigned index = 0; index < comandos.size() ; index ++){
         if (argv[COMANDO] == comandos[index]){
-            unsigned short aux = index;
-            index =  comandos.size() + 1;
-            achouComando = true;//achou
-
-            string comando = argv[COMANDO];
-
-            if (argc == 2){ //help, ListarCatalogo , ListarFilmes , MelhorFilme
-                if(!((rang[0] <= aux) and (aux < rang[1])))
-                {
-                    cout << "Numero de argumentos pro comando " << comando << " errado" << endl;
-                    cout << catalogo.help(argv[0],comando) << endl;
-                    return numeroArgumentosInvalidoParaComando;
+            
+            achouComando = true;
+            switch (index)
+            {
+            case 0: // help
+                if (argc == 2){// $./cadastro-pacientes help
+                    cout << help(argv[PROGRAMA],"");
                 }
-                switch (aux){
-                    case 0:
-                        cout << catalogo.help(argv[0],"") << endl;
-                        break;
-
-                    case 1:
-                        catalogo.listarCatalogo();
-                        break;
-
-                    case 2:
-                        catalogo.listarFilmes();
-                        break;
-
-                    case 3:
-                        cout << catalogo.melhorFilme();
-                        break;
-
-                    default:
-                        cout << "Erro indesperado "<< endl;
-                        return erroDesconhecido;
-                        break;
-                }
-
-                return ok;
-            }
-
-            if (argc == 3) {//,"help","removerFilme","buscarFilme","ListarFilme"
-                string filme = argv[2];
-                tipoErro erro;
-                if(!(((rang[1] <= aux) and (aux < rang[2])) or (aux == 0))){
-                    cout << "Numero errado de argumentos pro comando." << endl;
-                    cout << catalogo.help(argv[0],comando) << endl;
-                    return numeroArgumentosInvalidoParaComando;
-                }
-
-                switch (aux){
-                    case 0://pq temos 2 helps, em 0 e 4. Ele irá encontrar primeiro o help em 0
-                    case 4:
-                        cout << catalogo.help(argv[0],filme) << endl;
-                        break;
-
-                    case 5:
-                        catalogo.removerFilme(filme);
-                        break;
-
-                    case 6:
-                        cout << "O filme \""<< filme << "\" " << 
-                        (catalogo.buscarFilme(filme)?"":"nao ")
-                        << "foi encontrado" << endl;
-                        break;
-
-                    case 7:
-                        erro = catalogo.listarFilme(filme);
-                        if (erro!=ok){
-                            return erro;
+                else if (argc == 3){// $./cadastro-pacientes help [comando]
+                    bool nomeComando = false;
+                    for ( unsigned aux = 0 ; aux <comandos.size(); aux ++ ){
+                        if (argv[NOME] == comandos [ aux]){
+                            cout << help(argv[PROGRAMA],argv[NOME]);
+                            nomeComando = true;
                         }
-                        break;
-
-                    default:
-                        cout << "Erro indesperado: " << comando<< " " <<filme << endl;
-                        return erroDesconhecido;
-                        break;
-                }
-
-
-            }
-
-            if (argc == 4) {// "editarNome","editarProdutora","editarNota"
-                string filme = argv[2];
-                string troca = argv[3];
-                tipoErro erro;
-                if(!((rang[2] <= aux) and (aux < rang[3]))){
-                    cout << "Numero de argumentos pro comando errado" << endl;
-                    cout << catalogo.help(argv[0],comando) << endl;
-                    return numeroArgumentosInvalidoParaComando;
-                }
-
-                switch (aux){
-                    case 8:
-                        erro = catalogo.editarNome(filme,troca);
-                        if (erro!=ok){
-                            return erro;
-                        }
-                        break;
-
-                    case 9:
-                        erro = catalogo.editarProdutora(filme,troca);
-                        if (erro!=ok){
-                            return erro;
-                        }
-                        break;
-                    case 10:
-                        erro = catalogo.editarNota(filme,troca);
-                        if (erro!=ok){
-                            return erro;
-                        }
-                        break;
-                    default:
-                        cout << "Erro inesperado:" << comando << " " << filme << " " << troca<< endl;   
-                        return erroDesconhecido;
-                        break;
-                }
-
-            }
-
-            if (argc == 5) {//"InserirFilme"
-
-                string filme = argv[2];
-                string produtora = argv[3];
-                string nota = argv[4];
-
-                if(!((rang[3] <= aux) and (aux < rang[4]))){
-                    cout << "Numero de argumentos pro comando errado" << endl;
-                    cout << catalogo.help(argv[0],comando) << endl;
-                    return numeroArgumentosInvalidoParaComando;
-                }
-
-                switch (aux){
-                    case 11:
-                        /*a escolha do projeto ser CLI me impede de escrever:
-                        cin >> filme
-                        E passar o filme. Basicamente eu fiz um programa que recebe os dados do filme e constroi um struct filme com os dados e insere ele no catalogo.
-                        De qlqr forma fica registrado aqui que eu implementei o :
-                        cin >> filme e ele foi testado e funciona. O código está no final desse arquivo main.cpp, uma vez que é global
-                        */
-                        cout << catalogo.inserirFilme(filme,produtora,nota) << endl;
-                        break;
+                    }
+                    if (!nomeComando){
+                        cout << help(argv[PROGRAMA],"naoAchado"); 
+                        return comandoNaoAchado;
+                    }
                     
-                    default:
-                        cout << "Erro indesperado: " << comando<< " " <<filme << produtora << " " << nota<< endl;
-                        return erroDesconhecido;
-                        break;
                 }
+                else {//argc = 1 ou >3, não deveria entrar
+                    cout << "Não deveria acontecer";
+                    return erroDesconhecido;
+                }
+                break;
+
+            case 1: //inserir
+                if (argc == (NOME+1)){
+                    cout << "Inserir: " << argv[NOME] << endl;
+                    paciente* ptr_paciente =  sistema.inserir(argv[NOME]);
+                    if (ptr_paciente == NULL){
+                        //tratamento
+                        cout << "erro - what" << endl;
+                    }
+                
+                }
+                else {
+                    cout << "Numero de Argumentos para o comando fornecido errado. Abaixo o uso correto." << endl;
+                    cout << help(argv[PROGRAMA],argv[COMANDO]);
+                    return numeroArgumentosInvalidoParaComando;
+                }
+                
+                break;
+            
+            case 2: //buscar
+                if (argc == (NOME+1)){
+                    cout << "Buscar: " << argv[NOME] << endl;
+
+                    paciente* ptr_paciente =  sistema.inserir(argv[NOME]);
+                    if (ptr_paciente == NULL){
+                        //tratamento
+                        cout << "erro - what" << endl;
+                    }
+                    
+
+                }
+                else {
+                    cout << "Numero de Argumentos para o comando fornecido errado. Abaixo o uso correto." << endl;
+                    cout << help(argv[PROGRAMA],argv[COMANDO]);
+                    return numeroArgumentosInvalidoParaComando;
+                }
+                break;
+
+            case 3: //imprimir
+                if (argc == (COMANDO+1)){
+                    cout << "Imprimir" << endl;
+                    sistema.imprimir();
+                }
+                else {
+                    cout << "Numero de Argumentos para o comando fornecido errado. Abaixo o uso correto." << endl;
+                    cout << help(argv[PROGRAMA],argv[COMANDO]);
+                    return numeroArgumentosInvalidoParaComando;
+                }
+
+                break;
+            default:
+                cout  << "Erro desconhecido." << endl;
+                return erroDesconhecido;
+                break;
             }
-
-
         }
     }
     
@@ -211,8 +142,65 @@ main(int argc, char const *argv[])
         return comandoNaoAchado;
     }
 
-    
-
-    catalogo.escreverBD();
     return ok;
 }
+
+
+
+string 
+help(string argv,string comando){
+
+    if (comando.size()==0){
+        string saida = "Este programa é um gerenciador de pacientes para hospitais via CLI.\n";
+        saida+="Seu funcionamento básico está ligado a comandos.\n\n";
+        saida+="$" + argv + " [comando] [argumento1]\n\n";
+        saida+="Nesse caso o argumento 1 pode existir ou não de acordo com o comando.\n";
+        saida+="Abaixo está a lista de comandos existentes, bem como uma explicação de cada uma.\n";
+        saida+="Se desejar entender como usar o comando escreva na linha de comando:\n\n";
+        saida+="$" + argv + " help [argumento]\n\n";
+        saida+="Onde o argumento do comando acima é um dos comandos que vamos citar abaixo.\n\n";
+
+        saida+="help\t\t\t\tDescreve o programa como um todo ou apenas um comando.\n";
+        saida+="inserir\t\t\t\tInsere um paciente novo\n";
+        saida+="buscar\t\t\t\tDiz se o paciente buscado está cadastrado\n";
+        saida+="imprimir\t\t\tDiz o nome de todos os pacientes cadastrados\n";
+
+             
+       return saida;
+    }
+
+    if (comando == comandos[0]){//"help"
+        string saida ="Descreve o programa como um todo ou apenas um comando.\n";
+        saida+="Se for para descrever o programa todo:\n\b";
+        saida+="$" + argv + " help \n\n";
+        saida+="Se for para descrever um comando:\n\n";
+        saida+="$" + argv + " help [comando] \n";
+
+        return saida;
+    }
+    else if (comando  == comandos[1]){//inserir
+        string saida ="Insere um paciente novo";
+        saida+="\nUso: \n\n";
+        saida+="$" + argv + " inserir [nome-do-paciente]\n\n";
+        return saida;
+    }
+    else if (comando  == comandos[2]){//buscar
+        string saida ="Diz se o paciente buscado está cadastrado";
+        saida+="\nUso: \n\n";
+        saida+="$" + argv + " buscar [nome-do-paciente]\n\n";
+        return saida;        
+    }
+    else if (comando  == comandos[3]){//imprimir
+        string saida ="Diz o nome de todos os pacientes cadastrados";
+        saida+="\nUso: \n\n";
+        saida+="$" + argv + " imprimir\n\n";
+        return saida;        
+    }
+    string saida;
+    saida = "Comando pedido não listado.";
+    saida += "Por favor escreva:\n\n";
+    saida += "$" + argv + " help\n\n";
+    saida += "Com isso temos a lista de todos os comandos aceitos\n";
+    return saida;
+}
+
