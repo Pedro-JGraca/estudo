@@ -21,7 +21,8 @@ class Arvore
 {
 
     template <class U>
-    friend ostream &operator<<(ostream &output, U &entrada); // cout << arvore
+    friend ostream &
+    operator<<(ostream &output, T &entrada); // cout << arvore
 
 private:
     noh <T> *comeco;
@@ -29,6 +30,9 @@ private:
 public:
 
     Arvore ();
+
+    
+
     T*
     operator+=(const T adicionar); // paciente *ptr_paci=(arvore += paciente);
     
@@ -103,12 +107,13 @@ Arvore<T>::operator()(const T buscar){
 
 
 }
-/*
-template <class U> 
-ostream &operator<<(ostream &output, U &entrada){       
+
+template <class U>
+ostream&
+operator<<(ostream &output, U &entrada){       
     output  << entrada;
     return output;
-}*/
+}
 
 
 
