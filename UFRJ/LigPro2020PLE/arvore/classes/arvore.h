@@ -91,7 +91,7 @@ Arvore<T>::operator()(const T buscar){
     {
         if (local.data > buscar) {
             local = local.esquerda;
-            }
+        }
         else if ( local.data < buscar ){
             local = local.direita;
         }
