@@ -59,3 +59,4 @@ clean-exec:
 clean-all:
 	rm $(OBJETOS)
 	rm $(EXEC)
+	rm -rf BD/

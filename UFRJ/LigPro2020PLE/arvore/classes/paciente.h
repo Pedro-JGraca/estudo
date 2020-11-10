@@ -10,16 +10,18 @@ class paciente
 private:
     string nome;
     
-    paciente *esquerda;
-    paciente *direita;
 
 public:
+
+    paciente(string n);
+    paciente(const paciente &n);
 
     void
     setNome(string);
 
     string
     getNome();
+
 
 };
 

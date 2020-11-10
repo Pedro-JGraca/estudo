@@ -24,7 +24,7 @@ main(int argc, char const *argv[])
     cadastro sistema;
 
     if (sistema.getErroBD()!= ok){
-        cout << "erroBD" << endl;
+        cout << sistema.saida;
         return sistema.getErroBD();
     }
 
@@ -80,13 +80,12 @@ main(int argc, char const *argv[])
 
             case 1: //inserir
                 if (argc == (NOME+1)){
-                    cout << "Inserir: " << argv[NOME] << endl;
                     paciente* ptr_paciente =  sistema.inserir(argv[NOME]);
                     if (ptr_paciente == NULL){
                         //tratamento
                         cout << "erro - what" << endl;
+                        cout << "Paciente já existente" << endl;
                     }
-                
                 }
                 else {
                     cout << "Numero de Argumentos para o comando fornecido errado. Abaixo o uso correto." << endl;
@@ -98,12 +97,14 @@ main(int argc, char const *argv[])
             
             case 2: //buscar
                 if (argc == (NOME+1)){
-                    cout << "Buscar: " << argv[NOME] << endl;
-
-                    paciente* ptr_paciente =  sistema.inserir(argv[NOME]);
+                    paciente* ptr_paciente =  sistema.buscar(argv[NOME]);
                     if (ptr_paciente == NULL){
                         //tratamento
                         cout << "erro - what" << endl;
+                        cout << "não achadi" << endl;
+                    }
+                    else {
+                        cout << "Existe" << endl;
                     }
                     
 
@@ -117,8 +118,7 @@ main(int argc, char const *argv[])
 
             case 3: //imprimir
                 if (argc == (COMANDO+1)){
-                    cout << "Imprimir" << endl;
-                    sistema.imprimir();
+                    cout << sistema.imprimir();
                 }
                 else {
                     cout << "Numero de Argumentos para o comando fornecido errado. Abaixo o uso correto." << endl;

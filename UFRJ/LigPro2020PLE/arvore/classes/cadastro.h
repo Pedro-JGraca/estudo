@@ -6,7 +6,6 @@
 #include <fstream>
 
 #include "../main.h"
-#include "arvore.h"
 #include "paciente.h"
 
 #define ARQUIVO                 "./BD/arvore.txt"
@@ -30,7 +29,8 @@ class cadastro
 private:
     /* data */
     tipoErro erroBD = ok;
-    vector <paciente> arvore; // depois mudar para a classe arvore!
+    vector <paciente> arvore2; // depois mudar para a classe arvore!
+
 
     tipoErro
     lerBD();
@@ -38,7 +38,7 @@ private:
     tipoErro
     escreverBD();
 
-    void
+    string
     iniciarBD();  
 
 public:
@@ -50,13 +50,14 @@ public:
     paciente*
     buscar(string nome);
     
-    void
+    string
     imprimir();
 
     tipoErro
     getErroBD();
 
     
+    string saida;
 
     ~cadastro();
 };
