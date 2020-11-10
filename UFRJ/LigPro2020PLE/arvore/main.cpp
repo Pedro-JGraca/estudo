@@ -118,7 +118,7 @@ main(int argc, char const *argv[])
 
             case 3: //imprimir
                 if (argc == (COMANDO+1)){
-                    cout << sistema.imprimir();
+                    sistema.imprimir();
                 }
                 else {
                     cout << "Numero de Argumentos para o comando fornecido errado. Abaixo o uso correto." << endl;
@@ -164,9 +164,8 @@ help(string argv,string comando){
         saida+="inserir\t\t\t\tInsere um paciente novo\n";
         saida+="buscar\t\t\t\tDiz se o paciente buscado está cadastrado\n";
         saida+="imprimir\t\t\tDiz o nome de todos os pacientes cadastrados\n";
-
-             
-       return saida;
+        
+        return saida;
     }
 
     if (comando == comandos[0]){//"help"

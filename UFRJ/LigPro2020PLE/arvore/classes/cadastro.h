@@ -50,7 +50,7 @@ public:
     paciente*
     buscar(string nome);
     
-    string
+    void
     imprimir();
 
     tipoErro

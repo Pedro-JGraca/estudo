@@ -18,6 +18,14 @@ paciente::paciente(const paciente &n){
     nome = n.nome;
 }
 
+ostream&
+operator<<(ostream& output,paciente &entrada){
+    
+    output << (entrada).getNome() << "\n";
+    return output;
+
+}
+
 bool
 operator==(paciente novo, paciente outro){//global para esse contexto
     

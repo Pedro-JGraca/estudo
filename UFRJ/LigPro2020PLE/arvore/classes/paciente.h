@@ -9,6 +9,9 @@ class paciente
 {
 private:
     string nome;
+
+    friend ostream&
+    operator<<(ostream& output,paciente &entrada); // cout << paciente
     
 
 public:
@@ -22,7 +25,9 @@ public:
     string
     getNome();
 
-
 };
+
+
+
 
 #endif
