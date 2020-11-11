@@ -4,7 +4,7 @@
 #include <iostream>
 //#include <vector>
 #include "paciente.h"
-#include "noh.h"
+#include "noht.h"
 using namespace std;
 
 class Arvore
@@ -13,13 +13,13 @@ class Arvore
     operator<<(ostream& output,Arvore  &entrada); // cout << arvore*/
 
 private:
-    noh *comeco;
+    nohT<paciente> *comeco;
 
 public:
 
     Arvore ();
 
-    noh*
+    nohT<paciente>*
     getComeco();
     
     paciente*
@@ -29,13 +29,13 @@ public:
     operator()(paciente* buscar);// paciente *ptr_paci=(arvore(paciente);
 
     void
-    insere(noh **local, paciente * adicionado);
+    insere(nohT<paciente> **local, paciente * adicionado);
 
-    noh*
-    busca(noh *local, paciente * buscado);
+    nohT<paciente>*
+    busca(nohT<paciente> *local, paciente * buscado);
 
     void
-    percorrer(noh *local);
+    percorrer(nohT<paciente> *local);
 
 };
 #endif

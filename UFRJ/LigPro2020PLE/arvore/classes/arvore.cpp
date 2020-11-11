@@ -3,7 +3,7 @@
 
 #include "arvore.h"
 #include "paciente.h"
-#include "noh.h"
+#include "noht.h"
 using namespace std;
 
 
@@ -11,14 +11,14 @@ Arvore::Arvore(){
     comeco = nullptr;
 }
 
-noh*
+nohT<paciente>*
 Arvore::getComeco(){
     return comeco;
 }
 
 
 void
-Arvore::percorrer(noh * local){
+Arvore::percorrer(nohT<paciente>* local){
     if (local != NULL )
     {    
         percorrer (local->esquerda);
@@ -30,8 +30,7 @@ Arvore::percorrer(noh * local){
 
 ostream&
 operator<<(ostream& output,Arvore &entrada){
-    
-    noh *local = entrada.getComeco();
+    nohT<paciente> *local = entrada.getComeco();
     
     entrada.percorrer(local);
 
@@ -39,9 +38,9 @@ operator<<(ostream& output,Arvore &entrada){
 }
 
 void
-Arvore::insere(noh **local, paciente * adicionado){
+Arvore::insere(nohT<paciente> **local, paciente * adicionado){
     if ((*local) == NULL){
-        *local = new noh;
+        *local = new nohT<paciente>;
         (*local)->data = *adicionado;
     }
     else if ((*local)->data < *adicionado)
@@ -55,7 +54,8 @@ Arvore::operator+=(paciente* adicionar){ // inserir na arvore
     if (adicionar==NULL){
         return NULL;
     }
-    noh * achou = (busca(getComeco(),adicionar));
+
+    nohT<paciente> * achou = (busca(getComeco(),adicionar));
     if (achou != NULL){
         return NULL;
     }
@@ -74,9 +74,8 @@ Arvore::operator()(paciente* buscar){ //busca
 
 }
 
-
-noh *
-Arvore::busca(noh *local, paciente*buscado) {
+nohT<paciente> *
+Arvore::busca(nohT<paciente> *local, paciente*buscado) {
     if (local == NULL)
         return NULL;
     else if (local->data==*buscado)

@@ -9,26 +9,22 @@ MAIN_OBJS=				main.o
 CADASTRO_OBJS=			cadastro.o
 PACIENTE_OBJS=			paciente.o
 ARVORE_OBJS=			arvore.o
-NOH_OBJS=				noh.o
 
 
 OBJETOS=				$(MAIN_OBJS)\
 						$(CADASTRO_OBJS)\
 						$(PACIENTE_OBJS)\
-						$(ARVORE_OBJS)\
-						$(NOH_OBJS)
+						$(ARVORE_OBJS)
 
 MAIN_ARQ=				main.cpp
 CADASTRO_ARQ=			classes/cadastro.cpp
 PACIENTE_ARQ=			classes/paciente.cpp
 ARVORE_ARQ=				classes/arvore.cpp
-NOH_ARQ=				classes/noh.cpp
 
 ARQUIVOS= 				$(MAIN_ARQ)\
 						$(CADASTRO_ARQ)\
 						$(PACIENTE_ARQ)\
-						$(ARVORE_ARQ)\
-						$(NOH_ARQ)
+						$(ARVORE_ARQ)
 
 EXEC= cadastro-pacientes		
 
@@ -50,8 +46,6 @@ $(CADASTRO_OBJS): $(CADASTRO_ARQ)
 $(PACIENTE_OBJS): $(PACIENTE_ARQ)
 
 $(ARVORE_OBJS): $(ARVORE_ARQ)
-
-$(NOH_OBJS): $(NOH_ARQ)
 
 $(OBJETOS): 
 	$(CC) $(CFLAGS) $? -o $@
