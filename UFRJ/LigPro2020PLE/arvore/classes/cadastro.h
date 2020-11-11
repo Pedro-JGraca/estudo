@@ -7,6 +7,7 @@
 
 #include "../main.h"
 #include "paciente.h"
+#include "arvore.h"
 
 #define ARQUIVO                 "./BD/arvore.txt"
 
@@ -29,9 +30,9 @@ class cadastro
 private:
     /* data */
     tipoErro erroBD = ok;
-    vector <paciente> arvore2; // depois mudar para a classe arvore!
-
-
+    //vector <paciente> arvore2; // depois mudar para a classe arvore!
+   // Arvore <paciente> arvore;
+    Arvore arvore;
     tipoErro
     lerBD();
 

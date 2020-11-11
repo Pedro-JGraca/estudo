@@ -22,49 +22,49 @@ cadastro::inserir(string Nome)
 {
     paciente novo(Nome);
 
-    if (buscar(Nome))
+    /*if (buscar(Nome))
     {
         return NULL;
     }
     arvore2.push_back(novo);
-    /*if (!(arvore += paciente)){
-        cout << "falha na incersão";
-        return NULL;
-    }*/
+    */
 
-    return &arvore2.back();
+    if (!(arvore += &novo)){
+        return NULL;
+    }
+
+    //return &arvore2.back();
+    return arvore(&novo);
 }
 
 paciente *
 cadastro::buscar(string Nome)
 {
-    for (unsigned index = 0; index < arvore2.size(); index++)
+    /*for (unsigned index = 0; index < arvore2.size(); index++)
     {
         if (arvore2[index].getNome() == Nome)
         {
             return &arvore2[index];
         }
-    }
+    }*/
 
-    /*        
-    paciente *p = arvore(Nome);
-    if(!p){
-        cout << Não achado << endl;
-    }
-    return p;
-    */
+            
+    paciente p(Nome);
+    paciente *a = arvore(&p);
+    return a;
+    
 
-    return NULL;
+    //return NULL;
 }
 
 void
 cadastro::imprimir()
 {
-    for (unsigned index = 0; index < arvore2.size(); index++)
+    /*for (unsigned index = 0; index < arvore2.size(); index++)
     {
         cout << arvore2[index];
-    }
-    //cout << arvore;
+    }*/
+    cout << arvore;
 }
 
 tipoErro
@@ -87,8 +87,8 @@ cadastro::lerBD()
             if (b != "\0")
             {
                 paciente novo(b);
-                arvore2.push_back(novo);
-                //arvore += escrita[indice];
+                //arvore2.push_back(novo);
+                arvore += &novo;
             }
         }
     }
@@ -106,18 +106,13 @@ cadastro::escreverBD()
     ofstream fin(ARQUIVO);
     if (fin)
     {
-        for (unsigned index = 0; index < arvore2.size(); index++)
+        /*for (unsigned index = 0; index < arvore2.size(); index++)
         {
             string saida = arvore2[index].getNome() + "\n";
             fin << saida;
-        }
-        /* 
-        vector <paciente *> lista;
-        if (arvore.ordem (&lista)) {
-            cout << "arvore corrompida";
-            return arvoreCorrompida;
-        }
-        */
+        }*/
+
+        fin << arvore;
     }
     else
     {

@@ -12,10 +12,10 @@ private:
 
     friend ostream&
     operator<<(ostream& output,paciente &entrada); // cout << paciente
-    
 
 public:
 
+    paciente();
     paciente(string n);
     paciente(const paciente &n);
 
@@ -28,6 +28,12 @@ public:
 };
 
 
+    bool
+    operator<(paciente novo, paciente outro);
+    bool
+    operator>(paciente novo, paciente outro);
+    bool
+    operator==(paciente novo, paciente outro);
 
 
 #endif

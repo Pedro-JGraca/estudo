@@ -101,7 +101,7 @@ main(int argc, char const *argv[])
                     if (ptr_paciente == NULL){
                         //tratamento
                         cout << "erro - what" << endl;
-                        cout << "não achadi" << endl;
+                        cout << "não achado" << endl;
                     }
                     else {
                         cout << "Existe" << endl;
