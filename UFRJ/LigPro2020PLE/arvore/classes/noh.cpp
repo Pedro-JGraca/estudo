@@ -2,13 +2,13 @@
 #include "noh.h"
 
 using namespace std;
-
+/*
 noh*
 noh::pinta(noh *local, paciente * l){
     l->setNome(local->data.getNome());
     local->pintado = true;
     return local->anterior;
-}
+}*/
 
 bool
 noh::operator!=(noh comparador) {
@@ -19,5 +19,5 @@ noh::operator!=(noh comparador) {
 }
 
 noh::noh(){
-    pintado = false;
+//    pintado = false;
 }

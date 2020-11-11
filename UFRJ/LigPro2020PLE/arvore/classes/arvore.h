@@ -28,10 +28,14 @@ public:
     paciente*
     operator()(paciente* buscar);// paciente *ptr_paci=(arvore(paciente);
 
-    
+    void
+    insere(noh **local, paciente * adicionado);
+
+    noh*
+    busca(noh *local, paciente * buscado);
+
+    void
+    percorrer(noh *local);
 
 };
-
-vector <paciente>
-percorrer(Arvore* arvore); /*globais*/
 #endif

@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/cadastro-pacientes",
-            "args": ["inserir","ana"],
+            "args": ["imprimir"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

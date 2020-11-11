@@ -37,7 +37,7 @@ private:
     lerBD();
 
     tipoErro
-    escreverBD();
+    escreverBD(string n);
 
     string
     iniciarBD();  

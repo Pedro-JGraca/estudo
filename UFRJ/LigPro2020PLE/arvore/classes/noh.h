@@ -7,16 +7,16 @@ class noh
 {
 public:
     paciente data;
-    bool pintado;
-    noh *anterior;
+    //bool pintado;
+    //noh *anterior;
     noh *direita;
     noh *esquerda;
 
     noh ();
     
-    noh * 
+/*    noh * 
     pinta ( noh *local, paciente * l);
-
+*/
     bool
     operator!=(noh a);
 };

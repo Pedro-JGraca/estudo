@@ -10,17 +10,14 @@ cadastro::cadastro()
 }
 cadastro::~cadastro()
 {
-    erroBD = escreverBD();
-    if (erroBD != ok)
-    {
-        saida = iniciarBD();
-    }
 }
 
 paciente *
 cadastro::inserir(string Nome)
 {
     paciente novo(Nome);
+
+    
 
     /*if (buscar(Nome))
     {
@@ -29,9 +26,13 @@ cadastro::inserir(string Nome)
     arvore2.push_back(novo);
     */
 
+
     if (!(arvore += &novo)){
         return NULL;
     }
+    escreverBD(Nome);
+
+
 
     //return &arvore2.back();
     return arvore(&novo);
@@ -100,19 +101,22 @@ cadastro::lerBD()
     return ok;
 }
 tipoErro
-cadastro::escreverBD()
+cadastro::escreverBD(string escrever)
 {
 
-    ofstream fin(ARQUIVO);
+    ofstream fin(ARQUIVO,ios_base::app);
     if (fin)
     {
         /*for (unsigned index = 0; index < arvore2.size(); index++)
         {
+            //ANTES ELE ESCREVIA NO FINAL TODA A ESTRUTURA
+            //AGORA ELE ESCREVE SEMPRE QUE RECEBE UMA LINHA NOVA
+            //ASSIM ELE MANTEM A MESMA ESTRUTURA NA INSERÇÃO
             string saida = arvore2[index].getNome() + "\n";
             fin << saida;
         }*/
 
-        fin << arvore;
+        fin << escrever << endl;
     }
     else
     {
@@ -129,12 +133,6 @@ cadastro::iniciarBD()
     system("mkdir BD");
     string comando = "touch ";
     comando += ARQUIVO;
-    /*
-    char *c;
-    c = (char *) comando.c_str();
-    system(c);
-    */
-    //no trabalho anterior eu usei o malloc pq não conhecia o método c_str()...
     system(comando.c_str());
 
     return U;

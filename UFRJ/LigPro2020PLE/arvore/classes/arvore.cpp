@@ -17,152 +17,73 @@ Arvore::getComeco(){
 }
 
 
-vector <paciente>
-percorrer(Arvore* arvore){
-
-    noh *local = (arvore->getComeco());
-    noh *comeco = (arvore->getComeco());
-    local->anterior=comeco;
-    vector <paciente> saida;
-    paciente novo;
-
-    if (comeco!=nullptr){
-        while (!comeco->pintado)
-        {
-            if (local->esquerda!=NULL){
-                while(!local->esquerda->pintado){
-                    local->anterior = local;
-                    local= (local->esquerda);
-                    if(local->esquerda!=NULL){
-                        if (local->direita!=NULL)
-                            while ((local->esquerda==NULL) or (!local->direita->pintado)){
-                                if (local->direita==NULL){
-                                    
-                                    local = local->pinta(local,&novo);
-                                    saida.push_back(novo);  
-                                }
-                                else {
-                                    local->anterior = local;
-                                    local = local->direita;
-                                }
-                            }
-                        else {
-                            local = local->pinta(local,&novo);
-                            saida.push_back(novo);
-                        }
-                    }
-                }
-                if (local->direita!=NULL) {
-                    if (!local->direita->pintado){
-                        local->anterior = local;
-                        local = local->direita;
-                        if ((local->direita==NULL) and (local->esquerda==NULL)){
-                            local = local->pinta(local,&novo);
-                            saida.push_back(novo);
-                        }
-                    }
-                    else {
-                        local = local->pinta(local,&novo);
-                        saida.push_back(novo);
-                    }
-                }
-                else {
-                    local = local->pinta(local,&novo);
-                    saida.push_back(novo);
-                }
-            }
-            else if (local->direita!=NULL){
-                if (!local->direita->pintado){
-                    local->anterior = local;
-                    local = local->direita;
-                }
-                else {
-                    local = local->pinta(local,&novo);
-                    saida.push_back(novo);
-                }
-            }
-            else {
-                local = local->pinta(local,&novo);
-                saida.push_back(novo);
-            }
-        }
+void
+Arvore::percorrer(noh * local){
+    if (local != NULL )
+    {    
+        percorrer (local->esquerda);
+        cout << local->data;
+        percorrer (local->direita);
     }
-    return saida;
 }
-
 
 
 ostream&
 operator<<(ostream& output,Arvore &entrada){
-    vector <paciente> saida = percorrer(&entrada);
-    unsigned tamanho = saida.size();
-    for (unsigned index = 0;index<tamanho;index ++){
-        output << saida[index].getNome();
-    }
+    
+    noh *local = entrada.getComeco();
+    
+    entrada.percorrer(local);
+
     return output;
+}
+
+void
+Arvore::insere(noh **local, paciente * adicionado){
+    if ((*local) == NULL){
+        *local = new noh;
+        (*local)->data = *adicionado;
+    }
+    else if ((*local)->data < *adicionado)
+       insere(&((*local)->direita),adicionado);
+    else
+       insere(&((*local)->esquerda),adicionado);
 }
 
 paciente *
 Arvore::operator+=(paciente* adicionar){ // inserir na arvore
-    if (!comeco){
-        comeco = new noh;
-        comeco->data = *adicionar;
-        return &(comeco->data);
+    if (adicionar==NULL){
+        return NULL;
     }
-    noh *local = comeco;
-    noh *anterior = comeco;
-    
-
-    while (local!=nullptr){
-        if (local->data > *adicionar) {
-            anterior = local;
-            local->esquerda = new noh;
-            local = local->esquerda;
-            if (local!=nullptr){ // se o local é nulo eu aponto para ele
-                
-                local->data = *adicionar;
-                anterior->esquerda = local;
-                local->anterior = anterior;
-                return &(local->data);
-            }
-        }
-        else if ( local->data < *adicionar ){
-            anterior = local;
-            local->direita = new noh;
-            local = local->direita;
-            if (local!=nullptr){
-                local->data = *adicionar;
-                anterior->direita = local;
-                local->anterior =  anterior;
-                return &(local->data);
-            }
-        }
-        else { // igual
-            return NULL;
-        }
+    noh * achou = (busca(getComeco(),adicionar));
+    if (achou != NULL){
+        return NULL;
     }
+    insere(&(comeco),adicionar);
+    return &(busca(getComeco(),adicionar)->data);
 
-    return NULL;
 }
 
 paciente *
 Arvore::operator()(paciente* buscar){ //busca 
-    if (!comeco){
+    if (comeco==NULL){
         return NULL;
     }
-    noh *local = comeco;
-    while (local!=nullptr)
-    {
-        if (local->data > *buscar) {
-            local = local->esquerda;
-        }
-        else if ( local->data < *buscar ){
-            local = local->direita;
-        }
-        else { // igual
-            return &(local->data);
-        }
-    }
-    return &(local->data); // NULL
+
+    return &(busca(getComeco(),buscar)->data);
+
+}
+
+
+noh *
+Arvore::busca(noh *local, paciente*buscado) {
+    if (local == NULL)
+        return NULL;
+    else if (local->data==*buscado)
+        return local;
+    else if (local->data < *buscado)
+        return busca(local->direita,buscado);
+    else
+        return busca(local->esquerda,buscado);
 
 }
