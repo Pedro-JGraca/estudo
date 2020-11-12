@@ -21,7 +21,7 @@ main(int argc, char const *argv[])
 		PyTuple_SetItem(tupla,0,elemento1);
 		CPyObject pObjeto = PyObject_CallObject(pFunc, tupla); //instancia objeto, a tupla insere os argumentos passados para a classe
 
-		CPyObject pValue2 = PyObject_CallMethodObjArgs(pObjeto, PyUnicode_FromString("fazer"),PyLong_FromLong(20),NULL);//metodo
+		CPyObject pValue2 = PyObject_CallMethodObjArgs(pObjeto, PyUnicode_FromString("fazer"),PyLong_FromLong(10),NULL);//metodo
 
 		cout << "C: getInteger() = " << PyLong_AsLong(pValue2) << endl ;
 
@@ -30,7 +30,9 @@ main(int argc, char const *argv[])
 	{
 		printf("ERROR: Modulo nao importado\n");
 	}	
+	CPyObject lista = PyList_New (10);
 	
+
 	PyTuple_ClearFreeList();
 	return 0;
 }

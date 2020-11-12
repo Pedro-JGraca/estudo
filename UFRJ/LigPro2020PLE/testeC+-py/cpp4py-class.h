@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdio.h>
+#include <vector>
 #include <python3.8/Python.h>
 #include "pyhelper.hpp"
 
@@ -10,8 +11,17 @@ using namespace std;
 class cpp4pyClass
 {
 private:
-    /* data */
+    string path;
+    string funcao;
+    unsigned numeroArgumentos;
+    vector <string> argumentos; 
 public:
     cpp4pyClass(/* args */);
     ~cpp4pyClass();
+    
+    void
+    setPath(string);
+
+    
+    
 };
