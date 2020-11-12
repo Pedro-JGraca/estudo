@@ -2,7 +2,7 @@
 CC=				g++
 LD=				g++
 
-CFLAGS= 		-Wall -c -I/usr/include/python3.8
+CFLAGS= 		-Wall -g -c -I/usr/include/python3.8
 LFLAGS= 		-Wall
 LPOSFLAGS=		-lpython3.8
 

@@ -1,9 +1,11 @@
 #import sys
 
 
-def fibonacci():
+def fibonacci(n,n2):
     #n = int(sys.argv[1])
-    n = int(input("fibonacci:"))
+    #n = int(input("fibonacci:"))
+    n=int(n)
+    print (n2)
     primeiro = 0
     segundo = 1
     resultado = primeiro
@@ -18,3 +20,5 @@ def fibonacci():
         segundo = resultado
 
     return resultado
+
+#print(fibonacci(10,"20"))
