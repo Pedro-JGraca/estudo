@@ -2,12 +2,12 @@
 
 
 class fibonacci:
-    def __init__(self):
-        pass
+    def __init__(self,n):
+        self.n=n
         
-    def fazer(self,n1):
-        n=int(n1)
-        #print (n2)
+    def fazer(self,n2):
+        n=int(self.n)
+        print (n2)
         primeiro = 0
         segundo = 1
         resultado = primeiro
@@ -25,4 +25,3 @@ class fibonacci:
 
 def create(n):
     return fibonacci(n)
-

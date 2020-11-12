@@ -15,24 +15,16 @@ main(int argc, char const *argv[])
 
 	if(pModule)
 	{
+		CPyObject pFunc = PyObject_GetAttrString(pModule, "create");//chama classe
 		CPyObject elemento1 = PyLong_FromLong(10);
-
 		CPyObject tupla = PyTuple_New((Py_ssize_t)1);
-		PyTuple_SetItem(tupla,0,elemento1); // insere elemento1 na posição 0
+		PyTuple_SetItem(tupla,0,elemento1);
+		CPyObject pObjeto = PyObject_CallObject(pFunc, tupla); //instancia objeto, a tupla insere os argumentos passados para a classe
 
-		CPyObject classe=  PyObject_GetAttrString(pModule, "create");
-		CPyObject pObjeto = PyObject_CallObject(classe, NULL);//classe
-		
-		
-		
-		CPyObject metodo = PyObject_CallMethod(pObjeto,"fazer", NULL);
+		CPyObject pValue2 = PyObject_CallMethodObjArgs(pObjeto, PyUnicode_FromString("fazer"),PyLong_FromLong(20),NULL);//metodo
 
-		CPyObject n2 = PyUnicode_FromString("100000");
-		
-		CPyObject pValue = PyObject_CallMethodObjArgs(pObjeto, metodo, tupla);//metodo
-		
-		
-		cout << "C: getInteger() = " << PyLong_AsLong(pValue) << endl ;
+		cout << "C: getInteger() = " << PyLong_AsLong(pValue2) << endl ;
+
 	}
 	else
 	{
