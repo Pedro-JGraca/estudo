@@ -12,7 +12,8 @@ main(int argc, char const *argv[])
 	CPyInstance hInstance;
 
 	CPyObject pModule;	
-
+	PyRun_SimpleString("import sys");
+	PyRun_SimpleString("sys.path.append(\".\")");
 	//String_FromPyUnicode
 
 
