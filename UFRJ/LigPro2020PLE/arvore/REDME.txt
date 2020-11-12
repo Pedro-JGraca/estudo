@@ -41,13 +41,14 @@ Implementação do programa:
         vector, para a utilização do objeto vector.
         string, para a manipulação de strings.
         fstream, para a manipulação de arquivos texto.
+        exception, para tratamento de exceção.
 
     A estrutura de diretórios do program é:
         "./" -> raiz onde se compila o programa
         "./classes" -> diretório onde se encontra as classes desenvolvidas para esse programa
         "./BD" -> diretório onde se encontra o "Banco de dados"
     
-    O código do programa está dividido em 11 arquivos. 4 arquivos de código fonte (.cpp), 6 arquivos header (.h) e 1 arquivo de compilação (Makefile).
+    O código do programa está dividido em 12 arquivos. 4 arquivos de código fonte (.cpp), 7 arquivos header (.h) e 1 arquivo de compilação (Makefile).
 
     Códigos fonte:
         "main.cpp" -> Está localizado na raiz; É o arquivo principal do programa. Ele pega os argumentos passados via CLI e passa para os métodos da classe usada, de acordo com o comando pedido, e a main trata os erros entorno da quantidade de argumentos. Esses métodos ao serem executados irá retornar se funcionou ou não o método executado de acordo com os parametros. Ela irá pegar esses erros e irá relatar ao usuário quando for necessário.
@@ -69,10 +70,12 @@ Implementação do programa:
 
         "arvoret.h" -> está localizado em "./classes"; É onde está descrito a classe "ArvoreT"; É nela também onde está a implementação da arvore binária que é a estrutura de dados usada pela classe "cadastro" para armazenar a objetos da classe "paciente".
 
-        "noht" -> está localizado em "./classes"; É onde está descrito a classe "nohT"; É nela também onde está a implementação do nó usado pela arvore binária, o dado desse nó é o que vai ser o paciente.
+        "noht.h" -> está localizado em "./classes"; É onde está descrito a classe "nohT"; É nela também onde está a implementação do nó usado pela arvore binária, o dado desse nó é o que vai ser o paciente.
+
+        "trataErro.h" ->  está localizado em "./classes"; É onde estão descritas/implementadas as classes "erroInserir" e "erroBuscar", ambas herdam a classe "exception". Elas são usadas pela classe "cadastro" para o tratamento de exceção relacionadas aos métodos para inserir dados na arvore e métodos para buscar dados na arvore.
 
             obs: O motivo para a implementação estar no arquivo ".h" é pelo funcionomento do c++ onde para implementar uma classe tamplate (uma que você pode usar um tipo qualquer em elementos da classe) é necessário implementa-lo no ".h" e não em um ".cpp", onde seria mais tradicional.
-
+    
     Makefile:
         arquivo de compilação e link-edição do programa. Já foi descrito em "Introdução do software".
                 

@@ -1,4 +1,5 @@
 #include "cadastro.h"
+#include "trataErro.h"
 
 cadastro::cadastro()
 {
@@ -18,7 +19,7 @@ cadastro::inserir(string Nome)
     paciente novo(Nome);
 
     if (!(arvore += &novo)){
-        return NULL;
+        throw erroInserir();
     }
     escreverBD(Nome);
 
@@ -30,6 +31,11 @@ cadastro::buscar(string Nome)
 {
     paciente p(Nome);
     paciente *a = arvore(&p);
+
+    if (a==NULL){
+        throw erroBuscar();
+    }
+
     return a;
     
 }
@@ -65,6 +71,7 @@ cadastro::lerBD()
     }
     else
     {
+        //throw 
         return bancoDeDadosNaoAchado;
     }
 

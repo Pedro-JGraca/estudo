@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <exception>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ using namespace std;
 #include "main.h"
 #include "classes/cadastro.h"
 #include "classes/paciente.h"
+#include "classes/trataErro.h"
 
 //arvore paciente paciente-especial cadastro
 
@@ -80,11 +82,12 @@ main(int argc, char const *argv[])
 
             case 1: //inserir
                 if (argc == (NOME+1)){
-                    paciente* ptr_paciente =  sistema.inserir(argv[NOME]);
-                    if (ptr_paciente == NULL){
-                        //tratamento
-                        cout << "erro - what" << endl;
-                        cout << "Paciente já existente" << endl;
+                    try {
+                        sistema.inserir(argv[NOME]);
+                        cout << "O " << argv[NOME] << " Foi adicionado." << endl;
+                    }
+                    catch (erroInserir &erroInserir){
+                        cout << erroInserir.what() << endl;
                     }
                 }
                 else {
@@ -97,17 +100,13 @@ main(int argc, char const *argv[])
             
             case 2: //buscar
                 if (argc == (NOME+1)){
-                    paciente* ptr_paciente =  sistema.buscar(argv[NOME]);
-                    if (ptr_paciente == NULL){
-                        //tratamento
-                        cout << "erro - what" << endl;
-                        cout << "não achado" << endl;
-                    }
-                    else {
+                    try {
+                        sistema.buscar(argv[NOME]);
                         cout << "Existe" << endl;
                     }
-                    
-
+                    catch (erroBuscar &erroBuscar){
+                        cout << erroBuscar.what() << endl;
+                    }
                 }
                 else {
                     cout << "Numero de Argumentos para o comando fornecido errado. Abaixo o uso correto." << endl;
