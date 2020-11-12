@@ -2,6 +2,7 @@
 #define PYHELPER_HPP
 #pragma once
 
+#include <exception>
 #include <Python.h>
 
 class CPyInstance
@@ -10,6 +11,8 @@ public:
 	CPyInstance()
 	{
 		Py_Initialize();
+		PyRun_SimpleString("import sys");
+        PyRun_SimpleString("sys.path.append(\".\")");
 	}
 
 	~CPyInstance()
@@ -82,6 +85,11 @@ public:
 
 	PyObject* operator = (PyObject* pp)
 	{
+		if (pp==nullptr) 
+		{
+			throw "PyObject copy constructor recived Nullptr";
+
+		}
 		p = pp;
 		return p;
 	}

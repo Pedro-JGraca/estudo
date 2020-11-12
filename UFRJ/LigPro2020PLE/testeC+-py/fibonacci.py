@@ -1,24 +1,28 @@
 #import sys
 
 
-def fibonacci(n,n2):
-    #n = int(sys.argv[1])
-    #n = int(input("fibonacci:"))
-    n=int(n)
-    print (n2)
-    primeiro = 0
-    segundo = 1
-    resultado = primeiro
+class fibonacci:
+    def __init__(self):
+        pass
+        
+    def fazer(self,n1):
+        n=int(n1)
+        #print (n2)
+        primeiro = 0
+        segundo = 1
+        resultado = primeiro
 
-    if n > 1:
-        resultado = segundo
+        if n > 1:
+            resultado = segundo
 
-    while ( n > 2):
-        resultado = segundo + primeiro
-        n-=1
-        primeiro = segundo
-        segundo = resultado
+        while ( n > 2):
+            resultado = segundo + primeiro
+            n-=1
+            primeiro = segundo
+            segundo = resultado
 
-    return resultado
+        return resultado
 
-#print(fibonacci(10,"20"))
+def create(n):
+    return fibonacci(n)
+

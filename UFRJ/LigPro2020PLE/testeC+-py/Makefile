@@ -1,33 +1,40 @@
 #macros
-CC=				g++
-LD=				g++
+CC=						g++
+LD=						g++
 
-CFLAGS= 		-Wall -g -c -I/usr/include/python3.8
-LFLAGS= 		-Wall
-LPOSFLAGS=		-lpython3.8
+CFLAGS=		 			-Wall -g -c -I/usr/include/python3.8
+LFLAGS=		 			-Wall
+LPOSFLAGS=				-lpython3.8
 
-MAIN_OBJS=		main.o
+MAIN_OBJS=				main.o
+CPP4PY_CLASS_OBJS=		cpp4py-class.o
 
-OBJETOS=		$(MAIN_OBJS)
+OBJETOS=				$(MAIN_OBJS)\
+						$(CPP4PY_CLASS_OBJS)
 
-MAIN_ARQ=		main.cpp
+MAIN_ARQ=				main.cpp
+CPP4PY_CLASS_ARQ=		cpp4py-class.cpp
 
-ARQUIVOS= 		$(MAIN_ARQ)
+ARQUIVOS=	 			$(MAIN_ARQ)\
+						$(CPP4PY_CLASS_ARQ)
 
 
-EXEC= fibonacci	
+EXEC= cpp4py-class	
 
 #regras
-all:			$(EXEC)\
-				$(OBJETOS)\
-				$(ARQUIVOS)
+all:					$(EXEC)\
+						$(OBJETOS)\
+						$(ARQUIVOS)
 
 $(EXEC): $(OBJETOS)
 	$(LD) $(LFLAGS) $(OBJETOS) -o $@ $(LPOSFLAGS)
 
-compila: 	$(OBJETOS)
+compila:	 			$(OBJETOS)
 
-$(MAIN_OBJS): $(MAIN_ARQ)
+$(MAIN_OBJS): 			$(MAIN_ARQ)
+
+$(CPP4PY_CLASS_OBJS):	$(CPP4PY_CLASS_ARQ)
+
 
 $(OBJETOS): 
 	$(CC) $(CFLAGS) $? -o $@
@@ -42,4 +49,3 @@ clean-exec:
 clean-all:
 	rm $(OBJETOS)
 	rm $(EXEC)
-	rm -rf BD/

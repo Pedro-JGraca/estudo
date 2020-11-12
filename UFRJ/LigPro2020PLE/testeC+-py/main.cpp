@@ -11,46 +11,33 @@ main(int argc, char const *argv[])
 {
 	CPyInstance hInstance;
 
-	CPyObject pModule;	
-	PyRun_SimpleString("import sys");
-	PyRun_SimpleString("sys.path.append(\".\")");
-
-	if(CPyObject cNome= PyUnicode_FromString("fibonacci")){
-		pModule = PyImport_Import(cNome);
-	}
-	else {
-		cout << "nulo" << endl;
-	}
-
-	//ModuloPythonParaC++("CAMINHO/arquivo.py","funcao", "numero de argumentos","vetor de argumentos")
-
-    CPyObject elemento1 = PyLong_FromLong(10);
-	CPyObject elemento2 =  PyUnicode_FromString("1000000");
-	CPyObject tupla = PyTuple_New((Py_ssize_t)2);
-	PyTuple_SetItem(tupla,0,elemento1); // insere elemento1 na posição 0
-	PyTuple_SetItem(tupla,1,elemento2); // insere elemento2 na posição 1
+	CPyObject pModule =  PyImport_Import(PyUnicode_FromString("fibonacci"));//arquivo.py
 
 	if(pModule)
 	{
-		CPyObject pFunc = PyObject_GetAttrString(pModule, "fibonacci");
-		if(pFunc && PyCallable_Check(pFunc))
-		{
-			CPyObject pValue = PyObject_CallObject(pFunc, tupla);
+		CPyObject elemento1 = PyLong_FromLong(10);
 
-			cout << "C: getInteger() = " << PyLong_AsLong(pValue) << endl ;
+		CPyObject tupla = PyTuple_New((Py_ssize_t)1);
+		PyTuple_SetItem(tupla,0,elemento1); // insere elemento1 na posição 0
 
-		}
-		else
-		{
-			cout << "Erro: funcao()" << endl;
-		}
+		CPyObject classe=  PyObject_GetAttrString(pModule, "create");
+		CPyObject pObjeto = PyObject_CallObject(classe, NULL);//classe
+		
+		
+		
+		CPyObject metodo = PyObject_CallMethod(pObjeto,"fazer", NULL);
 
+		CPyObject n2 = PyUnicode_FromString("100000");
+		
+		CPyObject pValue = PyObject_CallMethodObjArgs(pObjeto, metodo, tupla);//metodo
+		
+		
+		cout << "C: getInteger() = " << PyLong_AsLong(pValue) << endl ;
 	}
 	else
 	{
 		printf("ERROR: Modulo nao importado\n");
 	}	
- 	//PyObject* PyObject_CallMethodObjArgs(PyObject *o, PyObject *name, ..., NULL)¶
 	
 	PyTuple_ClearFreeList();
 	return 0;

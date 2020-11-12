@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "fibonacci",
+            "name": "cpp4py-class",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/fibonacci",
+            "program": "${workspaceFolder}/cpp4py-class",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
