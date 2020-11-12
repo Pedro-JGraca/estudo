@@ -1,91 +1,164 @@
-Projeto de gerenciador de catalogo.
+Instituição: UFRJ-POLI-DEL
+Matéria: EEL670 - Linguagens de Programação
+Professor: Miguel Elias Mitre Campista
+Autor/Aluno: Pedro Jullian Medina Torres Graça
 
-Sobre o software:
-    Esse software é aplicado em CLI. Vc passará argumentos via linha de comando para constrolar as inserções de dados e ler os dados.
+0 - Descrição:
+        Projeto de gerenciador de catalogo.
 
-Como compilar:
-    dentro do diretório do programa
-    $ make
+1 - Introdução do software:
+        Esse software é aplicado em CLI. Vc passará argumentos via linha de comando para constrolar as inserções de dados e ler os dados.
 
-Como remover os arquivos compilados:
-    Dentro do diretório do programa
-    $ make clean
-    (assim vc tem so o executavel)
-    Existem várias regras previstas dentro do makefile para diversos fins.
+        Como compilar:
+            dentro do diretório do programa
+            $ make
+
+        regras do arquivo de compitação:
+            - all (faz o mesmo que apenas excrever make, ela compila linha a linha e link-edita depois)
         
-        - all (faz o mesmo que apenas excrever make, ela compila linha a linha e link-edita depois)
+            - compila (compila todos os os 3 arquivos .cpp em objetos .o)
         
-        - compila (compila todos os os 3 arquivos .cpp em objetos .o)
+            - linka (linka todos os 3 objetos .o no programa em si (arquivo binário))
         
-        - linka (linka todos os 3 objetos .o no programa em si (arquivo binário))
+            - se vc quiser compilar apenas um dos códigos fonte pode apenas digitando o nome do arquivo e tirando o .cpp e colocando .o. Exemplo:
+                Se vc quer compilar apenas a main.cpp basta escrever:
+                $ make main.o
         
-        - se vc quiser compilar apenas um dos códigos fonte pode apenas digitando o nome do arquivo e tirando o .cpp e colocando .o. Exemplo:
-            Se vc quer compilar apenas a main.cpp basta escrever:
-            $ make main.o
-        
-        - clean (remove todos os .o)
+            - clean (remove todos os .o)
 
-        - clean-exec (remove o executavel)
+            - clean-exec (remove o executavel)
 
-        - clean-all (remove todos os .o e os executaveis)
+            - clean-all (remove todos os .o e os executaveis)
 
-Como usar:
-    Ao compilar o programa ele estará contido dentro do arquivo binário "catalogo".
+        Como usar:
+            Ao compilar o programa ele estará contido dentro do arquivo binário "catalogo".
 
-    Se você rodar esse programa dessa forma:
+            Se você rodar esse programa dessa forma:
 
-    $ ./catalogo
+            $ ./catalogo
     
-    O programa irá pedir para escrever "help" como argumento para descrever o programa.
+            O programa irá pedir para escrever "help" como argumento para descrever o programa.
 
-    rodando então:
+            rodando então:
 
-    $ ./catalogo help
+            $ ./catalogo help
 
-    O programa fará uma breve descrição de como rodar o programa bem como uma lista de todas as funções possíveis
+            O programa fará uma breve descrição de como rodar o programa bem como uma lista de todas as funções possíveis
 
-Entrada/Saida de dados:
-	O programa manipula um arquivo chamado "catalogo.txt" dentro de um diretorio chamado "BD". Esse diretório está no mesmo local do arquivo binário.
-    Se aonde o programa for usado dentro não estiver um diretório chamado "BD", ele irá criar um diretório chamado "BD" e criará o "catalogo.txt" dentro dele.
-    Além disso se tiver um diretório chamado "BD" e não tiver um arquivo chamado "catalogo.txt", ele irá criar um "catalogo.txt" dentro deste.
-    Se o arquivo estiver fora da formatação compreensivel para o programa, ele irá reclamar que o arquivo está corrompido e não fará nada. Nesse caso é sugerido colocar o programa em outro lugar ou simplesmente apagar/mudar de nome o arquivo "catalogo.txt".
+2 - Entrada/Saida de dados:
+	    O programa manipula um arquivo chamado "catalogo.txt" dentro de um diretorio chamado "BD". Esse diretório está no mesmo local do arquivo binário.
+        Se aonde o programa for usado dentro não estiver um diretório chamado "BD", ele irá criar um diretório chamado "BD" e criará o "catalogo.txt" dentro dele.
+        Além disso se tiver um diretório chamado "BD" e não tiver um arquivo chamado "catalogo.txt", ele irá criar um "catalogo.txt" dentro deste.
+        Se o arquivo estiver fora da formatação compreensivel para o programa, ele irá reclamar que o arquivo está corrompido e não fará nada. Nesse caso é sugerido colocar o programa em outro lugar ou simplesmente apagar/mudar de nome o arquivo "catalogo.txt".
 
-Implementação do programa:
-    Esse programa foi totalmente desenvolvido em C++ e usa as bilbiotecas: 
-        iostream, para saida de textos no terminal.
-        vector, para a utilização do objeto vector.
-        fstream, para a manipulação de arquivos texto.
-        string, para a manipulação de strings.
-        iomanip, para funções mais específicas de saida de texto no terminal.
+3 - Implementação do programa:
+        Esse programa foi totalmente desenvolvido em C++ e usa as bilbiotecas: 
+            iostream, para saida de textos no terminal.
+            vector, para a utilização do objeto vector.
+            fstream, para a manipulação de arquivos texto.
+            string, para a manipulação de strings.
+            iomanip, para funções mais específicas de saida de texto no terminal.
+        
+        É necessário que o sistema operacional do programa seja linux (foi pensando para linux 5.4.0-52-generic de 64bits). Necessário também que esse sistema tenha os comandos "mkdir" e "touch" (usados nesse programa) e com permissão de uso para o usuario que está executando esse programa. Esse linux recém-instalado possui esses comandos.
+        É bem possivel que rode em outros linux, inclusive em 32bits. Mas não foi testado.
     
-    A estrutura de diretórios do program é:
-        "./" -> raiz onde se compila o programa
-        "./classes" -> diretório onde se encontra as classes desenvolvidas para esse programa
-        "./BD" -> diretório onde se encontra o "Banco de dados"
+        A estrutura de diretórios do program é:
+            "./" -> raiz onde se compila o programa
+            "./classes" -> diretório onde se encontra as classes desenvolvidas para esse programa
+            "./BD" -> diretório onde se encontra o "Banco de dados" (arquivo "catalogo.txt")
     
-    O código do programa está dividido em 7 arquivos. 3 arquivos de código fonte (.cpp), 3 arquivos header (.h) e 1 arquivo de compilação (Makefile).
+        Sobre os arquivos necessários para a compilação dos arquivos:
+            O código do programa está dividido em 7 arquivos. 3 arquivos de código fonte (.cpp), 3 arquivos header (.h) e 1 arquivo de compilação (Makefile).
 
-    Códigos fonte:
-        main.cpp. Está localizado     
+            Códigos fonte:
+                "main.cpp" -> Está localizado na raiz; É o arquivo principal do programa. Ele pega os argumentos passados via CLI e passa para os métodos da classe usada, de acordo com o comando pedido, e a main trata os erros entorno da quantidade de argumentos. Esses métodos ao serem executados irá retornar se funcionou ou não o método executado de acordo com os parametros. Ela irá pegar esses erros e irá relatar ao usuário quando for necessário.
 
--1 programa                                           1
+                "proxyCatalogo.cpp" -> está localizado em "./classes"; É o arquivo onde está a implementação da classe "proxyCatalogo". Essa classe serve como um proxy entre a main e a classe "catalogo". Ela tem como função uma simples organização dos dados chegados pela main e os  tratamentos de erros necessários para escrever dentro da classe "catalogo". Essa divisão foi importante para melhor divisão e organização dos códigos. A "proxyCatalogo" possui os métodos relacionados aos comandos do programa e métodos relacionados a organização interna/externa desses dados recebidos e seus tratamentos.
 
-0 programa help                                       2
+                "catalogo.cpp" -> está localizado em "./classes"; É o arquivo onde está a implementação da classe "catalogo". Essa classe é a que efetivamente organiza os filmes e aonde sofre as principais sobrecargas de operação.
 
-1 Programa ListarCatalogo                             2 -> lista todos os filmes e seus detalhes
+            header:
+                "catalogo.h" -> está localizado em "./classes"; É onde está descrito a classe "catalogo".
 
-2 Programa ListarFilmes                               2 -> lista todos os filmes  
+                "proxyCatalogo.h" -> está localizado em "./classes"; É onde está descrito a classe "proxyCatalogo".
 
-3 Programa MelhorFilme                                2
+                "globalCatalogo.h" -> está localizado em "./classes"; É onde está a descrição das funções globais. Essas funções são as necessárias de serem globais para a sobrecarga de operação.
+            
+            Makefile:
+                arquivo de compilação e link-edição do programa. Já foi descrito em "Introdução do software".
+                
+4 - Casos de uso:
+    Esse programa fala sobre a manipulação de um catalogo de filmes. Aqui abaixo estará os casos de uso previstas pelo desenvolvedor.
 
-4 programa help comando                               3
+    0)
+        Independente do uso, se executado o programa com problemas nos dados do arquivo:
+            
+            Caso não existir um diretório "BD" o programa avisará que não existe e ele irá criar esse diretório junto com um arquivo "catalogo.txt" (aqui ele usa os comandos "mkdir" e "touch").
 
-5 programa RemoverFilme Filme                         3
+            Caso existir esse diretório "BD" e não existir o arquivo "catalogo.txt". O programa irá avisar que não existe e cria o diretório também.
 
-6 programa BuscarFilme Filme                          3
+            Caso existir o diretório "BD" e existir o arquivo "catalogo.txt", mas se os dados desse arquivo estiver fora da formatação necessária, o programa irá avisar que o arquivo se encontra corrompido no contexto desse programa.
+    
+        Sempre que o programa é executado, ele rodará essa consulta se o diretório e o arquivo está correto, antes de tudo, então independente do uso, se o estiver com qualquer um dos 3 casos acima, ele irá executar e retornar o supracitado.
 
-7 programa ListarFilme Filme                          3
+        Todos os casos abaixo estão considerando que o diretório "BD" no mesmo local do binário, com um arquivo "cotalogo.txt" dentro desse diretório e esse não corrompido.
 
-8 programa InserirFilme Filme Produtora Nota          5
+    a)
+        $./catalogo           
+            Escreve a necessidade de um comando, sugerindo o comando help para explicar o uso do programa.
+    
+    b)
+        $./catalogo TEXTO-COM-COMANDO-NÃO-PREVISTO
+            Relata que não conhece esse programa e sugere o uso help.
 
-9 Progama EditarFilme Filme Produtora Nota            5
+    c)
+        Qualquer uso dos comandos previstos de forma não explicita abaixo, o programa irá reclamar e mostrará o uso correto.
+    
+    d)
+        Se for passado mais do que 4 argumentos, o programa irá comentar que passou do limite de argumentos possivel do programa. Sugere o uso comando help para explicar uso do programa.
+       
+    e)
+        $./catalogo help
+            Descreve os casos corretos de uso do programa e os comandos do programa, além do programa como um todo.
+    f)
+        $./catalogo listarCatalogo
+            Lista todos os filmes do catalogo, junto com seus dados.
+    g)
+        $./catalogo listarFilmes                               
+            Lista todos os nomes dos filmes no catalogo.
+    h)
+        $./catalogo melhorFilme
+            Diz o filme com a maior nota. Se existir notas iguais, o retorno será o primeiro na ordem alfabética.
+            Se não existir filmes no catalogo, o programa irá retornar que não existem arquivos no banco de dados.
+    i)
+        $./catalogo help [COMANDO]
+            Explica o comando passado e como usa-lo. Se for passado um comando não dentro da lista de comandos feitos, o programa irá avisar.
+            
+    j)
+        $./catalogo removerFilme [Nome]
+            Remove o filme passado no segundo argumento. 
+            Se for passado um filme não dentro da lista de filmes, o programa irá avisar e não removerá nenhum filme.
+    k)
+        $./catalogo buscarFilme [Nome]
+            Busca o filme passado no segundo argumento e diz se o filme existe na lista ou não.
+    l)
+        $./catalogo listarFilme [Nome]
+            Busca o filme passado no segundo argumento e retorna os dados do filme (seu nome, sua Produtora e sua nota). Se não achar, avisa.
+    m)
+        $./catalogo editarNome [Nome-do-filme-que-deseja-trocar] [Novo-Nome]
+            Busca o filme passado no segundo argumento, se não achar, avisa e não faz troca. Se achar, ele avisa qual foi e troca os nomes.
+    n)
+        $./catalogo editarProdutora [Nome-do-filme-que-deseja-trocar] [Nova-produtora]
+            Busca o filme passado no segundo argumento, se não achar, avisa e não faz troca. Se achar, ele avisa qual foi e troca as produtoras.
+
+    o)
+        $./catalogo editarNota [Nome-do-filme-que-deseja-trocar] [Nova-nota]
+            Busca o filme passado no segundo argumento, se não achar, avisa e não faz troca.
+            Se achar, ele irá verificar se a nota recebida é válida (menor ou igual à 10, maior ou igual à 0 e se é um numero).
+            Se não for válida ele avisa e não faz a troca.
+            Se se for ele avisa qual foi e troca as notas.
+    p)
+        $./catalogo inserirFilme [Nome] [Produtora] [Nota]
+            Insere o filme passado com os dados dos 3 argumentos acima.
+            Se a nota for negativa ou maior que 10, ele não deixa inserir e avisa o motivo.
+            Se tentar inserir um filme depois de já existirem 10 filmes (limite do programa), ele não deixa inserir e avisa o motivo.

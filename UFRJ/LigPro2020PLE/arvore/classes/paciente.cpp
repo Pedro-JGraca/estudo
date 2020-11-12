@@ -14,9 +14,9 @@ paciente::paciente(string n){
     nome = n;
 }
 
-paciente::paciente(const paciente &n){
+/*paciente::paciente(const paciente &n){
     nome = n.nome;
-}
+}*/
 
 paciente::paciente(){
 }

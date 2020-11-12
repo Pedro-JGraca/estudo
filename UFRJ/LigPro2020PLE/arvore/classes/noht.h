@@ -7,16 +7,11 @@ class nohT
 {
 public:
     type data;
-    //bool pintado;
-    //noh *anterior;
     nohT *direita;
     nohT *esquerda;
 
     nohT ();
     
-/*    noh * 
-    pinta ( noh *local, paciente * l);
-*/
     bool
     operator!=(nohT a);
 };

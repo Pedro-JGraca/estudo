@@ -17,12 +17,12 @@ public:
 
     paciente();
     paciente(string n);
-    paciente(const paciente &n);
+    //paciente(const paciente &n);
 
     void
     setNome(string);
 
-    string
+    virtual string
     getNome();
 
 };

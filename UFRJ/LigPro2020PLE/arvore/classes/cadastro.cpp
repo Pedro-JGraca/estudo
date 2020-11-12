@@ -1,5 +1,5 @@
 #include "cadastro.h"
-#include "arvore.h"
+
 cadastro::cadastro()
 {
     erroBD = lerBD();
@@ -17,54 +17,26 @@ cadastro::inserir(string Nome)
 {
     paciente novo(Nome);
 
-    
-
-    /*if (buscar(Nome))
-    {
-        return NULL;
-    }
-    arvore2.push_back(novo);
-    */
-
-
     if (!(arvore += &novo)){
         return NULL;
     }
     escreverBD(Nome);
 
-
-
-    //return &arvore2.back();
     return arvore(&novo);
 }
 
 paciente *
 cadastro::buscar(string Nome)
 {
-    /*for (unsigned index = 0; index < arvore2.size(); index++)
-    {
-        if (arvore2[index].getNome() == Nome)
-        {
-            return &arvore2[index];
-        }
-    }*/
-
-            
     paciente p(Nome);
     paciente *a = arvore(&p);
     return a;
     
-
-    //return NULL;
 }
 
 void
 cadastro::imprimir()
 {
-    /*for (unsigned index = 0; index < arvore2.size(); index++)
-    {
-        cout << arvore2[index];
-    }*/
     cout << arvore;
 }
 
@@ -84,11 +56,9 @@ cadastro::lerBD()
     {
         while (fin >> b)
         {
-
             if (b != "\0")
             {
                 paciente novo(b);
-                //arvore2.push_back(novo);
                 arvore += &novo;
             }
         }
@@ -107,15 +77,6 @@ cadastro::escreverBD(string escrever)
     ofstream fin(ARQUIVO,ios_base::app);
     if (fin)
     {
-        /*for (unsigned index = 0; index < arvore2.size(); index++)
-        {
-            //ANTES ELE ESCREVIA NO FINAL TODA A ESTRUTURA
-            //AGORA ELE ESCREVE SEMPRE QUE RECEBE UMA LINHA NOVA
-            //ASSIM ELE MANTEM A MESMA ESTRUTURA NA INSERÇÃO
-            string saida = arvore2[index].getNome() + "\n";
-            fin << saida;
-        }*/
-
         fin << escrever << endl;
     }
     else
@@ -134,6 +95,5 @@ cadastro::iniciarBD()
     string comando = "touch ";
     comando += ARQUIVO;
     system(comando.c_str());
-
     return U;
 }

@@ -1,7 +1,8 @@
-Projeto de gerenciador de catalogo.
+Projeto de gerenciador pacientes de um hospital.
 
 Sobre o software:
-    Esse software é aplicado em CLI. Vc passará argumentos via linha de comando para constrolar as inserções de dados e ler os dados.
+    Esse software é aplicado em CLI. Vc passará argumentos via linha de comando para constrolar as inserções de dados e ler os dados. 
+    O interessante é que a estrutura de dados usada para armazenamento de dados no programa em memória é a estrutura de uma arvore binária.
 
 Como compilar:
     dentro do diretório do programa
@@ -15,11 +16,11 @@ Como remover os arquivos compilados:
         
         - all (faz o mesmo que apenas excrever make, ela compila linha a linha e link-edita depois)
         
-        - compila (compila todos os os 3 arquivos .cpp em objetos .o)
+        - compila (compila todos os arquivos código-fonte .cpp em arquivos objetos .o)
         
-        - linka (linka todos os 3 objetos .o no programa em si (arquivo binário))
+        - linka (linka todos os arquivos objetos .o no programa em si (arquivo binário))
         
-        - se vc quiser compilar apenas um dos códigos fonte pode apenas digitando o nome do arquivo e tirando o .cpp e colocando .o. Exemplo:
+        - exemplo.o (se vc quiser compilar apenas um dos códigos fonte pode apenas digitando o nome do arquivo e tirando o .cpp e colocando .o). Exemplo:
             Se vc quer compilar apenas a main.cpp basta escrever:
             $ make main.o
         
@@ -29,63 +30,95 @@ Como remover os arquivos compilados:
 
         - clean-all (remove todos os .o e os executaveis)
 
-Como usar:
-    Ao compilar o programa ele estará contido dentro do arquivo binário "catalogo".
-
-    Se você rodar esse programa dessa forma:
-
-    $ ./catalogo
-    
-    O programa irá pedir para escrever "help" como argumento para descrever o programa.
-
-    rodando então:
-
-    $ ./catalogo help
-
-    O programa fará uma breve descrição de como rodar o programa bem como uma lista de todas as funções possíveis
-
 Entrada/Saida de dados:
-	O programa manipula um arquivo chamado "catalogo.txt" dentro de um diretorio chamado "BD". Esse diretório está no mesmo local do arquivo binário.
-    Se aonde o programa for usado dentro não estiver um diretório chamado "BD", ele irá criar um diretório chamado "BD" e criará o "catalogo.txt" dentro dele.
-    Além disso se tiver um diretório chamado "BD" e não tiver um arquivo chamado "catalogo.txt", ele irá criar um "catalogo.txt" dentro deste.
-    Se o arquivo estiver fora da formatação compreensivel para o programa, ele irá reclamar que o arquivo está corrompido e não fará nada. Nesse caso é sugerido colocar o programa em outro lugar ou simplesmente apagar/mudar de nome o arquivo "catalogo.txt".
+	O programa manipula um arquivo chamado "arvore.txt" dentro de um diretorio chamado "BD". Esse diretório está no mesmo local do arquivo binário.
+    Se aonde o programa for usado dentro não estiver um diretório chamado "BD", ele irá criar um diretório chamado "BD" e criará o "arvore.txt" dentro dele.
+    Além disso se tiver um diretório chamado "BD" e não tiver um arquivo chamado "arvore.txt", ele irá criar um "catalogo.txt" dentro deste.
 
 Implementação do programa:
     Esse programa foi totalmente desenvolvido em C++ e usa as bilbiotecas: 
         iostream, para saida de textos no terminal.
         vector, para a utilização do objeto vector.
-        fstream, para a manipulação de arquivos texto.
         string, para a manipulação de strings.
-        iomanip, para funções mais específicas de saida de texto no terminal.
-    
+        fstream, para a manipulação de arquivos texto.
+
     A estrutura de diretórios do program é:
         "./" -> raiz onde se compila o programa
         "./classes" -> diretório onde se encontra as classes desenvolvidas para esse programa
         "./BD" -> diretório onde se encontra o "Banco de dados"
     
-    O código do programa está dividido em 7 arquivos. 3 arquivos de código fonte (.cpp), 3 arquivos header (.h) e 1 arquivo de compilação (Makefile).
+    O código do programa está dividido em 11 arquivos. 4 arquivos de código fonte (.cpp), 6 arquivos header (.h) e 1 arquivo de compilação (Makefile).
 
     Códigos fonte:
-        main.cpp. Está localizado     
+        "main.cpp" -> Está localizado na raiz; É o arquivo principal do programa. Ele pega os argumentos passados via CLI e passa para os métodos da classe usada, de acordo com o comando pedido, e a main trata os erros entorno da quantidade de argumentos. Esses métodos ao serem executados irá retornar se funcionou ou não o método executado de acordo com os parametros. Ela irá pegar esses erros e irá relatar ao usuário quando for necessário.
 
--1 programa                                           1
+        "paciente.cpp" -> está localizado em "./classes"; É o arquivo onde está a implementação da classe "paciente". Essa classe é a que armazena os dados dos pacientes armazenados e é estruturada no programa.
 
-0 programa help                                       2
+        "cadastro.cpp" -> está localizado em "./classes"; É o arquivo onde está a implementação da classe "cadastro". Essa classe é a que cadastra os pacientes usando o objetos instanciados pela classe "pacientes". É nela que se instancia a arvore binária, é ela que lê do arquivo em "BD" e é ela que escreve no arquivo em "BD". É a grande organizadora.
 
-1 Programa ListarCatalogo                             2 -> lista todos os filmes e seus detalhes
+        "pacienteESP.cpp" -> está localizado em "./classes"; É o arquivo onde está a implementação da classe "pacienteESP". Essa classe é uma classe que herda as características da classe "paciente" e modifica um dos atributos para mostrar que esse é um paciente especial e que merece mais atenção do que a média.
 
-2 Programa ListarFilmes                               2 -> lista todos os filmes  
+    header:
+        "main.h" -> está localizado em "./"; Contem algumas das declarações globais do programa.
 
-3 Programa MelhorFilme                                2
+        "paciente.h" -> está localizado em "./classes"; É onde está descrito a classe "paciente".
 
-4 programa help comando                               3
+        "cadastro.h" -> está localizado em "./classes"; É onde está descrito a classe "cadastro".
 
-5 programa RemoverFilme Filme                         3
+        "pacienteESP.h" -> está localizado em "./classes"; É onde está descrito a classe "pacienteESP".
 
-6 programa BuscarFilme Filme                          3
+        "arvoret.h" -> está localizado em "./classes"; É onde está descrito a classe "ArvoreT"; É nela também onde está a implementação da arvore binária que é a estrutura de dados usada pela classe "cadastro" para armazenar a objetos da classe "paciente".
 
-7 programa ListarFilme Filme                          3
+        "noht" -> está localizado em "./classes"; É onde está descrito a classe "nohT"; É nela também onde está a implementação do nó usado pela arvore binária, o dado desse nó é o que vai ser o paciente.
 
-8 programa InserirFilme Filme Produtora Nota          5
+            obs: O motivo para a implementação estar no arquivo ".h" é pelo funcionomento do c++ onde para implementar uma classe tamplate (uma que você pode usar um tipo qualquer em elementos da classe) é necessário implementa-lo no ".h" e não em um ".cpp", onde seria mais tradicional.
 
-9 Progama EditarFilme Filme Produtora Nota            5
+    Makefile:
+        arquivo de compilação e link-edição do programa. Já foi descrito em "Introdução do software".
+                
+4 - Casos de uso:
+    Esse programa é um administrador de pacientes para um hospital. Aqui abaixo estará os casos de uso previstas pelo desenvolvedor.
+    O nome do arquivo binário é "cadastro-pacientes" e ele foi compilado em um computador usando o SO ubuntu 20.04 com o linux 5.4.0-53-generic. Em tese ele deve funcionar em qualquer linux.
+
+    0)
+        Independente do uso, se executado o programa com problemas no sistema de persistencia de dados:
+            
+            Caso não existir um diretório "BD" o programa avisará que não existe e ele irá criar esse diretório junto com um arquivo "arvore.txt" (aqui ele usa os comandos "mkdir" e "touch").
+
+            Caso existir esse diretório "BD" e não existir o arquivo "arvore.txt". O programa irá avisar que não existe e cria o diretório também.
+
+        Sempre que o programa é executado, ele rodará essa consulta se o diretório e o arquivo está correto, antes de tudo, então independente do uso, se o estiver com qualquer um dos 2 casos acima, ele irá executar e retornar o supracitado.
+
+        Todos os casos abaixo estão considerando que o diretório "BD" no mesmo local do binário, com um arquivo "arvore.txt" dentro desse diretório.
+
+    a)
+        $./cadastro-pacientes
+            Escreve a necessidade de um comando, sugerindo o comando help para explicar o uso do programa.
+    
+    b)
+        $./cadastro-pacientes TEXTO-COM-COMANDO-NÃO-PREVISTO
+            Relata que não conhece esse programa e sugere o uso help.
+
+    c)
+        Qualquer uso dos comandos previstos de forma não explicita abaixo, o programa irá reclamar e mostrará o uso correto.
+    
+    d)
+        Se for passado mais do que 2 argumentos, o programa irá comentar que passou do limite de argumentos possivel do programa. Sugere o uso comando help para explicar uso do programa.
+       
+    e)
+        $./cadastro-pacientes help
+            Descreve os casos corretos de uso do programa e os comandos do programa, além do programa como um todo.
+    f)
+        $./cadastro-pacientes imprimir
+            Lista todos os pacientes.
+    g)
+        $./cadastro-pacientes help [COMANDO]
+            Explica o comando passado e como usa-lo. Se for passado um comando não dentro da lista de comandos feitos, o programa irá avisar.
+            
+    h)
+        $./cadastro-pacientes  inserir [Nome]
+            Caso não exista um paciente com esse nome, o sistema insere dentro da arvore binária. Se existir, não irá incluir e irá avisar.
+    i)
+        $./cadastro-pacientes buscar [Nome]
+            Busca um paciente com o nome passado no segundo argumento e diz se o paciente está presente na lista ou não.
+   
