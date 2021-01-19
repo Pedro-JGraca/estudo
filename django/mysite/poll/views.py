@@ -3,6 +3,7 @@ from django.views import generic
 from .models import Question, Choice
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.utils import timezone
 
 # Create your views here.
 
@@ -14,7 +15,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the last five published questions. """
-        return Question.objects.order_by('-pub_date')[:5]
+        return Question.objects.filter(pub_date_lte= timezone.now()).order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
     model = Question
@@ -38,3 +39,4 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
     return HttpResponseRedirect(reverse('poll:results', args=(question.id,)))
+
