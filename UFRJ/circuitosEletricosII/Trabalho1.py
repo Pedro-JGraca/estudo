@@ -106,13 +106,13 @@ for no in nos:
                     exit()
             
             elif type(elemento) == transCondutancia: #modificando matriz de condutancias adicionando transcondutancias
-                if no == int(elemento.noPositivo): #corrente está entrando
+                if no == int(elemento.noPositivo): #corrente está entrando #G*(ep-en) -(*-1)> -Gep + Gen
                     if int(elemento.noControlePositivo) != 0:
-                        G[no-1][int(elemento.noControlePositivo)-1] += int(elemento.ganhoCorrente)
+                        G[no-1][int(elemento.noControlePositivo)-1] -= int(elemento.ganhoCorrente)
                     if int(elemento.noControleNegativo) != 0:
-                        G[no-1][int(elemento.noControleNegativo)-1] -= int(elemento.ganhoCorrente)
+                        G[no-1][int(elemento.noControleNegativo)-1] += int(elemento.ganhoCorrente)
                 
-                elif no == int(elemento.noNegativo):
+                elif no == int(elemento.noNegativo): #corrente está saindo # -G*(ep-en) -(*-1)> Gep - Gen
                     if int(elemento.noControleNegativo) != 0:
                         G[no-1][int(elemento.noControleNegativo)-1] += int(elemento.ganhoCorrente)
                     if int(elemento.noControlePositivo) != 0:
