@@ -2,12 +2,10 @@
 from flask import Flask
 from flask import request
 from bd import devices,logs
-import sqlite3
 
 ###############################     ROUTES  ########################################
 app = Flask(__name__)
 
-conn = sqlite3.connect('devices.db')
 
 @app.route('/admin', methods=["POST"])
 def adminCmd():
