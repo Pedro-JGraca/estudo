@@ -27,6 +27,7 @@ class devices: #add tratamento para quando não acha ID
         else:
             return False
         return True
+        
     def inserirDevice(self,device):
         if(type( device ) == devices):
             if not(self.verificarDevice(self.id)):
