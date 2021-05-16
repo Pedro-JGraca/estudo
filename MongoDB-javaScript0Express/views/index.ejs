@@ -6,25 +6,48 @@
     </head>
     <body>
         <h2>A TABELA</h2>
+        <br>
+        <br>
+        <h3>Registrar</h3>
         <form action="/register" method="POST">
             <input type="number" name="Id" id="_id">
             <input type="text" placeholder="Nome" name='name'>
             <input type="password" placeholder="Senha" name='password'>
             <button type="submit">registrar </button>
         </form>
-
+        <br>
+        <br>
+        <h3>Listar</h3>
         <form action="/listar" method="GET">
             <button type="submit">listar </button>
         </form>
+        <br>
+        <br>
+        <h3>Buscar</h3>
+
         <form action="/buscar" method="POST">
             <input type="number" name="Id" id="_id">
             <button type="submit">buscar </button>
         </form>
-
-        <form action="/alterar" method="GET">
+        <br>
+        <br>
+        <h3>Modificar</h3>
+        <form action="/alterar" method="POST">
+            <h4>Alterar</h4>
+            <input type="text" placeholder="Key" name='Akey'>
+            <input type="text" placeholder="Conteudo" name='Aconteudo'>
+            <h4>Modificador</h4>
+            <input type="text" placeholder="Key" name='Mkey'>
+            <input type="text" placeholder="Conteudo" name='Mconteudo'>
+            
             <button type="submit">alterar </button>
         </form>
-        <form action="/apagar" method="GET">
+        <br>
+        <br>
+        <h3>Apagar</h3>
+        <form action="/apagar" method="POST">
+            <input type="text" placeholder="Key" name='key'>
+            <input type="text" placeholder="Conteudo" name='conteudo'>
             <button type="submit">apagar </button>
         </form>
 

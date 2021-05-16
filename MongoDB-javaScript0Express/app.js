@@ -63,8 +63,6 @@ app.post('/register', (req,res) => {
       ...novo
     }
   }
-
-
   
   const dbplayers = db.collection('players')
   dbplayers.insertOne(register)
@@ -122,15 +120,32 @@ app.post('/buscar', (req,res) => {
   res.render('show.ejs')
  })
 
-app.get('/alterar', (req,res) => {
+app.post('/alterar', (req,res) => {
+  alterar = {}
+  modificador = {}
+
+  alterar[req.body['Akey'].toString()]=req.body['Aconteudo']
+  modificador[req.body['Mkey'].toString()]=req.body['Mconteudo']
+
+  console.log(alterar)
+  console.log(modificador)
+
   res.render('show.ejs')
-  // db.players.update({ "name" : "55"}, { $set : {"password" : "oioi"} })
+
+
+  db.collection('players').updateOne(alterar, { $set : modificador })//pega o primeiro  ID e altera
+  //db.collection('players').update(alterar, { $set : modificador })//pega todos os que encontra alterar e altera
 
 })
 
-app.get('/apagar', (req,res) => {
+app.post('/apagar', (req,res) => {
+  
+  console.log(req.body)
 
-//  db.players.remove({ "name" : "Pedro"})
+  remover = {}
+  remover[req.body['key'].toString()]=req.body['conteudo']
+  console.log(remover)
+  db.collection('players').deleteOne(remover)
  
   res.render('show.ejs')
 })
