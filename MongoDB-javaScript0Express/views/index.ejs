@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Meu Modificador de tabelas Mongo</title>
+    </head>
+    <body>
+        <h2>A TABELA</h2>
+        <form action="/register" method="POST">
+            <input type="number" name="Id" id="_id">
+            <input type="text" placeholder="Nome" name='name'>
+            <input type="password" placeholder="Senha" name='password'>
+            <button type="submit">registrar </button>
+        </form>
+
+        <form action="/listar" method="GET">
+            <button type="submit">listar </button>
+        </form>
+        <form action="/buscar" method="POST">
+            <input type="number" name="Id" id="_id">
+            <button type="submit">buscar </button>
+        </form>
+
+        <form action="/alterar" method="GET">
+            <button type="submit">alterar </button>
+        </form>
+        <form action="/apagar" method="GET">
+            <button type="submit">apagar </button>
+        </form>
+
+    </body>
+</html>
