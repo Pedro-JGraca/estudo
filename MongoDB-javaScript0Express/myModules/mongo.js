@@ -1,4 +1,4 @@
-export class collection{
+class collection{
   constructor(db,collection) {
     this.dbplayers = db.collection(collection)
   }
@@ -13,4 +13,4 @@ export class collection{
   }
 }
 
-//module.export = {collection}
+module.exports = {collection}

@@ -1,5 +1,3 @@
-//import {collection} from "./myModules/mongo.js"
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -68,12 +66,9 @@ app.post('/register', (req,res) => {
       ...novo
     }
   }
-  
-  /*const dbplayers = db.collection('players')
-  dbplayers.insertOne(register)*/
-  console.log(collection)
-  /*a = new collection(db,'players')
-  a.insertOne(register)*/
+
+  a = new collection(db,'players')
+  a.insertOne(register)
   console.log(register)
 }
   res.render('show.ejs')
