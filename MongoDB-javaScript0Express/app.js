@@ -62,36 +62,18 @@ app.post('/buscar', (req,res) => {
   //db.players.findOne({"name":'55'})
 
   id = req.body['Id'].toString()
-  if (id.length < 24)
+  let result = players.searchByID(id)
+  if(result== false)
   {
-    while(id.length!=24)
-    {
-      id = '0' + id 
-    }
+    console.log('Não existe usuário com esse Id')
   }
-  else if (id.length > 24) {
-    id = id.substring(id.length-24,id.length)
-  }//tem que ter 24 hexadecimais
-  achou = false
-  db.collection('players').find().toArray()
-  .then(
-  results => {
-    for (cont=0;cont<results.length;cont++){
-      if (results[cont]['_id'].toString() == id){
-        achou = true
-        console.log(results[cont])
-      }
-    }
-    if (achou == false)
-    {
-      console.log('Não existe usuário com esse Id')
-    }
-   
-  })
+  else{
+   console.log(result) 
+  }
 
-  
+
   res.render('show.ejs')
- })
+})
 
 app.post('/alterar', (req,res) => {
   alterar = {}
