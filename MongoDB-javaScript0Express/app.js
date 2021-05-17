@@ -3,25 +3,26 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true}))
 const MongoClient = require('mongodb').MongoClient
-
 const {collection} = require('./myModules/mongo.js')
 
 
 const url = 'mongodb://127.0.0.1:27017'
 
 const dbName = 'outroNome' 
-let db 
-const {ObjectId} = require('mongodb')
+let db
+
+
 MongoClient.connect(url, { useUnifiedTopology: true}, (err,client) => {
   if (err) return console.log(err)
   db = client.db(dbName) 
   console.log('MangoDB: ' +  url)
   console.log('DataBase: ' +  dbName)
-  
+  players = new collection(db,'players')
 })
 
 app.listen(3000, function() {
     console.log('server ok')
+
 })
 
 app.set('view engine', 'ejs')
@@ -31,49 +32,22 @@ app.get('/', (req,res) =>{
 })
 
 app.post('/register', (req,res) => {
-
-  id = req.body['Id'].toString()
-  if (/^[A-F0-9]+$/i.test(id)==false)
-  {
-    console.log('esse numero não é valido')
-  } 
-  else {
-  if (id.search("-")==0) // tira o menos
-  {
-    id = id.substring(1,id.length)
-  }
-  if (id.length < 24)
-  {
-    while(id.length!=24)
+  if (
+    players.insertOneWithID(req.body['Id'],
     {
-      id = '0' + id 
-    }
-  }
-  else if (id.length > 24) {
-    id = id.substring(id.length-24,id.length)
-  }//tem que ter 24 hexadecimais
-
-  //verificar se o ID é usado
-
-
-  register = {'_id':ObjectId(id)} // add todos os outros elementos tirando o primeiro a entrada (se o id é o primeiro)
-  novo = {}
-  for (cont = 1;cont < Object.keys(req.body).length;cont++)
+      'name':req.body['name'],
+      'password':req.body['password']
+    })
+   )
   {
-    novo[Object.keys(req.body)[cont]] = req.body[Object.keys(req.body)[cont]]
-    register = {
-      ...register,
-      ...novo
-    }
+    console.log("Inclusão com sucesso!")
+  }
+  else
+  {
+    console.log("Inclusão com FRACASO!")
   }
 
-  a = new collection(db,'players')
-  a.insertOne(register)
-  console.log(register)
-}
-  res.render('show.ejs')
-
-  
+  res.render('show.ejs')  
 })
 
 
