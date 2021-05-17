@@ -35,9 +35,11 @@ class collection{
 
     //verificar se o ID é usado
 
-    this.dbplayers.insertOne({...{
-      '_id':ObjectId(id)
-    },...{data}})
+    this.dbplayers.insertOne(
+      {
+        ...{'_id':ObjectId(id)},...data}
+  )
+    
     return true
   }
   insertOneOffID(register){
