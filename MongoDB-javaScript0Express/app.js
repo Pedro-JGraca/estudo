@@ -15,7 +15,7 @@ let db
 MongoClient.connect(url, { useUnifiedTopology: true}, (err,client) => {
   if (err) return console.log(err)
   db = client.db(dbName) 
-  console.log('MangoDB: ' +  url)
+  console.log('MongoDB: ' +  url)
   console.log('DataBase: ' +  dbName)
   players = new collection(db,'players')
 })
@@ -53,11 +53,7 @@ app.post('/register', (req,res) => {
 
 
 app.get('/listar', (req,res) => {
- db.collection('players').find().toArray()
-   .then(
-   results => {
-     console.log(results)
-   })
+  players.list()
   res.render('show.ejs')
 })
 

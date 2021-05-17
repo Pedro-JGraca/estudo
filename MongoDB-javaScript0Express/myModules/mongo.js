@@ -34,22 +34,27 @@ class collection{
     }
 
     //verificar se o ID é usado
+    //verificar de data é json
 
     this.dbplayers.insertOne(
       {
         ...{'_id':ObjectId(id)},...data}
-  )
+    )
     
     return true
   }
-  insertOneOffID(register){
-    
+  insertOneOffID(data){
+    this.dbplayers.insertOne(data)
   }
   
 
 
   list(){
-    dbplayers.find()
+    this.dbplayers.find().toArray()
+    .then(
+      results => {
+        console.log(results)
+      })
   }
 }
 
