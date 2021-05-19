@@ -1,6 +1,15 @@
 {
     "folders": [
         {
+            "path": "../../GameBack"
+        },
+        {
+            "path": "../../ps-gris"
+        },
+        {
+            "path": "../UFRJ/circuitosEletricosII"
+        },
+        {
             "path": ".."
         }
     ]

@@ -2,23 +2,17 @@ import sympy as sy
 
 s = sy.Symbol('s')
 
-Y = sy.zeros(4,4)
-Y[0,0] = s+2
-Y[0,1] = Y[1,0] = -2
-Y[1,1] = 2 + 2/(s)
-Y[1,2] = Y[2,1] = -(2/s)
-Y[2,2] = 4 + s + s/2
-Y[0,2] = Y[2,0] = 1/s
-Y[3,0] = 1
-Y[0,3] = -1
+Y = sy.zeros(7,7)
+Y[0,0] = 1/s + 1/4
+Y[0,1] = Y[1,0] = 1/4
+Y[1,1] = 3/4 + s/2
 sy.pprint(Y)
 
 
-I = sy.zeros(4,1)
-I[0] = 1/s
-I[1] = 14/s
-I[3] = 3/s
-#sy.pprint(I)
+I = sy.zeros(2,1)
+I[0] = 31/(4*s)
+I[1] = (32*s+27)/(4*s)
+sy.pprint(I)
 
 E = Y.LUsolve(I)
 
