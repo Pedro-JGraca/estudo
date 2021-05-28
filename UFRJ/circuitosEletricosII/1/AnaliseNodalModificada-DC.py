@@ -64,14 +64,14 @@ if nos == False:
 if (argumento == 'verboso') or (argumento == 'avançado'):
     print("Netlist analisada, tudo certo")
 
-if (argumento == 'debug') or (argumento == 'avançado'):
-    print("leitura dos nos:")
-    for no in nos:
-        print(no, end=': \n')
-        lista = nos[no]
-        for i in lista:
-            i.mostrar()
-        print()
+#if (argumento == 'debug') or (argumento == 'avançado'):
+#    print("leitura dos nos:")
+#    for no in nos:
+#        print(no, end=': \n')
+#        lista = nos[no]
+#        for i in lista:
+#            i.mostrar()
+#        print()
 
 
 G = np.zeros((len(nos) -1 + Neq,len(nos) -1 + Neq))
