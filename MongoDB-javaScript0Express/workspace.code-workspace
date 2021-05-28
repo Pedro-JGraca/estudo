@@ -23,6 +23,9 @@
         {
             "name": "estudo",
             "path": ".."
+        },
+        {
+            "path": "../React/React_Flask_MySQL_docker"
         }
     ]
 }
