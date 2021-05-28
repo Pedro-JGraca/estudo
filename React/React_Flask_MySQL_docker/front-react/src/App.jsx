@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios' //API
 
+import Login from './pages/login'
 import './App.css';
 
 const App = () => {
   
-  
-  
   return (
     <Router>
-      <h1> cabecalho</h1>
+      <header className="App-header" />
+
       <Route path='/' exact render ={() => (
         <>
-          <div className="App">
+          <div>
+            <Login/>
           </div>
         </>
       )}/>
+      
+      <Route path='/Register' exact render ={() => (
+        <>
+          <div>
+            
+          </div>
+        </>
+      )}/>
+
+
+      <Route path='/DashBoard' exact render ={() => (
+        <>
+          <div>
+            
+          </div>
+        </>
+      )}/>
+
+
 
     </Router>
 

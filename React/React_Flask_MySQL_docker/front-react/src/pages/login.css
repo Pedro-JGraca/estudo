@@ -1,0 +1,33 @@
+.login {
+    text-align: center;
+    max-width: 500px;
+    margin: 30px auto;
+    overflow: auto;
+    min-height: 300px;
+    border: 2px solid rgb(0, 255, 234);
+    padding: 30px;
+    border-radius: 10px
+}
+
+.password,
+.username{
+    font: 1.00rem 'Fira Sans', sans-serif;
+    background-color: #444;
+}
+
+.passImage,
+.usernameImage{
+    font: 1.00rem 'Fira Sans', sans-serif;
+    color: #eee;
+}
+
+.register {
+    margin-left: auto;
+    width: 20%;
+    height: 20px;
+}
+
+.input {
+    margin: auto;
+    width: 20%;
+}
