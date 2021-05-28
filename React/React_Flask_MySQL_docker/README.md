@@ -1,6 +1,11 @@
 # React Flask MySQL Docker
 <h1 align="center"> Sistema de login com CRUD V0.0.0 </h1>
 <p align="justify"> Um sistma CRUD complexo com manipulação de Tabelas a vontade com Login e ADMIN </p>
+
+<h2 align="center"> Install </h2>
+<p align="justify"> para que o sistema funcione veja abaixo</p>
+
+<h2 align="center"> Sobre o Front </h2>
 <p align="justify"> A ideia é fazer um dashboard com 4 telas: Login (0), Register (1), DashBoard (2), Admin(3)</p>
 
 - [_] 0 Login 
@@ -30,3 +35,8 @@
     - 2 <-> 2.3
 - 0 -> 3
 - 0<-*
+
+<h2 align="center"> Sobre o Back </h2>
+
+
+<h2 align="center"> Sobre o Docker </h2>
