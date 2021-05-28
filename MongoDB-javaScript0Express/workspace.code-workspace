@@ -17,11 +17,12 @@
             "path": "../UFRJ/circuitosEletricosII/2"
         },
         {
-            "name": "estudo",
-            "path": ".."
+            "name": "curso_react_iniciante",
+            "path": "../React/cursosRapidos/DicasParaDevs/curso_react_iniciante"
         },
         {
-            "path": "../React/cursosRapidos/DicasParaDevs/curso_react_iniciante"
+            "name": "estudo",
+            "path": ".."
         }
     ]
 }
