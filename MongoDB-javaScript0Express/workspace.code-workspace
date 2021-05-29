@@ -26,6 +26,9 @@
         },
         {
             "path": "../React/React_Flask_MySQL_docker"
+        },
+        {
+            "path": "../React/cursosRapidos/LucasNhimi/clone_youtube/nextjs-clone-youtube"
         }
     ]
 }
