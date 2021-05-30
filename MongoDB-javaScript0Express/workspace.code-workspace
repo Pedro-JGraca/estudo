@@ -2,6 +2,9 @@
     "folders": [
         {
             "path": "../React/cursosRapidos/LucasNhimi/clone_youtube"
+        },
+        {
+            "path": ".."
         }
     ]
 }
