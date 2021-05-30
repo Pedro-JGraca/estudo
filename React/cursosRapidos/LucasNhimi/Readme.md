@@ -4,8 +4,8 @@ Agradeço ao Lucas Nhimi por ter disponibilizado esse material online que usarei
 
 <h1 align="center"> Cursos </h1>
 
- - Projeto: Clonando YouTube com Next.js + Material-UI
+ - RECRIANDO A INTERFACE DO YOUTUBE COM MATERIAL-UI + REACT.JS | Clone #01
     - Link: https://www.youtube.com/watch?v=u9FnmBdBl5k
-    - Diretorio: ./clone_youtube/
+    - projeto: ./clone_youtube/
 
     

@@ -1,34 +1,7 @@
 {
     "folders": [
         {
-            "name": "GameBack",
-            "path": "../../GameBack"
-        },
-        {
-            "name": "ps-gris",
-            "path": "../../ps-gris"
-        },
-        {
-            "name": "circuitosEletricosII",
-            "path": "../UFRJ/circuitosEletricosII"
-        },
-        {
-            "name": "2",
-            "path": "../UFRJ/circuitosEletricosII/2"
-        },
-        {
-            "name": "curso_react_iniciante",
-            "path": "../React/cursosRapidos/DicasParaDevs/curso_react_iniciante"
-        },
-        {
-            "name": "estudo",
-            "path": ".."
-        },
-        {
-            "path": "../React/React_Flask_MySQL_docker"
-        },
-        {
-            "path": "../React/cursosRapidos/LucasNhimi/clone_youtube/nextjs-clone-youtube"
+            "path": "../React/cursosRapidos/LucasNhimi/clone_youtube"
         }
     ]
 }
