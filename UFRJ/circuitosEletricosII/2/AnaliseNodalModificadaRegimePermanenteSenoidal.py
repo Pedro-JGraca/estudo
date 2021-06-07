@@ -20,7 +20,7 @@ for line in circuito:
     colocar,NRIG = selecionador(componente)
     Neq += NRIG
     if (colocar==False):
-        print("netlist corrompida")
+        print("netlist corrompida" + str(colocar))
         exit()
     elif (type(colocar) != AmpOpId):
         if (type(colocar) != fonteTensao) and (type(colocar) != fonteCorrente):
