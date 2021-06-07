@@ -46,7 +46,6 @@ nos = 0
 
 for AmpOP in AmpOps:
     componentes.append(AmpOP)
-AmpOps = 0 #apagar
 
 for componente in componentes:
     nos = max(nos,componente.maiorNo())
@@ -66,17 +65,32 @@ for componente in componentes:
 #print(I)
 
 E = np.linalg.solve(G,I)
+
+for componente in componentes:
+    if type(componente) == TransformadorIdeal:
+        E[componente.corrente] = - E[componente.corrente]
+
 index = 1
+
+#for e in E:
+#    if (index<=nos):
+#        print("e"+str(index)+": <" + '{:.2f}'.format(e) + "> V")
+#    else:
+#        print("j"+str(index-nos)+": <" +'{:.2f}'.format(e)+ "> A")
+#    index+=1
+#
+#index = 1
 for e in E:
     x = np.real(e)
     y = np.imag(e)
 
     rho = np.sqrt(x**2 + y**2)
     phi = np.arctan2(y, x)
+    phi = phi*180/np.pi
     
 
     if (index<=nos):
-        print("e"+str(index)+":" + str(rho) +  "cos("+str(freq)+"t + " + str(phi*180/np.pi)+")" +"> V")
+        print("e"+str(index)+":" +'{:.2f}'.format(rho) +  "cos("+str(freq)+"t + " + '{:.2f}'.format(phi) +"°)" +"> V")
     else:
-        print("j"+str(index-nos)+":" + str(rho) +  "cos("+str(freq)+"t + " + str(phi*180/np.pi)+")" +"> A")
+        print("j"+str(index-nos)+":" +'{:.2f}'.format(rho) +  "cos("+str(freq)+"t + " + '{:.2f}'.format(phi)+"°)" +"> A")
     index+=1

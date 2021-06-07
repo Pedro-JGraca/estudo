@@ -1,6 +1,6 @@
 import numpy as np
+from numpy.core.numeric import indices
 j = np.complex(1j)
-
 
 def Complexificador(a):
     continuo = float(a[0])
@@ -8,7 +8,7 @@ def Complexificador(a):
     freq = float(a[2])
     atraso = float(a[3])
     A = amplitude #*cos(atraso) = 1
-    B = amplitude #*cos(atraso) = 1
+    B = 0 #*cos(atraso) = 1
     R = complex(continuo) + complex(A) + B*j
 
     return R,freq#frequencia
@@ -62,6 +62,7 @@ class fonteTensao:
         print(self.nome,self.tensao,self.noPositivo,self.noNegativo)
     
     def estampa(self,G,I,index,w):
+        
         I[index-1] -= self.tensao
         if (self.noPositivo > 0):
             G[self.noPositivo-1,index-1] +=1
@@ -327,23 +328,25 @@ class TransformadorIdeal: #Transformador ideal
         self.C = int(lista[3])
         self.D = int(lista[4])
         self.n = int(lista[5])
+        self.corrente = 0
 
     def mostrar(self):
         print(self.nome,self.A,self.B,self.C,self.D,self.n)
     
     def estampa(self,G,I,index,w):
+        self.corrente=index-1
         if(self.A>0):
-            G[index-1][self.A-1] += self.n
-            G[self.A-1][index-1] -= self.n
+            G[index-1][self.A-1] -= self.n
+            G[self.A-1][index-1] += self.n
         if(self.B>0):
-            G[index-1][self.B-1] -= self.n
-            G[self.B-1][index-1] += self.n
+            G[index-1][self.B-1] += self.n
+            G[self.B-1][index-1] -= self.n
         if(self.C>0):
             G[index-1][self.C-1] += 1
             G[self.C-1][index-1] -= 1
         if(self.D>0):
-            G[index-1][self.C-1] -= 1
-            G[self.C-1][index-1] += 1
+            G[index-1][self.D-1] -= 1
+            G[self.D-1][index-1] += 1
 
     def maiorNo(self):
         return max(self.A,self.B,self.C,self.D)

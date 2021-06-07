@@ -1,10 +1,13 @@
 {
     "folders": [
         {
-            "path": "../React/cursosRapidos/LucasNhimi/clone_youtube"
+            "path": "../../poli-sio-trab/MbaPoliSystem"
         },
         {
-            "path": ".."
+            "path": "../../e-key"
+        },
+        {
+            "path": "../UFRJ/circuitosEletricosII/2"
         }
     ]
 }
