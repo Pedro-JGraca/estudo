@@ -307,12 +307,14 @@ class AmpOpId: #Amplificador Operacional Ideal
                     G[i][self.C] += G[i][self.D]
         
         #tirar coluna self.D e linha self.A
-        if(self.D>0): # +, linha
-            G = np.delete(G,[self.D-1],1) 
-        if (self.A>0): # -, colona
-            G = np.delete(G,self.A-1,0)
-            I = np.delete(I,self.A-1,0)
-
+        if(self.A>0): # +, linha
+            G = np.delete(G,[self.A-1],1)
+            I = np.delete(I,[self.A-1],0)
+            
+        if (self.D>0): # -, colona
+            G = np.delete(G,self.D-1,0)
+            
+        return G,I
                 
 
     def maiorNo(self):
@@ -328,13 +330,13 @@ class TransformadorIdeal: #Transformador ideal
         self.C = int(lista[3])
         self.D = int(lista[4])
         self.n = int(lista[5])
-        self.corrente = 0
+        self.index = 0
 
     def mostrar(self):
         print(self.nome,self.A,self.B,self.C,self.D,self.n)
     
     def estampa(self,G,I,index,w):
-        self.corrente=index-1
+        self.index = index-1
         if(self.A>0):
             G[index-1][self.A-1] -= self.n
             G[self.A-1][index-1] += self.n

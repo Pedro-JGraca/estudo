@@ -57,21 +57,29 @@ index = nos
 for componente in componentes:
     if not(isRGIO(componente)):
         index+=1
-    componente.estampa(G,I,index,freq)
-
-
-
-#print(G)
-#print(I)
+    if type(componente) == AmpOpId:
+        G,I=componente.estampa(G,I,index,freq)
+    else:
+        componente.estampa(G,I,index,freq)
 
 E = np.linalg.solve(G,I)
 
 for componente in componentes:
+    if type(componente) == AmpOpId:
+        if (componente.C==0):
+          E= np.insert(E,componente.D-1,0)
+          
+        else:
+          E= np.insert(E,componente.D-1,E[componente.C])
+
+
+for componente in componentes:
     if type(componente) == TransformadorIdeal:
-        E[componente.corrente] = - E[componente.corrente]
+        E[componente.index] = - E[componente.index]
+
 
 index = 1
-
+#mostra em complexo
 #for e in E:
 #    if (index<=nos):
 #        print("e"+str(index)+": <" + '{:.2f}'.format(e) + "> V")
@@ -85,8 +93,7 @@ for e in E:
     y = np.imag(e)
 
     rho = np.sqrt(x**2 + y**2)
-    phi = np.arctan2(y, x)
-    phi = phi*180/np.pi
+    phi = np.arctan2(y, x)*180/np.pi
     
 
     if (index<=nos):
