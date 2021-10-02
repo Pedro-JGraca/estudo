@@ -4,7 +4,18 @@
             "path": "../../poli-sio-trab/MbaPoliSystem"
         },
         {
-            "path": "../UFRJ/circuitosEletricosII/1/programas-conta-matrizes"
+            "path": "../React/cursosRapidos/LucasNhimi/clone_youtube/src"
+        },
+        {
+            "path": "../../Sistemas_Operacionais"
+        },
+        {
+            "path": "../../../teste/docker"
         }
-    ]
+    ],
+    "settings": {
+        "files.associations": {
+            "trabalho1.h": "c"
+        }
+    }
 }
